@@ -1,0 +1,429 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		108FDCC31A1DA00C00658904 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCC21A1DA00C00658904 /* main.m */; };
+		108FDCC61A1DA00C00658904 /* TYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCC51A1DA00C00658904 /* TYAppDelegate.m */; };
+		108FDCC91A1DA00C00658904 /* TYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCC81A1DA00C00658904 /* TYViewController.m */; };
+		108FDCCC1A1DA00C00658904 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 108FDCCA1A1DA00C00658904 /* Main.storyboard */; };
+		108FDCCE1A1DA00C00658904 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 108FDCCD1A1DA00C00658904 /* Images.xcassets */; };
+		108FDCD11A1DA00C00658904 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 108FDCCF1A1DA00C00658904 /* LaunchScreen.xib */; };
+		108FDCDD1A1DA00C00658904 /* GourmetDiaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCDC1A1DA00C00658904 /* GourmetDiaryTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		108FDCD71A1DA00C00658904 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 108FDCB51A1DA00C00658904 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 108FDCBC1A1DA00C00658904;
+			remoteInfo = GourmetDiary;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		108FDCBD1A1DA00C00658904 /* GourmetDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GourmetDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		108FDCC11A1DA00C00658904 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		108FDCC21A1DA00C00658904 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		108FDCC41A1DA00C00658904 /* TYAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYAppDelegate.h; sourceTree = "<group>"; };
+		108FDCC51A1DA00C00658904 /* TYAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYAppDelegate.m; sourceTree = "<group>"; };
+		108FDCC71A1DA00C00658904 /* TYViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYViewController.h; sourceTree = "<group>"; };
+		108FDCC81A1DA00C00658904 /* TYViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYViewController.m; sourceTree = "<group>"; };
+		108FDCCB1A1DA00C00658904 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		108FDCCD1A1DA00C00658904 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		108FDCD01A1DA00C00658904 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		108FDCD61A1DA00C00658904 /* GourmetDiaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GourmetDiaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		108FDCDB1A1DA00C00658904 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		108FDCDC1A1DA00C00658904 /* GourmetDiaryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GourmetDiaryTests.m; sourceTree = "<group>"; };
+		108FDCE61A1DB99A00658904 /* GourmetDiary-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GourmetDiary-Prefix.pch"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		108FDCBA1A1DA00C00658904 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		108FDCD31A1DA00C00658904 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		108FDCB41A1DA00C00658904 = {
+			isa = PBXGroup;
+			children = (
+				108FDCBF1A1DA00C00658904 /* GourmetDiary */,
+				108FDCD91A1DA00C00658904 /* GourmetDiaryTests */,
+				108FDCBE1A1DA00C00658904 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		108FDCBE1A1DA00C00658904 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				108FDCBD1A1DA00C00658904 /* GourmetDiary.app */,
+				108FDCD61A1DA00C00658904 /* GourmetDiaryTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		108FDCBF1A1DA00C00658904 /* GourmetDiary */ = {
+			isa = PBXGroup;
+			children = (
+				108FDCC41A1DA00C00658904 /* TYAppDelegate.h */,
+				108FDCC51A1DA00C00658904 /* TYAppDelegate.m */,
+				108FDCC71A1DA00C00658904 /* TYViewController.h */,
+				108FDCC81A1DA00C00658904 /* TYViewController.m */,
+				108FDCCA1A1DA00C00658904 /* Main.storyboard */,
+				108FDCCD1A1DA00C00658904 /* Images.xcassets */,
+				108FDCCF1A1DA00C00658904 /* LaunchScreen.xib */,
+				108FDCE61A1DB99A00658904 /* GourmetDiary-Prefix.pch */,
+				108FDCC01A1DA00C00658904 /* Supporting Files */,
+			);
+			path = GourmetDiary;
+			sourceTree = "<group>";
+		};
+		108FDCC01A1DA00C00658904 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				108FDCC11A1DA00C00658904 /* Info.plist */,
+				108FDCC21A1DA00C00658904 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		108FDCD91A1DA00C00658904 /* GourmetDiaryTests */ = {
+			isa = PBXGroup;
+			children = (
+				108FDCDC1A1DA00C00658904 /* GourmetDiaryTests.m */,
+				108FDCDA1A1DA00C00658904 /* Supporting Files */,
+			);
+			path = GourmetDiaryTests;
+			sourceTree = "<group>";
+		};
+		108FDCDA1A1DA00C00658904 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				108FDCDB1A1DA00C00658904 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		108FDCBC1A1DA00C00658904 /* GourmetDiary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 108FDCE01A1DA00C00658904 /* Build configuration list for PBXNativeTarget "GourmetDiary" */;
+			buildPhases = (
+				108FDCB91A1DA00C00658904 /* Sources */,
+				108FDCBA1A1DA00C00658904 /* Frameworks */,
+				108FDCBB1A1DA00C00658904 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GourmetDiary;
+			productName = GourmetDiary;
+			productReference = 108FDCBD1A1DA00C00658904 /* GourmetDiary.app */;
+			productType = "com.apple.product-type.application";
+		};
+		108FDCD51A1DA00C00658904 /* GourmetDiaryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 108FDCE31A1DA00C00658904 /* Build configuration list for PBXNativeTarget "GourmetDiaryTests" */;
+			buildPhases = (
+				108FDCD21A1DA00C00658904 /* Sources */,
+				108FDCD31A1DA00C00658904 /* Frameworks */,
+				108FDCD41A1DA00C00658904 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				108FDCD81A1DA00C00658904 /* PBXTargetDependency */,
+			);
+			name = GourmetDiaryTests;
+			productName = GourmetDiaryTests;
+			productReference = 108FDCD61A1DA00C00658904 /* GourmetDiaryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		108FDCB51A1DA00C00658904 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = yamatomo;
+				TargetAttributes = {
+					108FDCBC1A1DA00C00658904 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					108FDCD51A1DA00C00658904 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 108FDCBC1A1DA00C00658904;
+					};
+				};
+			};
+			buildConfigurationList = 108FDCB81A1DA00C00658904 /* Build configuration list for PBXProject "GourmetDiary" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 108FDCB41A1DA00C00658904;
+			productRefGroup = 108FDCBE1A1DA00C00658904 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				108FDCBC1A1DA00C00658904 /* GourmetDiary */,
+				108FDCD51A1DA00C00658904 /* GourmetDiaryTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		108FDCBB1A1DA00C00658904 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				108FDCCC1A1DA00C00658904 /* Main.storyboard in Resources */,
+				108FDCD11A1DA00C00658904 /* LaunchScreen.xib in Resources */,
+				108FDCCE1A1DA00C00658904 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		108FDCD41A1DA00C00658904 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		108FDCB91A1DA00C00658904 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				108FDCC91A1DA00C00658904 /* TYViewController.m in Sources */,
+				108FDCC61A1DA00C00658904 /* TYAppDelegate.m in Sources */,
+				108FDCC31A1DA00C00658904 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		108FDCD21A1DA00C00658904 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				108FDCDD1A1DA00C00658904 /* GourmetDiaryTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		108FDCD81A1DA00C00658904 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 108FDCBC1A1DA00C00658904 /* GourmetDiary */;
+			targetProxy = 108FDCD71A1DA00C00658904 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		108FDCCA1A1DA00C00658904 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				108FDCCB1A1DA00C00658904 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		108FDCCF1A1DA00C00658904 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				108FDCD01A1DA00C00658904 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		108FDCDE1A1DA00C00658904 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		108FDCDF1A1DA00C00658904 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		108FDCE11A1DA00C00658904 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GourmetDiary/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		108FDCE21A1DA00C00658904 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GourmetDiary/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		108FDCE41A1DA00C00658904 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GourmetDiaryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GourmetDiary.app/GourmetDiary";
+			};
+			name = Debug;
+		};
+		108FDCE51A1DA00C00658904 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GourmetDiaryTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GourmetDiary.app/GourmetDiary";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		108FDCB81A1DA00C00658904 /* Build configuration list for PBXProject "GourmetDiary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				108FDCDE1A1DA00C00658904 /* Debug */,
+				108FDCDF1A1DA00C00658904 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		108FDCE01A1DA00C00658904 /* Build configuration list for PBXNativeTarget "GourmetDiary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				108FDCE11A1DA00C00658904 /* Debug */,
+				108FDCE21A1DA00C00658904 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		108FDCE31A1DA00C00658904 /* Build configuration list for PBXNativeTarget "GourmetDiaryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				108FDCE41A1DA00C00658904 /* Debug */,
+				108FDCE51A1DA00C00658904 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 108FDCB51A1DA00C00658904 /* Project object */;
+}
