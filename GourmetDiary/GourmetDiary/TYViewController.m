@@ -14,9 +14,14 @@
 
 @implementation TYViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
   [super viewDidLoad];
-  // Do any additional setup after loading the view, typically from a nib.
+  
+  self.searchBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+  self.searchBtn.layer.borderWidth = 1;
+  self.searchBtn.layer.cornerRadius = 10;
+  
 }
 
 - (void)didReceiveMemoryWarning {

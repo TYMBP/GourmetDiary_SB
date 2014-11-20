@@ -23,8 +23,12 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BdR-0V-vsb">
-                                <rect key="frame" x="226" y="274" width="147" height="48"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BdR-0V-vsb">
+                                <rect key="frame" x="220" y="274" width="160" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="ej2-gM-LJd"/>
+                                    <constraint firstAttribute="width" constant="160" id="oGD-pI-JVe"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="24"/>
                                 <state key="normal" title="検索入力">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -44,6 +48,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TOP" id="H3u-x5-ygZ"/>
+                    <connections>
+                        <outlet property="searchBtn" destination="BdR-0V-vsb" id="XFl-Ti-ZG3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
@@ -52,7 +59,7 @@
         <!--Search-->
         <scene sceneID="i9d-q9-STF">
             <objects>
-                <viewController id="xnY-Tm-TjP" sceneMemberID="viewController">
+                <viewController id="xnY-Tm-TjP" customClass="TYSearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NiF-1P-Kcb"/>
                         <viewControllerLayoutGuide type="bottom" id="Vb6-c9-ebc"/>
@@ -95,7 +102,7 @@
                                 <rect key="frame" x="0.0" y="309" width="600" height="162"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="eCT-hx-5ti">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Shoplist" rowHeight="60" id="eCT-hx-5ti" customClass="TYSearchTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eCT-hx-5ti" id="Cc5-ZN-IoJ">
@@ -129,6 +136,11 @@
                                                 <constraint firstItem="FyR-nI-8aU" firstAttribute="top" secondItem="Cc5-ZN-IoJ" secondAttribute="topMargin" id="uX7-eV-1F8"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="address" destination="hS2-If-DqM" id="Bom-8V-UZw"/>
+                                            <outlet property="genru" destination="Dgn-my-hoT" id="2ze-hh-36g"/>
+                                            <outlet property="name" destination="FyR-nI-8aU" id="uCZ-UC-YLK"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -174,6 +186,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="ITR-hJ-h3q"/>
+                    <connections>
+                        <outlet property="areaStation" destination="wBG-F9-CCn" id="KvD-96-NRs"/>
+                        <outlet property="shopKeyword" destination="S3f-gf-bjM" id="GAB-IE-SMC"/>
+                        <outlet property="tableView" destination="Abi-5E-Iy5" id="rk1-ZP-dEE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Edv-IM-3vT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

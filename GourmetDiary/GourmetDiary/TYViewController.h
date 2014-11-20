@@ -10,6 +10,7 @@
 
 @interface TYViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *searchBtn;
 
 @end
 
