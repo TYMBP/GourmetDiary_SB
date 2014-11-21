@@ -24,11 +24,11 @@
     NSNumber *lngObj = [_location objectAtIndex:0];
     double lat = fabs(latObj.doubleValue);
     double lng = fabs(lngObj.doubleValue);
-//  NSURL *url = [NSURL URLWithString:API_TEST];
+  NSURL *url = [NSURL URLWithString:API_TEST];
 
-    NSString *urlStr = [NSString stringWithFormat:@"%@%@&Latitude=%f&Longitude=%f&order=4&start=1&count=15&format=json", API_BASEURL, API_KEY, lat, lng];
-    LOG(@"urlStr: %@", urlStr)
-    NSURL *url = [NSURL URLWithString:urlStr];
+//    NSString *urlStr = [NSString stringWithFormat:@"%@%@&Latitude=%f&Longitude=%f&order=4&start=1&count=15&format=json", API_BASEURL, API_KEY, lat, lng];
+//    LOG(@"urlStr: %@", urlStr)
+//    NSURL *url = [NSURL URLWithString:urlStr];
     
     NSURLRequest *request =  [NSURLRequest requestWithURL:url];
     [NSURLConnection connectionWithRequest:request delegate:self];

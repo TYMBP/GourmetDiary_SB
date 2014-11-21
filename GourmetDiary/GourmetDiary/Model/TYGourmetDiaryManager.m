@@ -132,7 +132,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
     _searchData.lat = [NSNumber numberWithDouble:[lat doubleValue]];
     NSString *lng = [[data valueForKeyPath:@"results.shop.lng"] objectAtIndex:_n];
     _searchData.lng = [NSNumber numberWithDouble:[lng doubleValue]];
-    LOG(@"n %d shop: %@ sid: %@ genru:%@ area:%@ lat:%@ lng:%@", _n, _searchData.shop, _searchData.sid, _searchData.genre, _searchData.address, _searchData.lat, _searchData.lng)
+//    LOG(@"n %d shop: %@ sid: %@ genru:%@ area:%@ lat:%@ lng:%@", _n, _searchData.shop, _searchData.sid, _searchData.genre, _searchData.address, _searchData.lat, _searchData.lng)
     NSError *error = nil;
     if (![_context save:&error]) {
       LOG("error %@", error)
@@ -146,9 +146,9 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   NSError *error = nil;
   NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"SearchData"];
   NSArray *fetchedArray = [_context executeFetchRequest:request error:&error];
-  LOG(@"fetchedArrary %@", [fetchedArray objectAtIndex:0])
-  LOG(@"fetchedArrary %@", [fetchedArray objectAtIndex:1])
-  LOG(@"fetchedArrary %@", [fetchedArray objectAtIndex:2])
+//  LOG(@"fetchedArrary %@", [fetchedArray objectAtIndex:0])
+//  LOG(@"fetchedArrary %@", [fetchedArray objectAtIndex:1])
+//  LOG(@"fetchedArrary %@", [fetchedArray objectAtIndex:2])
   
   if (fetchedArray == nil) {
     LOG(@"fetch failure\n%@", [error localizedDescription])

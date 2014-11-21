@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1001E5211A1EC476003AB9A3 /* TYResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E5201A1EC476003AB9A3 /* TYResultViewController.m */; };
+		1001E5241A1EC60A003AB9A3 /* TYKeywordSearchConn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E5231A1EC60A003AB9A3 /* TYKeywordSearchConn.m */; };
+		1001E5281A1EF881003AB9A3 /* TYDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E5271A1EF881003AB9A3 /* TYDetailViewController.m */; };
+		1001E52B1A1F0512003AB9A3 /* TYDetailSearchConn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E52A1A1F0512003AB9A3 /* TYDetailSearchConn.m */; };
+		1001E52F1A1F32E1003AB9A3 /* TYRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E52E1A1F32E1003AB9A3 /* TYRegisterViewController.m */; };
 		108FDCC31A1DA00C00658904 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCC21A1DA00C00658904 /* main.m */; };
 		108FDCC61A1DA00C00658904 /* TYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCC51A1DA00C00658904 /* TYAppDelegate.m */; };
 		108FDCC91A1DA00C00658904 /* TYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCC81A1DA00C00658904 /* TYViewController.m */; };
@@ -40,6 +45,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1001E51F1A1EC476003AB9A3 /* TYResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYResultViewController.h; sourceTree = "<group>"; };
+		1001E5201A1EC476003AB9A3 /* TYResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYResultViewController.m; sourceTree = "<group>"; };
+		1001E5221A1EC60A003AB9A3 /* TYKeywordSearchConn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYKeywordSearchConn.h; sourceTree = "<group>"; };
+		1001E5231A1EC60A003AB9A3 /* TYKeywordSearchConn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYKeywordSearchConn.m; sourceTree = "<group>"; };
+		1001E5261A1EF881003AB9A3 /* TYDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYDetailViewController.h; sourceTree = "<group>"; };
+		1001E5271A1EF881003AB9A3 /* TYDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYDetailViewController.m; sourceTree = "<group>"; };
+		1001E5291A1F0512003AB9A3 /* TYDetailSearchConn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYDetailSearchConn.h; sourceTree = "<group>"; };
+		1001E52A1A1F0512003AB9A3 /* TYDetailSearchConn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYDetailSearchConn.m; sourceTree = "<group>"; };
+		1001E52D1A1F32E1003AB9A3 /* TYRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYRegisterViewController.h; sourceTree = "<group>"; };
+		1001E52E1A1F32E1003AB9A3 /* TYRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYRegisterViewController.m; sourceTree = "<group>"; };
 		108FDCBD1A1DA00C00658904 /* GourmetDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GourmetDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		108FDCC11A1DA00C00658904 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		108FDCC21A1DA00C00658904 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -99,6 +114,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1001E51D1A1EC1C9003AB9A3 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				1001E51F1A1EC476003AB9A3 /* TYResultViewController.h */,
+				1001E5201A1EC476003AB9A3 /* TYResultViewController.m */,
+			);
+			name = Result;
+			path = Controller/Result;
+			sourceTree = "<group>";
+		};
+		1001E51E1A1EC307003AB9A3 /* Top */ = {
+			isa = PBXGroup;
+			children = (
+				108FDCC71A1DA00C00658904 /* TYViewController.h */,
+				108FDCC81A1DA00C00658904 /* TYViewController.m */,
+			);
+			name = Top;
+			path = Controller/Top;
+			sourceTree = "<group>";
+		};
+		1001E5251A1EF84B003AB9A3 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				1001E5261A1EF881003AB9A3 /* TYDetailViewController.h */,
+				1001E5271A1EF881003AB9A3 /* TYDetailViewController.m */,
+			);
+			name = Detail;
+			path = Controller/Detail;
+			sourceTree = "<group>";
+		};
+		1001E52C1A1F32A1003AB9A3 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				1001E52D1A1F32E1003AB9A3 /* TYRegisterViewController.h */,
+				1001E52E1A1F32E1003AB9A3 /* TYRegisterViewController.m */,
+			);
+			name = Register;
+			path = Controller/Register;
+			sourceTree = "<group>";
+		};
 		108FDCB41A1DA00C00658904 = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +245,10 @@
 				108FDCEE1A1DC10600658904 /* TYURLOperation.m */,
 				108FDCF31A1DC13900658904 /* TYLocationSearch.h */,
 				108FDCF41A1DC14000658904 /* TYLocationSearch.m */,
+				1001E5221A1EC60A003AB9A3 /* TYKeywordSearchConn.h */,
+				1001E5231A1EC60A003AB9A3 /* TYKeywordSearchConn.m */,
+				1001E5291A1F0512003AB9A3 /* TYDetailSearchConn.h */,
+				1001E52A1A1F0512003AB9A3 /* TYDetailSearchConn.m */,
 			);
 			path = Connection;
 			sourceTree = "<group>";
@@ -215,9 +274,11 @@
 		108FDD091A1DC87500658904 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1001E52C1A1F32A1003AB9A3 /* Register */,
+				1001E5251A1EF84B003AB9A3 /* Detail */,
+				1001E51E1A1EC307003AB9A3 /* Top */,
+				1001E51D1A1EC1C9003AB9A3 /* Result */,
 				108FDD0A1A1DCA5200658904 /* Search */,
-				108FDCC71A1DA00C00658904 /* TYViewController.h */,
-				108FDCC81A1DA00C00658904 /* TYViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -229,6 +290,7 @@
 				108FDD0C1A1DCA9A00658904 /* TYSearchViewController.m */,
 			);
 			name = Search;
+			path = Controller/Search;
 			sourceTree = "<group>";
 		};
 		108FDD111A1E065A00658904 /* View */ = {
@@ -341,18 +403,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				108FDCC91A1DA00C00658904 /* TYViewController.m in Sources */,
+				1001E5211A1EC476003AB9A3 /* TYResultViewController.m in Sources */,
 				108FDCC61A1DA00C00658904 /* TYAppDelegate.m in Sources */,
 				108FDCF21A1DC11A00658904 /* TYUtil.m in Sources */,
+				1001E5281A1EF881003AB9A3 /* TYDetailViewController.m in Sources */,
 				108FDCC31A1DA00C00658904 /* main.m in Sources */,
 				108FDCEF1A1DC10600658904 /* TYURLOperation.m in Sources */,
 				108FDD101A1DD97300658904 /* TYLocationInfo.m in Sources */,
 				108FDD051A1DC4C900658904 /* KeywordSearch.m in Sources */,
 				108FDCF91A1DC19400658904 /* GourmetDiary.xcdatamodeld in Sources */,
 				108FDD141A1E06C800658904 /* TYSearchTableViewCell.m in Sources */,
+				1001E52B1A1F0512003AB9A3 /* TYDetailSearchConn.m in Sources */,
 				108FDCF51A1DC14000658904 /* TYLocationSearch.m in Sources */,
 				108FDD081A1DC4C900658904 /* ShopMst.m in Sources */,
 				108FDCFF1A1DC25600658904 /* SearchData.m in Sources */,
 				108FDCFC1A1DC1A700658904 /* TYGourmetDiaryManager.m in Sources */,
+				1001E5241A1EC60A003AB9A3 /* TYKeywordSearchConn.m in Sources */,
+				1001E52F1A1F32E1003AB9A3 /* TYRegisterViewController.m in Sources */,
 				108FDD0D1A1DCA9A00658904 /* TYSearchViewController.m in Sources */,
 				108FDD021A1DC4C800658904 /* VisitData.m in Sources */,
 				108FDCEC1A1DC0E600658904 /* TYApplication.m in Sources */,
