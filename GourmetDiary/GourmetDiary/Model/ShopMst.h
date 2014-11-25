@@ -2,7 +2,7 @@
 //  ShopMst.h
 //  GourmetDiary
 //
-//  Created by Tomohiko on 2014/11/20.
+//  Created by Tomohiko on 2014/11/23.
 //  Copyright (c) 2014年 yamatomo. All rights reserved.
 //
 
@@ -28,14 +28,6 @@
 @property (nonatomic, retain) NSString * tel;
 @property (nonatomic, retain) NSDate * updated_at;
 @property (nonatomic, retain) NSString * url;
-@property (nonatomic, retain) NSSet *master;
-@end
-
-@interface ShopMst (CoreDataGeneratedAccessors)
-
-- (void)addMasterObject:(VisitData *)value;
-- (void)removeMasterObject:(VisitData *)value;
-- (void)addMaster:(NSSet *)values;
-- (void)removeMaster:(NSSet *)values;
+@property (nonatomic, retain) VisitData *master;
 
 @end

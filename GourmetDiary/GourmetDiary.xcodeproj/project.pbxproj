@@ -12,6 +12,7 @@
 		1001E5281A1EF881003AB9A3 /* TYDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E5271A1EF881003AB9A3 /* TYDetailViewController.m */; };
 		1001E52B1A1F0512003AB9A3 /* TYDetailSearchConn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E52A1A1F0512003AB9A3 /* TYDetailSearchConn.m */; };
 		1001E52F1A1F32E1003AB9A3 /* TYRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E52E1A1F32E1003AB9A3 /* TYRegisterViewController.m */; };
+		1001E5331A1F7D46003AB9A3 /* TYMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E5321A1F7D46003AB9A3 /* TYMapViewController.m */; };
 		108FDCC31A1DA00C00658904 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCC21A1DA00C00658904 /* main.m */; };
 		108FDCC61A1DA00C00658904 /* TYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCC51A1DA00C00658904 /* TYAppDelegate.m */; };
 		108FDCC91A1DA00C00658904 /* TYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCC81A1DA00C00658904 /* TYViewController.m */; };
@@ -26,12 +27,14 @@
 		108FDCF91A1DC19400658904 /* GourmetDiary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCF71A1DC19400658904 /* GourmetDiary.xcdatamodeld */; };
 		108FDCFC1A1DC1A700658904 /* TYGourmetDiaryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCFB1A1DC1A700658904 /* TYGourmetDiaryManager.m */; };
 		108FDCFF1A1DC25600658904 /* SearchData.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCFE1A1DC25600658904 /* SearchData.m */; };
-		108FDD021A1DC4C800658904 /* VisitData.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD011A1DC4C800658904 /* VisitData.m */; };
 		108FDD051A1DC4C900658904 /* KeywordSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD041A1DC4C900658904 /* KeywordSearch.m */; };
-		108FDD081A1DC4C900658904 /* ShopMst.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD071A1DC4C900658904 /* ShopMst.m */; };
 		108FDD0D1A1DCA9A00658904 /* TYSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD0C1A1DCA9A00658904 /* TYSearchViewController.m */; };
 		108FDD101A1DD97300658904 /* TYLocationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD0F1A1DD97300658904 /* TYLocationInfo.m */; };
 		108FDD141A1E06C800658904 /* TYSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD131A1E06C800658904 /* TYSearchTableViewCell.m */; };
+		10C927C01A204BAE00CD6669 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C927BF1A204BAE00CD6669 /* MapKit.framework */; };
+		10C927C31A20BA5A00CD6669 /* TYVisitedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C927C21A20BA5A00CD6669 /* TYVisitedTableViewCell.m */; };
+		10C927C61A218C6400CD6669 /* ShopMst.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C927C51A218C6400CD6669 /* ShopMst.m */; };
+		10C927C91A218C6500CD6669 /* VisitData.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C927C81A218C6500CD6669 /* VisitData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,8 @@
 		1001E52A1A1F0512003AB9A3 /* TYDetailSearchConn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYDetailSearchConn.m; sourceTree = "<group>"; };
 		1001E52D1A1F32E1003AB9A3 /* TYRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYRegisterViewController.h; sourceTree = "<group>"; };
 		1001E52E1A1F32E1003AB9A3 /* TYRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYRegisterViewController.m; sourceTree = "<group>"; };
+		1001E5311A1F7D46003AB9A3 /* TYMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYMapViewController.h; sourceTree = "<group>"; };
+		1001E5321A1F7D46003AB9A3 /* TYMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYMapViewController.m; sourceTree = "<group>"; };
 		108FDCBD1A1DA00C00658904 /* GourmetDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GourmetDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		108FDCC11A1DA00C00658904 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		108FDCC21A1DA00C00658904 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -82,18 +87,21 @@
 		108FDCFB1A1DC1A700658904 /* TYGourmetDiaryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYGourmetDiaryManager.m; sourceTree = "<group>"; };
 		108FDCFD1A1DC25600658904 /* SearchData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchData.h; sourceTree = "<group>"; };
 		108FDCFE1A1DC25600658904 /* SearchData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchData.m; sourceTree = "<group>"; };
-		108FDD001A1DC4C800658904 /* VisitData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitData.h; sourceTree = "<group>"; };
-		108FDD011A1DC4C800658904 /* VisitData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitData.m; sourceTree = "<group>"; };
 		108FDD031A1DC4C900658904 /* KeywordSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordSearch.h; sourceTree = "<group>"; };
 		108FDD041A1DC4C900658904 /* KeywordSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordSearch.m; sourceTree = "<group>"; };
-		108FDD061A1DC4C900658904 /* ShopMst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopMst.h; sourceTree = "<group>"; };
-		108FDD071A1DC4C900658904 /* ShopMst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopMst.m; sourceTree = "<group>"; };
 		108FDD0B1A1DCA9A00658904 /* TYSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYSearchViewController.h; sourceTree = "<group>"; };
 		108FDD0C1A1DCA9A00658904 /* TYSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYSearchViewController.m; sourceTree = "<group>"; };
 		108FDD0E1A1DD97300658904 /* TYLocationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYLocationInfo.h; sourceTree = "<group>"; };
 		108FDD0F1A1DD97300658904 /* TYLocationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYLocationInfo.m; sourceTree = "<group>"; };
 		108FDD121A1E06C800658904 /* TYSearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYSearchTableViewCell.h; sourceTree = "<group>"; };
 		108FDD131A1E06C800658904 /* TYSearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYSearchTableViewCell.m; sourceTree = "<group>"; };
+		10C927BF1A204BAE00CD6669 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		10C927C11A20BA5A00CD6669 /* TYVisitedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVisitedTableViewCell.h; sourceTree = "<group>"; };
+		10C927C21A20BA5A00CD6669 /* TYVisitedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYVisitedTableViewCell.m; sourceTree = "<group>"; };
+		10C927C41A218C6400CD6669 /* ShopMst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopMst.h; sourceTree = "<group>"; };
+		10C927C51A218C6400CD6669 /* ShopMst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopMst.m; sourceTree = "<group>"; };
+		10C927C71A218C6500CD6669 /* VisitData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitData.h; sourceTree = "<group>"; };
+		10C927C81A218C6500CD6669 /* VisitData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10C927C01A204BAE00CD6669 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,9 +163,20 @@
 			path = Controller/Register;
 			sourceTree = "<group>";
 		};
+		1001E5301A1F7CE4003AB9A3 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				1001E5311A1F7D46003AB9A3 /* TYMapViewController.h */,
+				1001E5321A1F7D46003AB9A3 /* TYMapViewController.m */,
+			);
+			name = Map;
+			path = Controller/Map;
+			sourceTree = "<group>";
+		};
 		108FDCB41A1DA00C00658904 = {
 			isa = PBXGroup;
 			children = (
+				10C927BF1A204BAE00CD6669 /* MapKit.framework */,
 				108FDCBF1A1DA00C00658904 /* GourmetDiary */,
 				108FDCD91A1DA00C00658904 /* GourmetDiaryTests */,
 				108FDCBE1A1DA00C00658904 /* Products */,
@@ -257,12 +277,12 @@
 			isa = PBXGroup;
 			children = (
 				108FDCF71A1DC19400658904 /* GourmetDiary.xcdatamodeld */,
-				108FDD061A1DC4C900658904 /* ShopMst.h */,
-				108FDD071A1DC4C900658904 /* ShopMst.m */,
+				10C927C71A218C6500CD6669 /* VisitData.h */,
+				10C927C81A218C6500CD6669 /* VisitData.m */,
+				10C927C41A218C6400CD6669 /* ShopMst.h */,
+				10C927C51A218C6400CD6669 /* ShopMst.m */,
 				108FDD031A1DC4C900658904 /* KeywordSearch.h */,
 				108FDD041A1DC4C900658904 /* KeywordSearch.m */,
-				108FDD001A1DC4C800658904 /* VisitData.h */,
-				108FDD011A1DC4C800658904 /* VisitData.m */,
 				108FDCFD1A1DC25600658904 /* SearchData.h */,
 				108FDCFE1A1DC25600658904 /* SearchData.m */,
 				108FDCFA1A1DC1A700658904 /* TYGourmetDiaryManager.h */,
@@ -274,6 +294,7 @@
 		108FDD091A1DC87500658904 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1001E5301A1F7CE4003AB9A3 /* Map */,
 				1001E52C1A1F32A1003AB9A3 /* Register */,
 				1001E5251A1EF84B003AB9A3 /* Detail */,
 				1001E51E1A1EC307003AB9A3 /* Top */,
@@ -298,6 +319,8 @@
 			children = (
 				108FDD121A1E06C800658904 /* TYSearchTableViewCell.h */,
 				108FDD131A1E06C800658904 /* TYSearchTableViewCell.m */,
+				10C927C11A20BA5A00CD6669 /* TYVisitedTableViewCell.h */,
+				10C927C21A20BA5A00CD6669 /* TYVisitedTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -402,7 +425,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1001E5331A1F7D46003AB9A3 /* TYMapViewController.m in Sources */,
 				108FDCC91A1DA00C00658904 /* TYViewController.m in Sources */,
+				10C927C91A218C6500CD6669 /* VisitData.m in Sources */,
 				1001E5211A1EC476003AB9A3 /* TYResultViewController.m in Sources */,
 				108FDCC61A1DA00C00658904 /* TYAppDelegate.m in Sources */,
 				108FDCF21A1DC11A00658904 /* TYUtil.m in Sources */,
@@ -413,15 +438,15 @@
 				108FDD051A1DC4C900658904 /* KeywordSearch.m in Sources */,
 				108FDCF91A1DC19400658904 /* GourmetDiary.xcdatamodeld in Sources */,
 				108FDD141A1E06C800658904 /* TYSearchTableViewCell.m in Sources */,
+				10C927C61A218C6400CD6669 /* ShopMst.m in Sources */,
 				1001E52B1A1F0512003AB9A3 /* TYDetailSearchConn.m in Sources */,
 				108FDCF51A1DC14000658904 /* TYLocationSearch.m in Sources */,
-				108FDD081A1DC4C900658904 /* ShopMst.m in Sources */,
 				108FDCFF1A1DC25600658904 /* SearchData.m in Sources */,
 				108FDCFC1A1DC1A700658904 /* TYGourmetDiaryManager.m in Sources */,
 				1001E5241A1EC60A003AB9A3 /* TYKeywordSearchConn.m in Sources */,
+				10C927C31A20BA5A00CD6669 /* TYVisitedTableViewCell.m in Sources */,
 				1001E52F1A1F32E1003AB9A3 /* TYRegisterViewController.m in Sources */,
 				108FDD0D1A1DCA9A00658904 /* TYSearchViewController.m in Sources */,
-				108FDD021A1DC4C800658904 /* VisitData.m in Sources */,
 				108FDCEC1A1DC0E600658904 /* TYApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

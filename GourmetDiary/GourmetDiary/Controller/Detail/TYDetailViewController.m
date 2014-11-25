@@ -7,8 +7,9 @@
 //
 
 #import "TYDetailViewController.h"
+#import "TYRegisterViewController.h"
+#import "TYMapViewController.h"
 #import "TYGourmetDiaryManager.h"
-#import "TYSearchTableViewCell.h"
 #import "TYDetailSearchConn.h"
 #import "TYApplication.h"
 #import "ShopMst.h"
@@ -107,5 +108,20 @@
     self.shopImage.image = img;
   }];
 }
+
+//遷移前パラメータセット
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+  if ([[segue identifier] isEqualToString:@"Register"]) {
+    LOG()
+    TYRegisterViewController *registerCtr = segue.destinationViewController;
+    registerCtr.shopMst = _shopData;
+  } else if ([[segue identifier] isEqualToString:@"Map"]) {
+    LOG()
+    TYMapViewController *mapCtr = segue.destinationViewController;
+    mapCtr.shopMst = _shopData;
+  }
+}
+
 
 @end

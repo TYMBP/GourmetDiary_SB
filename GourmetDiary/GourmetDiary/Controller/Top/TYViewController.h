@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TYViewController : UIViewController
+@interface TYViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *searchBtn;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic) NSMutableArray *visitedData;
 
 @end
 

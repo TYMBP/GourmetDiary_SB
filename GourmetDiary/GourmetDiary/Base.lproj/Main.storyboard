@@ -17,20 +17,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfN-tf-hEz">
-                                <rect key="frame" x="233" y="114" width="135.5" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タイトル" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfN-tf-hEz">
+                                <rect key="frame" x="181" y="94" width="238.5" height="60"/>
                                 <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="60"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BdR-0V-vsb">
-                                <rect key="frame" x="220" y="274" width="160" height="60"/>
+                                <rect key="frame" x="220" y="194" width="160" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="ej2-gM-LJd"/>
+                                    <constraint firstAttribute="height" constant="50" id="ej2-gM-LJd"/>
                                     <constraint firstAttribute="width" constant="160" id="oGD-pI-JVe"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="24"/>
-                                <state key="normal" title="検索入力">
+                                <state key="normal" title="検索スタート">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -38,18 +38,88 @@
                                     <segue destination="xnY-Tm-TjP" kind="push" id="gtu-KV-hh7"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="TtX-OT-ak5">
+                                <rect key="frame" x="0.0" y="274" width="600" height="197"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VisitedList" rowHeight="60" id="Eev-Xl-RaD" customClass="TYVisitedTableViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eev-Xl-RaD" id="gSj-H5-khP">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgM-j0-i3t">
+                                                    <rect key="frame" x="8" y="22" width="80" height="14"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="EWB-at-zeh"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lkM-Qi-PrI">
+                                                    <rect key="frame" x="98" y="8" width="484" height="17"/>
+                                                    <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="genre" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIx-qE-5HP">
+                                                    <rect key="frame" x="98" y="37" width="140" height="14"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="140" id="yo3-PI-HWb"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="area" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kq-jB-5Q1">
+                                                    <rect key="frame" x="248" y="38" width="100" height="14"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="aHb-Yi-99w"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="lkM-Qi-PrI" firstAttribute="top" secondItem="gSj-H5-khP" secondAttribute="topMargin" id="6UJ-cn-ijp"/>
+                                                <constraint firstItem="2kq-jB-5Q1" firstAttribute="leading" secondItem="GIx-qE-5HP" secondAttribute="trailing" constant="10" id="8hw-c5-4vu"/>
+                                                <constraint firstItem="2kq-jB-5Q1" firstAttribute="bottom" secondItem="gSj-H5-khP" secondAttribute="bottomMargin" id="Jk4-Gm-tUY"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="lkM-Qi-PrI" secondAttribute="trailing" constant="10" id="TH5-Du-yCJ"/>
+                                                <constraint firstItem="lkM-Qi-PrI" firstAttribute="leading" secondItem="gSj-H5-khP" secondAttribute="leadingMargin" constant="90" id="VHx-wv-baH"/>
+                                                <constraint firstItem="kgM-j0-i3t" firstAttribute="leading" secondItem="gSj-H5-khP" secondAttribute="leadingMargin" id="Zam-I5-Y6N"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="GIx-qE-5HP" secondAttribute="bottom" id="lKE-WT-cLJ"/>
+                                                <constraint firstItem="GIx-qE-5HP" firstAttribute="leading" secondItem="gSj-H5-khP" secondAttribute="leadingMargin" constant="90" id="rwU-6s-oi9"/>
+                                                <constraint firstItem="kgM-j0-i3t" firstAttribute="centerY" secondItem="gSj-H5-khP" secondAttribute="centerY" id="sBs-SC-PNf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="area" destination="2kq-jB-5Q1" id="2Ww-gK-3Oi"/>
+                                            <outlet property="date" destination="kgM-j0-i3t" id="hmz-US-VwZ"/>
+                                            <outlet property="genre" destination="GIx-qE-5HP" id="4jw-fz-Vjg"/>
+                                            <outlet property="name" destination="lkM-Qi-PrI" id="YnG-yf-ZNs"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="TtX-OT-ak5" secondAttribute="bottom" constant="80" id="1zl-n3-mOq"/>
                             <constraint firstAttribute="centerX" secondItem="gfN-tf-hEz" secondAttribute="centerX" id="O93-re-eeR"/>
-                            <constraint firstItem="gfN-tf-hEz" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="ULP-5w-tm9"/>
+                            <constraint firstItem="TtX-OT-ak5" firstAttribute="top" secondItem="BdR-0V-vsb" secondAttribute="bottom" constant="30" id="QBq-rJ-a6D"/>
+                            <constraint firstItem="gfN-tf-hEz" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="30" id="ULP-5w-tm9"/>
                             <constraint firstAttribute="centerX" secondItem="BdR-0V-vsb" secondAttribute="centerX" id="WLZ-pz-vJm"/>
-                            <constraint firstItem="BdR-0V-vsb" firstAttribute="top" secondItem="gfN-tf-hEz" secondAttribute="bottom" constant="100" id="peh-Bi-tsc"/>
+                            <constraint firstAttribute="trailing" secondItem="TtX-OT-ak5" secondAttribute="trailing" id="WVv-a1-OSD"/>
+                            <constraint firstItem="BdR-0V-vsb" firstAttribute="top" secondItem="gfN-tf-hEz" secondAttribute="bottom" constant="40" id="peh-Bi-tsc"/>
+                            <constraint firstItem="TtX-OT-ak5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="vmp-8Z-vQc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TOP" id="H3u-x5-ygZ"/>
                     <connections>
                         <outlet property="searchBtn" destination="BdR-0V-vsb" id="XFl-Ti-ZG3"/>
+                        <outlet property="tableView" destination="TtX-OT-ak5" id="9eJ-Lm-LiC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -394,12 +464,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dcc-du-am2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2931" y="300"/>
+            <point key="canvasLocation" x="3048" y="293"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="Qdg-Oh-nbi">
             <objects>
-                <viewController id="djN-xz-tus" sceneMemberID="viewController">
+                <viewController id="djN-xz-tus" customClass="TYMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bFA-db-UqN"/>
                         <viewControllerLayoutGuide type="bottom" id="9PV-Z9-mwi"/>
@@ -407,12 +477,27 @@
                     <view key="view" contentMode="scaleToFill" id="IOV-kS-is7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TOk-Br-McN">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="TOk-Br-McN" secondAttribute="trailing" id="4tr-KY-yHz"/>
+                            <constraint firstItem="9PV-Z9-mwi" firstAttribute="top" secondItem="TOk-Br-McN" secondAttribute="bottom" id="Ewn-O7-X0c"/>
+                            <constraint firstItem="TOk-Br-McN" firstAttribute="top" secondItem="bFA-db-UqN" secondAttribute="bottom" id="bfC-RC-PNY"/>
+                            <constraint firstItem="TOk-Br-McN" firstAttribute="leading" secondItem="IOV-kS-is7" secondAttribute="leading" id="gFr-8C-2RP"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="5GD-zG-PJ5"/>
+                    <connections>
+                        <outlet property="mapView" destination="TOk-Br-McN" id="D2c-iN-mCi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L7H-ol-RKF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2798" y="-1157"/>
+            <point key="canvasLocation" x="4422" y="-1175"/>
         </scene>
         <!--店舗の詳細情報-->
         <scene sceneID="Ndv-6r-YW0">
@@ -514,6 +599,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="djN-xz-tus" kind="push" identifier="Map" id="e6M-Tt-Ql1"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBr-Qe-OSA">
                                 <rect key="frame" x="224" y="319" width="340" height="30"/>
@@ -540,7 +628,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="26z-Mr-4a4" kind="push" id="WjC-sb-4mh"/>
+                                    <segue destination="26z-Mr-4a4" kind="push" identifier="Register" id="7MX-CY-qHq"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -759,6 +847,7 @@
                         <outlet property="dou" destination="uqr-np-S3y" id="jy3-O8-0eV"/>
                         <outlet property="fee" destination="Opk-Py-hth" id="Fl7-6l-Ti3"/>
                         <outlet property="level" destination="yw5-Ib-u67" id="jXJ-eG-mwe"/>
+                        <outlet property="naviTitle" destination="5d9-IZ-0Mn" id="8go-wM-If6"/>
                         <outlet property="persons" destination="1j4-I4-JSk" id="5nI-e5-Mj6"/>
                         <outlet property="registerBtn" destination="DjT-Yb-eBh" id="dx7-Yx-ycw"/>
                         <outlet property="situation" destination="BuF-Va-2pT" id="T8D-6O-iq8"/>
@@ -830,7 +919,7 @@
         <image name="NoImage" width="84" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="lAs-8i-SDH"/>
         <segue reference="dEz-Fh-OwF"/>
-        <segue reference="usy-o5-ER0"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -61,70 +61,72 @@
 {
   [super viewDidLoad];
   if (self.shopMst) {
-    self.title = self.shopMst.shop;
+    self.naviTitle.title = self.shopMst.shop;
+    
+    _dateFomatter = [[NSDateFormatter alloc] init];
+     [_dateFomatter setDateFormat:@"yyyy/MM/dd"];
+  //  [_dateFomatter setDateStyle:NSDateFormatterShortStyle];
+    
+    self.registerBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.registerBtn.layer.borderWidth = 1;
+    self.registerBtn.layer.cornerRadius = 5;
+    
+    self.dou.tag = TF_CALENDAR;
+    self.dou.text = [_dateFomatter stringFromDate:[NSDate date]];
+    self.dou.delegate = self;
+    self.situation.tag = TF_SITUATION;
+    self.situation.delegate = self;
+    self.level.tag = TF_LEVEL;
+    self.level.delegate = self;
+    self.persons.tag = TF_PERSON;
+    self.persons.delegate = self;
+    self.fee.tag = TF_FEE;
+    self.fee.delegate = self;
+    self.comment.editable = YES;
+    
+    _picker = [[UIDatePicker alloc] init];
+    _picker.minuteInterval = 1;
+    _picker.datePickerMode = UIDatePickerModeDate;
+    [_picker addTarget:self action:@selector(datePickerEventValueChanged) forControlEvents:UIControlEventValueChanged];
+    
+    _picker.tag = TF_CALENDAR;
+    self.dou.inputView = _picker;
+    _picker2 = [self makePicker];
+    _picker2.tag = TF_SITUATION;
+    self.situation.inputView = _picker2;
+    _picker3 = [self makePicker];
+    _picker3.tag = TF_LEVEL;
+    self.level.inputView = _picker3;
+    _picker4 = [self makePicker];
+    _picker4.tag = TF_PERSON;
+    self.persons.inputView = _picker4;
+    _picker5 = [self makePicker];
+    _picker5.tag = TF_FEE;
+    self.fee.inputView = _picker5;
+    _toolbar = [self makeToolbar:CGRectMake(0, 0, 320, 44)];
+    _toolbar.tag = TF_CALENDAR;
+    _toolbar2 = [self makeToolbar:CGRectMake(0, 0, 320, 44)];
+    _toolbar2.tag = TF_SITUATION;
+    _toolbar3 = [self makeToolbar:CGRectMake(0, 0, 320, 44)];
+    _toolbar3.tag = TF_LEVEL;
+    _toolbar4 = [self makeToolbar:CGRectMake(0, 0, 320, 44)];
+    _toolbar4.tag = TF_PERSON;
+    _toolbar5 = [self makeToolbar:CGRectMake(0, 0, 320, 44)];
+    _toolbar5.tag = TF_FEE;
+    self.dou.inputAccessoryView = _toolbar;
+    self.situation.inputAccessoryView = _toolbar2;
+    self.level.inputAccessoryView = _toolbar3;
+    self.persons.inputAccessoryView = _toolbar4;
+    self.fee.inputAccessoryView = _toolbar5;
+    _backView = [[UIView alloc] initWithFrame:self.view.frame];
+    _backView.backgroundColor = [UIColor clearColor];
+  //  _backView.alpha = 0;
+    _backView.hidden = YES;
+    _backView.userInteractionEnabled = NO;
+    [self.view addSubview:_backView];
+  } else {
+    [self warning:@"不具合が発生しました"];
   }
-  _dateFomatter = [[NSDateFormatter alloc] init];
-   [_dateFomatter setDateFormat:@"yyyy/MM/dd"];
-//  [_dateFomatter setDateStyle:NSDateFormatterShortStyle];
-  
-  self.registerBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
-  self.registerBtn.layer.borderWidth = 1;
-  self.registerBtn.layer.cornerRadius = 5;
-  
-  self.dou.tag = TF_CALENDAR;
-  self.dou.text = [_dateFomatter stringFromDate:[NSDate date]];
-  self.dou.delegate = self;
-  self.situation.tag = TF_SITUATION;
-  self.situation.delegate = self;
-  self.level.tag = TF_LEVEL;
-  self.level.delegate = self;
-  self.persons.tag = TF_PERSON;
-  self.persons.delegate = self;
-  self.fee.tag = TF_FEE;
-  self.fee.delegate = self;
-  self.comment.editable = YES;
-  
-  _picker = [[UIDatePicker alloc] init];
-  _picker.minuteInterval = 1;
-  _picker.datePickerMode = UIDatePickerModeDate;
-  [_picker addTarget:self action:@selector(datePickerEventValueChanged) forControlEvents:UIControlEventValueChanged];
-  
-  _picker.tag = TF_CALENDAR;
-  self.dou.inputView = _picker;
-  _picker2 = [self makePicker];
-  _picker2.tag = TF_SITUATION;
-  self.situation.inputView = _picker2;
-  _picker3 = [self makePicker];
-  _picker3.tag = TF_LEVEL;
-  self.level.inputView = _picker3;
-  _picker4 = [self makePicker];
-  _picker4.tag = TF_PERSON;
-  self.persons.inputView = _picker4;
-  _picker5 = [self makePicker];
-  _picker5.tag = TF_FEE;
-  self.fee.inputView = _picker5;
-  _toolbar = [self makeToolbar:CGRectMake(0, 0, 320, 44)];
-  _toolbar.tag = TF_CALENDAR;
-  _toolbar2 = [self makeToolbar:CGRectMake(0, 0, 320, 44)];
-  _toolbar2.tag = TF_SITUATION;
-  _toolbar3 = [self makeToolbar:CGRectMake(0, 0, 320, 44)];
-  _toolbar3.tag = TF_LEVEL;
-  _toolbar4 = [self makeToolbar:CGRectMake(0, 0, 320, 44)];
-  _toolbar4.tag = TF_PERSON;
-  _toolbar5 = [self makeToolbar:CGRectMake(0, 0, 320, 44)];
-  _toolbar5.tag = TF_FEE;
-  self.dou.inputAccessoryView = _toolbar;
-  self.situation.inputAccessoryView = _toolbar2;
-  self.level.inputAccessoryView = _toolbar3;
-  self.persons.inputAccessoryView = _toolbar4;
-  self.fee.inputAccessoryView = _toolbar5;
-  _backView = [[UIView alloc] initWithFrame:self.view.frame];
-  _backView.backgroundColor = [UIColor clearColor];
-//  _backView.alpha = 0;
-  _backView.hidden = YES;
-  _backView.userInteractionEnabled = NO;
-  [self.view addSubview:_backView];
-  
 }
 
 - (UIPickerView *)makePicker
@@ -233,9 +235,13 @@
   [dic setValue:[NSNumber numberWithInteger:_situNum] forKey:@"situation"];
   [dic setValue:[NSNumber numberWithInteger:_feeNum] forKey:@"fee"];
   self.shopMst.level = [NSNumber numberWithInteger:_levelNum];
+  
+  [_dataManager addVisitRegist:dic shop:self.shopMst];
+/*1125リレーション変更
   [_dataManager addShopMstData:self.shopMst];
   [_dataManager addVisitData:dic];
-
+*/
+  
 //  if ([self.modalDelegate respondsToSelector:@selector(searchDidFinish)]) {
 //    [self.modalDelegate searchDidFinish];
 //  }

@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *fee;
 @property (weak, nonatomic) IBOutlet UITextView *comment;
 @property (weak, nonatomic) IBOutlet UIButton *registerBtn;
+@property (weak, nonatomic) IBOutlet UINavigationItem *naviTitle;
 @property (nonatomic) ShopMst *shopMst;
 
 @end

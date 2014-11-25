@@ -30,7 +30,7 @@
         <attribute name="tel" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="master" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VisitData" inverseName="diary" inverseEntity="VisitData" syncable="YES"/>
+        <relationship name="master" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="VisitData" inverseName="diary" inverseEntity="VisitData" syncable="YES"/>
     </entity>
     <entity name="VisitData" representedClassName="VisitData" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
@@ -41,11 +41,11 @@
         <attribute name="situation" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="visited_at" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="diary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ShopMst" inverseName="master" inverseEntity="ShopMst" syncable="YES"/>
+        <relationship name="diary" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ShopMst" inverseName="master" inverseEntity="ShopMst" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SearchData" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="KeywordSearch" positionX="-54" positionY="36" width="128" height="103"/>
+        <element name="SearchData" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="ShopMst" positionX="-36" positionY="54" width="128" height="283"/>
         <element name="VisitData" positionX="-18" positionY="162" width="128" height="178"/>
     </elements>
