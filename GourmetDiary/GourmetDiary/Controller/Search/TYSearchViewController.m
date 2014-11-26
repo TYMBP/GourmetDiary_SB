@@ -173,14 +173,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return 3;
+  return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   TYSearchTableViewCell *cell = (TYSearchTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Shoplist" forIndexPath:indexPath];
-  if (_searchData.count == 0) {
-    LOG(@"null")
+  NSInteger n = indexPath.row + 1;
+  if (_searchData.count < 4 && _searchData.count < n) {
     cell.genru.text = @"";
     cell.name.text = @"";
     cell.address.text = @"";
@@ -191,7 +191,14 @@
     cell.name.text = rowData.shop;
     cell.address.text = rowData.address;
   }
+  
   return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  float ht = 60;
+  return ht;
 }
 
 //タップイベント

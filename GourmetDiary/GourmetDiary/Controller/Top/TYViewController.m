@@ -33,12 +33,13 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  _visitedData = [_dataManager fetchVisitData];
+  LOG()
 //  [self test];
+  _visitedData = [_dataManager fetchVisitData];
   
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
-  self.tableView.backgroundColor = [UIColor colorWithRed:1.0 green:0.4 blue:0.4 alpha:1.0];
+  self.tableView.backgroundColor = [UIColor colorWithRed:1.0 green:0.39 blue:0.39 alpha:1.0];
   
   self.searchBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
   self.searchBtn.layer.borderWidth = 1;
@@ -52,28 +53,37 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return 3;
+  return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   TYVisitedTableViewCell *cell = (TYVisitedTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VisitedList" forIndexPath:indexPath];
-  if (self.visitedData.count == 0) {
-    LOG(@"null")
-    cell.date.text = @"";
-    cell.name.text = @"";
-    cell.genre.text = @"";
-    cell.area.text = @"";
+  NSInteger n = indexPath.row + 1;
+  if (self.visitedData.count < 4 && self.visitedData.count < n) {
+      LOG(@"null")
+      cell.date.text = @"";
+      cell.level.text = @"";
+      cell.name.text = @"";
+      cell.genre.text = @"";
+      cell.area.text = @"";
   } else {
-    NSDictionary *fetchData = [self.visitedData objectAtIndex:indexPath.row];
+    LOG()
 //    LOG(@"id visited: %@", [fetchData valueForKey:@"visited_at"])
-    
+    NSDictionary *fetchData = [self.visitedData objectAtIndex:indexPath.row];
     cell.date.text = [_dateFomatter stringFromDate:[fetchData valueForKey:@"visited"]];
     cell.name.text = [fetchData valueForKey:@"shop"];
+    cell.level.text = [[fetchData valueForKey:@"level"] stringValue];
     cell.area.text = [fetchData valueForKey:@"area"];
     cell.genre.text = [fetchData valueForKey:@"genre"];
   }
   return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  float ht = 60;
+  return ht;
 }
 
 //タップイベント

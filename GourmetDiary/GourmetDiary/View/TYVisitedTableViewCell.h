@@ -13,5 +13,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *genre;
 @property (weak, nonatomic) IBOutlet UILabel *area;
+@property (weak, nonatomic) IBOutlet UILabel *level;
+@property (weak, nonatomic) IBOutlet UILabel *dateList;
+@property (weak, nonatomic) IBOutlet UILabel *levelList;
+@property (weak, nonatomic) IBOutlet UILabel *nameList;
+@property (weak, nonatomic) IBOutlet UILabel *genreList;
+@property (weak, nonatomic) IBOutlet UILabel *areaList;
 
 @end

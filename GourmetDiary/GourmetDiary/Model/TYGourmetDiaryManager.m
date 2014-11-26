@@ -67,7 +67,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
 // SQLパターン
   NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
   _storeURL = [NSURL fileURLWithPath:[directory stringByAppendingPathComponent:@"GourmetDiary.sqlite"]];
-  LOG(@"storeURL %@", _storeURL)
+//  LOG(@"storeURL %@", _storeURL)
 //  NSURL *modelURL = [NSURL fileURLWithPath:[NSFileManager defaultManager].currentDirectoryPath];
 //  modelURL = [modelURL URLByAppendingPathComponent:@"GourmetDiary.momd"];
   NSError *error = nil;
@@ -471,7 +471,45 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   NSMutableArray *array = [NSMutableArray array];
   NSError *error = nil;
   NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"VisitData"];
-  [request setFetchLimit:3];
+  [request setFetchLimit:4];
+  NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"visited_at" ascending:NO];
+  request.sortDescriptors = @[sort];
+  NSArray *fetchedArray = [_context executeFetchRequest:request error:&error];
+  
+  if (fetchedArray == nil) {
+    LOG(@"fetch failure\n%@", [error localizedDescription])
+    return array;
+  }
+  for (NSManagedObject *obj in fetchedArray) {
+    NSMutableDictionary *ary = [NSMutableDictionary dictionary];
+    [ary setValue:[obj valueForKey:@"visited_at"] forKey:@"visited"];
+//    LOG(@"visit: %@", [obj valueForKey:@"visited_at"])
+    NSSet *master = [obj valueForKey:@"diary"];
+    if (master.count == 0) {
+      LOG(@"null");
+    } else {
+      for (NSManagedObject *shop in master) {
+//        LOG(@"shop: %@", [shop valueForKey:@"shop"])
+        [ary setValue:[shop valueForKey:@"shop"] forKey:@"shop"];
+        [ary setValue:[shop valueForKey:@"level"] forKey:@"level"];
+        [ary setValue:[shop valueForKey:@"genre"] forKey:@"genre"];
+        [ary setValue:[shop valueForKey:@"area"] forKey:@"area"];
+      }
+    }
+    [array addObject:ary];
+    
+  }
+  return array;
+}
+
+/* 日記リスト */
+- (NSMutableArray *)fetchVisitedList
+{
+  LOG()
+  NSMutableArray *array = [NSMutableArray array];
+  NSError *error = nil;
+  NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"VisitData"];
+  [request setFetchLimit:15];
   NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"visited_at" ascending:NO];
   request.sortDescriptors = @[sort];
   NSArray *fetchedArray = [_context executeFetchRequest:request error:&error];
@@ -492,6 +530,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
 //        LOG(@"shop: %@", [shop valueForKey:@"shop"])
         [ary setValue:[shop valueForKey:@"shop"] forKey:@"shop"];
         [ary setValue:[shop valueForKey:@"genre"] forKey:@"genre"];
+        [ary setValue:[shop valueForKey:@"level"] forKey:@"level"];
         [ary setValue:[shop valueForKey:@"area"] forKey:@"area"];
       }
     }
@@ -500,6 +539,8 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   }
   return array;
 }
+
+
 
 - (void)undo
 {

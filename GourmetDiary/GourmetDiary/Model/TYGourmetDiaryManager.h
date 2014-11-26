@@ -30,9 +30,10 @@ typedef void (^SetData)(ShopMst *);
 - (void)tempShopData:(NSDictionary *)data setData:(SetData)setData;
 - (void)addShopMstData:(ShopMst *)data;
 - (void)addVisitData:(NSMutableDictionary *)data;
-
-//1125
 - (BOOL)addVisitRegist:(NSMutableDictionary *)data shop:(ShopMst *)shop;
 - (NSMutableArray *)fetchVisitData;
+
+//1125
+- (NSMutableArray *)fetchVisitedList;
 
 @end

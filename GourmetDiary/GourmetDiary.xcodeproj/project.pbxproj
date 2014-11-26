@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1001DDBC1A24B7D200B84E66 /* TYDiaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001DDBB1A24B7D200B84E66 /* TYDiaryViewController.m */; };
+		1001DDC01A255F3300B84E66 /* TYEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001DDBF1A255F3300B84E66 /* TYEditorViewController.m */; };
 		1001E5211A1EC476003AB9A3 /* TYResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E5201A1EC476003AB9A3 /* TYResultViewController.m */; };
 		1001E5241A1EC60A003AB9A3 /* TYKeywordSearchConn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E5231A1EC60A003AB9A3 /* TYKeywordSearchConn.m */; };
 		1001E5281A1EF881003AB9A3 /* TYDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E5271A1EF881003AB9A3 /* TYDetailViewController.m */; };
@@ -48,6 +50,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1001DDBA1A24B7D200B84E66 /* TYDiaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYDiaryViewController.h; sourceTree = "<group>"; };
+		1001DDBB1A24B7D200B84E66 /* TYDiaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYDiaryViewController.m; sourceTree = "<group>"; };
+		1001DDBE1A255F3300B84E66 /* TYEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYEditorViewController.h; sourceTree = "<group>"; };
+		1001DDBF1A255F3300B84E66 /* TYEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYEditorViewController.m; sourceTree = "<group>"; };
 		1001E51F1A1EC476003AB9A3 /* TYResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYResultViewController.h; sourceTree = "<group>"; };
 		1001E5201A1EC476003AB9A3 /* TYResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYResultViewController.m; sourceTree = "<group>"; };
 		1001E5221A1EC60A003AB9A3 /* TYKeywordSearchConn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYKeywordSearchConn.h; sourceTree = "<group>"; };
@@ -123,6 +129,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1001DDB91A24B73500B84E66 /* Diary */ = {
+			isa = PBXGroup;
+			children = (
+				1001DDBA1A24B7D200B84E66 /* TYDiaryViewController.h */,
+				1001DDBB1A24B7D200B84E66 /* TYDiaryViewController.m */,
+			);
+			name = Diary;
+			path = Controller/Diary;
+			sourceTree = "<group>";
+		};
+		1001DDBD1A255F0700B84E66 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				1001DDBE1A255F3300B84E66 /* TYEditorViewController.h */,
+				1001DDBF1A255F3300B84E66 /* TYEditorViewController.m */,
+			);
+			name = Editor;
+			path = Controller/Editor;
+			sourceTree = "<group>";
+		};
 		1001E51D1A1EC1C9003AB9A3 /* Result */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +320,8 @@
 		108FDD091A1DC87500658904 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1001DDBD1A255F0700B84E66 /* Editor */,
+				1001DDB91A24B73500B84E66 /* Diary */,
 				1001E5301A1F7CE4003AB9A3 /* Map */,
 				1001E52C1A1F32A1003AB9A3 /* Register */,
 				1001E5251A1EF84B003AB9A3 /* Detail */,
@@ -427,6 +455,7 @@
 			files = (
 				1001E5331A1F7D46003AB9A3 /* TYMapViewController.m in Sources */,
 				108FDCC91A1DA00C00658904 /* TYViewController.m in Sources */,
+				1001DDC01A255F3300B84E66 /* TYEditorViewController.m in Sources */,
 				10C927C91A218C6500CD6669 /* VisitData.m in Sources */,
 				1001E5211A1EC476003AB9A3 /* TYResultViewController.m in Sources */,
 				108FDCC61A1DA00C00658904 /* TYAppDelegate.m in Sources */,
@@ -448,6 +477,7 @@
 				1001E52F1A1F32E1003AB9A3 /* TYRegisterViewController.m in Sources */,
 				108FDD0D1A1DCA9A00658904 /* TYSearchViewController.m in Sources */,
 				108FDCEC1A1DC0E600658904 /* TYApplication.m in Sources */,
+				1001DDBC1A24B7D200B84E66 /* TYDiaryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
