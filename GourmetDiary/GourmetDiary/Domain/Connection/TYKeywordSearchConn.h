@@ -10,6 +10,7 @@
 
 @interface TYKeywordSearchConn : TYURLOperation
 
-- (id)initWithTarget:(id)target selector:(SEL)selector para:(NSMutableDictionary *)para;
+//- (id)initWithTarget:(id)target selector:(SEL)selector para:(NSMutableDictionary *)para;
+- (id)initWithTarget:(id)target selector:(SEL)selector para:(NSMutableDictionary *)para set:(NSInteger)set;
 
 @end

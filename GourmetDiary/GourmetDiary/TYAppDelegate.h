@@ -13,6 +13,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, readonly, nonatomic) TYApplication *application;
+@property (nonatomic) NSString *sid;
+@property (nonatomic) int n;
 
 @end
 

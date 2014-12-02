@@ -12,5 +12,10 @@
 
 + (NSString *)checkKeyword:(NSString *)keyword;
 + (NSString *)checkInputTextMax:(NSString *)keyword;
++ (NSString *)checkLength:(NSString *)word;
++ (NSString *)setSituationPickerText:(NSNumber *)para;
++ (NSString *)setLevelPickerText:(NSNumber *)para;
++ (NSString *)setFeePickerText:(NSNumber *)para;
++ (NSString *)setLevelTableText:(NSNumber *)para;
 
 @end

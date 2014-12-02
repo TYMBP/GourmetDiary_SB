@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^Paging)();
+
 @interface TYDiaryViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSArray *visitedList;
 @property (weak, nonatomic) IBOutlet UINavigationItem *naviTitle;
+
+- (void)pageLoading:(Paging)paging;
 
 @end

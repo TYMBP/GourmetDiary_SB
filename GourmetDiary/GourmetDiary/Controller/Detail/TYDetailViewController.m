@@ -13,6 +13,7 @@
 #import "TYDetailSearchConn.h"
 #import "TYApplication.h"
 #import "ShopMst.h"
+#import "TYAppDelegate.h"
 
 @implementation TYDetailViewController {
   TYGourmetDiaryManager *_dataManager;
@@ -33,6 +34,11 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+
+  TYAppDelegate *appDelegate;
+  appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
+  NSString *sid = appDelegate.sid;
+  int n = appDelegate.n;
   
   self.mapBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
   self.mapBtn.layer.borderWidth = 1;
@@ -46,15 +52,21 @@
   self.nextBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
   self.nextBtn.layer.borderWidth = 1;
   self.nextBtn.layer.cornerRadius = 5;
-  
-  if (self.para) {
-    LOG(@"para: %@", self.para)
-    //APIよりDATAの取得
+ 
+  if (n == 1) {
+    if (self.para) {
+      LOG(@"para: %@", self.para)
+      //APIよりDATAの取得
+      [self runAPI];
+    } else {
+      //paraが取得できない
+      [self warning:@"問題発生しました"];
+    }
+  } else if (n == 2) {
+    self.para = sid;
     [self runAPI];
-  } else {
-    //paraが取得できない
-    [self warning:@"問題発生しました"];
   }
+  
 }
 
 - (void)warning:(NSString *)mess

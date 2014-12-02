@@ -12,7 +12,6 @@
 
 - (void)awakeFromNib {
     // Initialization code
-  LOG()
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

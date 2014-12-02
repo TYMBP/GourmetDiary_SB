@@ -13,7 +13,8 @@
   NSArray *_location;
 }
 
-- (id)initWithTarget:(id)target selector:(SEL)selector para:(NSMutableDictionary *)para
+//- (id)initWithTarget:(id)target selector:(SEL)selector para:(NSMutableDictionary *)para
+- (id)initWithTarget:(id)target selector:(SEL)selector para:(NSMutableDictionary *)para set:(NSInteger)set
 {
   LOG()
   self = [super initWithTarget:target selector:selector];
@@ -22,9 +23,12 @@
 //    LOG(@"url: %@", API_TEST2)
     NSString *shopWord = [para objectForKey:@"shop"];
     NSString *areaWord = [para objectForKey:@"area"];
+    NSString *start = [[NSString alloc] initWithFormat:@"%ld", set];
     
     LOG(@"shop: %@ area:%@", shopWord, areaWord)
-    NSString *urlStr = [NSString stringWithFormat:@"%@%@&Keyword=%@ %@&order=4&start=1&count=15&format=json", API_SHOPSEARCH, API_KEY, shopWord, areaWord];
+//    NSString *urlStr = [NSString stringWithFormat:@"%@%@&Keyword=%@ %@&order=4&start=1&count=15&format=json", API_SHOPSEARCH, API_KEY, shopWord, areaWord];
+//    NSString *urlStr = [NSString stringWithFormat:@"%@%@&name=%@&Keyword=%@&order=4&start=1&count=15&format=json", API_BASEURL, API_KEY, shopWord, areaWord];
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@&name=%@&Keyword=%@&order=4&start=%@&count=15&format=json", API_BASEURL, API_KEY, shopWord, areaWord, start];
     LOG(@"urlStr: %@", urlStr)
     NSURL *url = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     

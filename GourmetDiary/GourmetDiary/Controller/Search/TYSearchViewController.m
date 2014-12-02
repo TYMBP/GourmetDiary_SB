@@ -11,6 +11,7 @@
 #import "TYDetailViewController.h"
 #import "TYLocationSearch.h"
 #import "TYApplication.h"
+#import "TYAppDelegate.h"
 #import "TYGourmetDiaryManager.h"
 #import "TYUtil.h"
 #import "TYSearchTableViewCell.h"
@@ -163,6 +164,8 @@
     LOG(@"detail %@", segue.identifier)
     TYDetailViewController *detailCtr = segue.destinationViewController;
     detailCtr.para = _sid;
+    TYAppDelegate *appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.n = 1;
   }
 }
 

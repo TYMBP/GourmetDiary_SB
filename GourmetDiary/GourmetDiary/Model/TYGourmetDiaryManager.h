@@ -28,12 +28,15 @@ typedef void (^SetData)(ShopMst *);
 - (void)fetchKeywordSearchData:(Callback)callback;
 - (void)resetKeywordSearchData;
 - (void)tempShopData:(NSDictionary *)data setData:(SetData)setData;
-- (void)addShopMstData:(ShopMst *)data;
-- (void)addVisitData:(NSMutableDictionary *)data;
 - (BOOL)addVisitRegist:(NSMutableDictionary *)data shop:(ShopMst *)shop;
 - (NSMutableArray *)fetchVisitData;
 
-//1125
-- (NSMutableArray *)fetchVisitedList;
+//1128
+- (NSMutableArray *)fetchDiaryData:(NSString *)para;
+- (BOOL)addShopMstData:(ShopMst *)data;
+- (BOOL)addVisitData:(NSMutableDictionary *)data;
+- (BOOL)addEditorRegist:(NSMutableDictionary *)data shop:(NSMutableDictionary *)shop;
+- (BOOL)deleteDiary;
+- (NSMutableArray *)fetchVisitedList:(NSInteger)set offset:(NSInteger)offset;
 
 @end

@@ -14,6 +14,7 @@
 #import "KeywordSearch.h"
 #import "TYApplication.h"
 #import "SearchData.h"
+#import "TYAppDelegate.h"
 
 
 @implementation TYResultViewController {
@@ -21,13 +22,20 @@
   NSArray *_searchData;
   TYKeywordSearchConn *_connection;
   NSString *_sid;
+  NSNumber *_results;
+  NSInteger _setNum;
+  BOOL _isLoading;
+  UIActivityIndicatorView *_indicator;
 }
 
 - (id)initWithCoder:(NSCoder *)coder
 {
   self = [super initWithCoder:coder];
   if (self) {
+    LOG(@"yamada")
     _dataManager = [TYGourmetDiaryManager sharedmanager];
+   [_dataManager resetKeywordSearchData];
+    _setNum = 1;
   }
   return self;
 }
@@ -38,7 +46,11 @@
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   self.tableView.backgroundColor = [UIColor colorWithRed:0.2 green:0.8 blue:0.6 alpha:1.0];
-
+  _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+  [_indicator setColor:[UIColor darkGrayColor]];
+  [_indicator setHidesWhenStopped:YES];
+  [_indicator stopAnimating];
+  
   LOG(@"n: %d", self.n)
   if (self.n == 1) {
     LOG()
@@ -60,10 +72,11 @@
 
 - (void)runAPI
 {
-  LOG()
-  [_dataManager resetKeywordSearchData];
+//  [_dataManager resetKeywordSearchData];
   @synchronized (self) {
-    _connection = [[TYKeywordSearchConn alloc] initWithTarget:self selector:@selector(getApiData) para:self.para];
+  LOG()
+//    _connection = [[TYKeywordSearchConn alloc] initWithTarget:self selector:@selector(getApiData) para:self.para];
+    _connection = [[TYKeywordSearchConn alloc] initWithTarget:self selector:@selector(getApiData) para:self.para set:_setNum];
     [[TYApplication application] addURLOperation:_connection];
   }
 }
@@ -71,16 +84,17 @@
 - (void)getApiData {
   NSError *error = nil;
   NSString *json_str = [[NSString alloc] initWithData:_connection.data encoding:NSUTF8StringEncoding];
-//  LOG(@"data_str:%@",json_str)
   NSData *jsonData = [json_str dataUsingEncoding:NSUTF8StringEncoding];
   NSDictionary *data = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&error];
-  
-  LOG(@"error %@", [[data objectForKey:@"results"] objectForKey:@"error"])
-  LOG(@"error %@", [data valueForKeyPath:@"results.error.message"])
-  LOG(@"data count %@", [[data objectForKey:@"results"] objectForKey:@"results_returned"])
+  _results = [[data  objectForKey:@"results"] objectForKey:@"results_available"];
   NSNumber *n = [[data objectForKey:@"results"] objectForKey:@"results_returned"];
+  
+//  LOG(@"data_str:%@",json_str)
+//  LOG(@"error %@", [[data objectForKey:@"results"] objectForKey:@"error"])
+//  LOG(@"error %@", [data valueForKeyPath:@"results.error.message"])
+//  LOG(@"data count %@", [[data objectForKey:@"results"] objectForKey:@"results_returned"])
+  
   int num = [n intValue];
-  LOG(@"n: %@", n)
   if (num == 0) {
     LOG(@"response null")
     [self warning:@"検索条件が正しくないか、もしくは条件を絞り込む必要があります"];
@@ -88,10 +102,15 @@
     [_dataManager addKeywordSearchData:data];
      _searchData = nil;
     [_dataManager fetchKeywordSearchData:^(NSArray *ary){
-      LOG(@"ary :%@", ary)
-       _searchData = ary;
+//      LOG(@"ary :%@", ary)
+      _searchData = ary;
+      self.resultCount.text = [_results stringValue];
+      _setNum += 15;
+      LOG(@"setNum %lu", _setNum)
       [_tableView reloadData];
-     }];
+      [self endIndicator];
+      _isLoading = YES;
+    }];
   }
 }
 
@@ -113,6 +132,8 @@
 //    LOG(@"detail %@", segue.identifier)
     TYDetailViewController *detailCtr = segue.destinationViewController;
     detailCtr.para = _sid;
+    TYAppDelegate *appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.n = 1;
   }
 }
 
@@ -161,5 +182,37 @@
   [self performSegueWithIdentifier:@"Detail" sender:self];
 }
 
+//スクロールビューページング
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+  if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height))
+  {
+    if (_isLoading) {
+      if (_setNum < [_results integerValue]) {
+        LOG()
+        [self startIndicator];
+        _isLoading = NO;
+        [self runAPI];
+      }
+    }
+  }
+}
+
+- (void)startIndicator
+{
+  [_indicator startAnimating];
+  CGRect footerFrame = self.tableView.tableFooterView.frame;
+  footerFrame.size.height += 70.0f;
+  
+  [_indicator setFrame:footerFrame];
+  [self.tableView setTableFooterView:_indicator];
+}
+
+- (void)endIndicator
+{
+  [_indicator stopAnimating];
+  [_indicator removeFromSuperview];
+  [self.tableView setTableFooterView:nil];
+}
 
 @end
