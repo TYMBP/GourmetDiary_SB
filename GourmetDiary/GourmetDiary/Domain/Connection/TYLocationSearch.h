@@ -10,6 +10,7 @@
 
 @interface TYLocationSearch : TYURLOperation
 
-- (id)initWithTarget:(id)target selector:(SEL)selector;
+//- (id)initWithTarget:(id)target selector:(SEL)selector;
+- (id)initWithTarget:(id)target selector:(SEL)selector set:(NSInteger)set;
 
 @end

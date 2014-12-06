@@ -117,7 +117,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   }
 }
 
-//データ登録
+//ロケーションデータ登録
 - (void)addData:(NSDictionary *)data
 {
   NSArray *ary = [[data objectForKey:@"results"] objectForKey:@"shop"];
@@ -150,7 +150,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   NSError *error = nil;
   NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"SearchData"];
   NSArray *fetchedArray = [_context executeFetchRequest:request error:&error];
-  
+  LOG(@"fetch count %lu", fetchedArray.count)
   if (fetchedArray == nil) {
     LOG(@"fetch failure\n%@", [error localizedDescription])
     return fetchedArray;

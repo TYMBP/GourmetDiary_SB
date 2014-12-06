@@ -11,6 +11,7 @@
 #import "TYGourmetDiaryManager.h"
 #import "TYSearchTableViewCell.h"
 #import "TYKeywordSearchConn.h"
+#import "TYLocationSearch.h"
 #import "KeywordSearch.h"
 #import "TYApplication.h"
 #import "SearchData.h"
@@ -19,6 +20,7 @@
 
 @implementation TYResultViewController {
   TYGourmetDiaryManager *_dataManager;
+  TYLocationSearch *_location;
   NSArray *_searchData;
   TYKeywordSearchConn *_connection;
   NSString *_sid;
@@ -54,7 +56,11 @@
   LOG(@"n: %d", self.n)
   if (self.n == 1) {
     LOG()
+    _isLoading = YES;
+    _setNum += 15;
     _searchData = nil;
+    self.resultCount.text = [self.locRs stringValue];
+    _results = self.locRs;
     _searchData = [_dataManager fetchData];
     [_tableView reloadData];
   } else if (self.n == 2) {
@@ -72,12 +78,17 @@
 
 - (void)runAPI
 {
-//  [_dataManager resetKeywordSearchData];
   @synchronized (self) {
   LOG()
 //    _connection = [[TYKeywordSearchConn alloc] initWithTarget:self selector:@selector(getApiData) para:self.para];
-    _connection = [[TYKeywordSearchConn alloc] initWithTarget:self selector:@selector(getApiData) para:self.para set:_setNum];
-    [[TYApplication application] addURLOperation:_connection];
+    if (self.n == 1) {
+      LOG(@"runApi setNum %lu", _setNum)
+      _location = [[TYLocationSearch alloc] initWithTarget:self selector:@selector(getApiData) set:_setNum];
+      [[TYApplication application] addURLOperation:_connection];
+    } else {
+      _connection = [[TYKeywordSearchConn alloc] initWithTarget:self selector:@selector(getApiData) para:self.para set:_setNum];
+      [[TYApplication application] addURLOperation:_connection];
+    }
   }
 }
 
@@ -88,29 +99,34 @@
   NSDictionary *data = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&error];
   _results = [[data  objectForKey:@"results"] objectForKey:@"results_available"];
   NSNumber *n = [[data objectForKey:@"results"] objectForKey:@"results_returned"];
-  
 //  LOG(@"data_str:%@",json_str)
 //  LOG(@"error %@", [[data objectForKey:@"results"] objectForKey:@"error"])
 //  LOG(@"error %@", [data valueForKeyPath:@"results.error.message"])
 //  LOG(@"data count %@", [[data objectForKey:@"results"] objectForKey:@"results_returned"])
-  
-  int num = [n intValue];
-  if (num == 0) {
-    LOG(@"response null")
-    [self warning:@"検索条件が正しくないか、もしくは条件を絞り込む必要があります"];
-  } else {
-    [_dataManager addKeywordSearchData:data];
-     _searchData = nil;
-    [_dataManager fetchKeywordSearchData:^(NSArray *ary){
-//      LOG(@"ary :%@", ary)
-      _searchData = ary;
-      self.resultCount.text = [_results stringValue];
-      _setNum += 15;
-      LOG(@"setNum %lu", _setNum)
-      [_tableView reloadData];
-      [self endIndicator];
-      _isLoading = YES;
-    }];
+
+  if (self.n == 1) {
+    [_dataManager addData:data];
+    _searchData = [_dataManager fetchData];
+    [self.tableView reloadData];
+    _isLoading = YES;
+  } else if (self.n == 2) {
+    int num = [n intValue];
+    if (num == 0) {
+      LOG(@"response null")
+      [self warning:@"検索条件が正しくないか、もしくは条件を絞り込む必要があります"];
+    } else {
+      [_dataManager addKeywordSearchData:data];
+       _searchData = nil;
+      [_dataManager fetchKeywordSearchData:^(NSArray *ary){
+        _searchData = ary;
+        self.resultCount.text = [_results stringValue];
+        _setNum += 15;
+        LOG(@"setNum %lu", _setNum)
+        [_tableView reloadData];
+        [self endIndicator];
+        _isLoading = YES;
+      }];
+    }
   }
 }
 
@@ -188,8 +204,8 @@
   if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height))
   {
     if (_isLoading) {
+      LOG(@"setNum: %ld results: %@", _setNum, _results)
       if (_setNum < [_results integerValue]) {
-        LOG()
         [self startIndicator];
         _isLoading = NO;
         [self runAPI];

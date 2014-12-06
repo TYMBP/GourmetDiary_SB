@@ -31,7 +31,8 @@
   NSString *_areaMessage;
   NSMutableDictionary *_para;
   NSString *_sid;
-//  TYLocationInfo *_locationManager;
+  NSInteger _setNum;
+  NSNumber *_results;
 }
 
 - (id)initWithCoder:(NSCoder *)coder
@@ -51,10 +52,10 @@
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   self.tableView.backgroundColor = [UIColor colorWithRed:1.0 green:0.4 blue:0.4 alpha:1.0];
-
   self.searchBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
   self.searchBtn.layer.borderWidth = 1;
   self.searchBtn.layer.cornerRadius = 5;
+  _setNum = 1;
 
 //  _more.tag = MORE_LABEL;
 //  _more.userInteractionEnabled = YES;
@@ -98,7 +99,7 @@
   LOG()
   [_dataManager resetData];
   @synchronized (self) {
-    _connection = [[TYLocationSearch alloc] initWithTarget:self selector:@selector(getApiData)];
+    _connection = [[TYLocationSearch alloc] initWithTarget:self selector:@selector(getApiData) set:_setNum];
     [[TYApplication application] addURLOperation:_connection];
   }
 }
@@ -110,6 +111,7 @@
 //  LOG(@"data_str:%@",json_str)
   NSData *jsonData = [json_str dataUsingEncoding:NSUTF8StringEncoding];
   NSDictionary *data = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&error];
+  _results = [[data  objectForKey:@"results"] objectForKey:@"results_available"];
   [_dataManager addData:data];
   _searchData = [_dataManager fetchData];
   [self.tableView reloadData];
@@ -156,6 +158,7 @@
   if ([sender isEqual:self.moreBtn]) { //もっとみる
     LOG(@"more")
     resultCtr.n = SET_MORE;
+    resultCtr.locRs = _results;
   } else if ([sender isEqual:self.searchBtn]) { //キーワード検索
     resultCtr.n = SET_SEARCH;
     LOG(@"search %d", resultCtr.n)

@@ -13,20 +13,21 @@
   NSArray *_location;
 }
 
-- (id)initWithTarget:(id)target selector:(SEL)selector
+- (id)initWithTarget:(id)target selector:(SEL)selector set:(NSInteger)set
 {
   LOG()
   self = [super initWithTarget:target selector:selector];
   if (self) {
     _location = [[TYApplication application] getLocation];
-//    LOG(@"location %@", _location)
     NSNumber *latObj = [_location objectAtIndex:1];
     NSNumber *lngObj = [_location objectAtIndex:0];
     double lat = fabs(latObj.doubleValue);
     double lng = fabs(lngObj.doubleValue);
+    NSString *start = [[NSString alloc] initWithFormat:@"%ld", set];
 //  NSURL *url = [NSURL URLWithString:API_TEST];
 
-    NSString *urlStr = [NSString stringWithFormat:@"%@%@&Latitude=%f&Longitude=%f&order=4&start=1&count=15&format=json", API_BASEURL, API_KEY, lat, lng];
+//    NSString *urlStr = [NSString stringWithFormat:@"%@%@&Latitude=%f&Longitude=%f&order=4&start=1&count=15&format=json", API_BASEURL, API_KEY, lat, lng];
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@&Latitude=%f&Longitude=%f&order=4&start=%@&count=15&format=json", API_BASEURL, API_KEY, lat, lng, start];
 //    LOG(@"urlStr: %@", urlStr)
     NSURL *url = [NSURL URLWithString:urlStr];
     

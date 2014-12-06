@@ -11,6 +11,7 @@
 @interface TYResultViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) int n;
+@property (nonatomic) NSNumber *locRs;
 @property (nonatomic) NSMutableDictionary *para;
 @property (weak, nonatomic) IBOutlet UILabel *resultCount;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

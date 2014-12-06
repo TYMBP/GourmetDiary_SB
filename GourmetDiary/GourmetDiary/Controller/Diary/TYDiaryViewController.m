@@ -31,7 +31,7 @@
     _dateFomatter = [[NSDateFormatter alloc] init];
      [_dateFomatter setDateFormat:@"yy/MM/dd"];
     _dataManager = [TYGourmetDiaryManager sharedmanager];
-    
+//    _isLoading = YES;
   }
   return self;
 }
@@ -182,6 +182,10 @@
         _offset += 15;
         LOG()
         [self startIndicator];
+        [self pageLoading:^{
+          LOG(@"callback")
+          
+        }];
       }
     }
   }

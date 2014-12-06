@@ -6,6 +6,7 @@ dependencies: \
   /Users/TY/YamatoDev/Tapps/github/GourmetDiary_SB/GourmetDiary/GourmetDiary/View/TYSearchTableViewCell.h \
   /Users/TY/YamatoDev/Tapps/github/GourmetDiary_SB/GourmetDiary/GourmetDiary/Domain/Connection/TYKeywordSearchConn.h \
   /Users/TY/YamatoDev/Tapps/github/GourmetDiary_SB/GourmetDiary/GourmetDiary/Domain/Connection/TYURLOperation.h \
+  /Users/TY/YamatoDev/Tapps/github/GourmetDiary_SB/GourmetDiary/GourmetDiary/Domain/Connection/TYLocationSearch.h \
   /Users/TY/YamatoDev/Tapps/github/GourmetDiary_SB/GourmetDiary/GourmetDiary/Model/KeywordSearch.h \
   /Users/TY/YamatoDev/Tapps/github/GourmetDiary_SB/GourmetDiary/GourmetDiary/Domain/Application/TYApplication.h \
   /Users/TY/YamatoDev/Tapps/github/GourmetDiary_SB/GourmetDiary/GourmetDiary/Model/SearchData.h \
