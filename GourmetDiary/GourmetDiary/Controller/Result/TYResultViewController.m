@@ -55,7 +55,6 @@
   
   LOG(@"n: %d", self.n)
   if (self.n == 1) {
-    LOG()
     _isLoading = YES;
     _setNum += 15;
     _searchData = nil;
@@ -64,7 +63,6 @@
     _searchData = [_dataManager fetchData];
     [_tableView reloadData];
   } else if (self.n == 2) {
-    LOG()
     if (self.para) {
       LOG(@"para: %@", self.para)
       //APIよりDATAの取得
@@ -82,7 +80,6 @@
   LOG()
 //    _connection = [[TYKeywordSearchConn alloc] initWithTarget:self selector:@selector(getApiData) para:self.para];
     if (self.n == 1) {
-      LOG(@"runApi setNum %lu", _setNum)
       _location = [[TYLocationSearch alloc] initWithTarget:self selector:@selector(getApiData) set:_setNum];
       [[TYApplication application] addURLOperation:_connection];
     } else {
@@ -94,7 +91,12 @@
 
 - (void)getApiData {
   NSError *error = nil;
-  NSString *json_str = [[NSString alloc] initWithData:_connection.data encoding:NSUTF8StringEncoding];
+  NSString *json_str;
+  if (self.n == 1) {
+    json_str = [[NSString alloc] initWithData:_location.data encoding:NSUTF8StringEncoding];
+  } else {
+    json_str = [[NSString alloc] initWithData:_connection.data encoding:NSUTF8StringEncoding];
+  }
   NSData *jsonData = [json_str dataUsingEncoding:NSUTF8StringEncoding];
   NSDictionary *data = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&error];
   _results = [[data  objectForKey:@"results"] objectForKey:@"results_available"];
@@ -107,7 +109,9 @@
   if (self.n == 1) {
     [_dataManager addData:data];
     _searchData = [_dataManager fetchData];
+    _setNum += 15;
     [self.tableView reloadData];
+    [self endIndicator];
     _isLoading = YES;
   } else if (self.n == 2) {
     int num = [n intValue];

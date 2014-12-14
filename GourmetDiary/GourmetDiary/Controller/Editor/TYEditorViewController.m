@@ -51,6 +51,7 @@
 
 - (id)initWithCoder:(NSCoder *)coder
 {
+  LOG(@"init")
   self = [super initWithCoder:coder];
   if (self) {
     _dateFomatter = [[NSDateFormatter alloc] init];
@@ -80,6 +81,7 @@
   
   _appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
   NSString *sid = _appDelegate.sid;
+  
   _n = _appDelegate.n;
   _dateFomatter = [[NSDateFormatter alloc] init];
    [_dateFomatter setDateFormat:@"yyyy/MM/dd"];
@@ -104,6 +106,7 @@
     self.comment.editable = NO;
     
   } else if (_n == 2) {
+    LOG()
     if (self.shopDic) {
       LOG()
       self.naviTitle.title = [self.shopDic valueForKey:@"shop"];

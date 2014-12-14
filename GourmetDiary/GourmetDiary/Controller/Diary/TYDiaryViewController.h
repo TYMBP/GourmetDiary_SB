@@ -10,12 +10,12 @@
 
 typedef void (^Paging)();
 
-@interface TYDiaryViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface TYDiaryViewController : UIViewController<UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSArray *visitedList;
 @property (weak, nonatomic) IBOutlet UINavigationItem *naviTitle;
 
-- (void)pageLoading:(Paging)paging;
+- (BOOL)pageLoading:(Paging)paging;
 
 @end

@@ -35,6 +35,7 @@
 {
   [super viewDidLoad];
 
+  LOG()
   TYAppDelegate *appDelegate;
   appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
   NSString *sid = appDelegate.sid;

@@ -25,10 +25,9 @@
     double lng = fabs(lngObj.doubleValue);
     NSString *start = [[NSString alloc] initWithFormat:@"%ld", set];
 //  NSURL *url = [NSURL URLWithString:API_TEST];
-
-//    NSString *urlStr = [NSString stringWithFormat:@"%@%@&Latitude=%f&Longitude=%f&order=4&start=1&count=15&format=json", API_BASEURL, API_KEY, lat, lng];
+//  NSString *urlStr = [NSString stringWithFormat:@"%@%@&count=15&format=json", API_TEST1, start];
     NSString *urlStr = [NSString stringWithFormat:@"%@%@&Latitude=%f&Longitude=%f&order=4&start=%@&count=15&format=json", API_BASEURL, API_KEY, lat, lng, start];
-//    LOG(@"urlStr: %@", urlStr)
+    LOG(@"urlStr: %@", urlStr)
     NSURL *url = [NSURL URLWithString:urlStr];
     
     NSURLRequest *request =  [NSURLRequest requestWithURL:url];

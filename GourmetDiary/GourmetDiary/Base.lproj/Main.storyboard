@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tWo-Nj-T5e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tWo-Nj-T5e">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -1318,8 +1318,8 @@
         <image name="NoImage" width="84" height="63"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IMO-6E-pdj"/>
+        <segue reference="SYk-EV-8rd"/>
         <segue reference="dEz-Fh-OwF"/>
-        <segue reference="usy-o5-ER0"/>
+        <segue reference="IMO-6E-pdj"/>
     </inferredMetricsTieBreakers>
 </document>

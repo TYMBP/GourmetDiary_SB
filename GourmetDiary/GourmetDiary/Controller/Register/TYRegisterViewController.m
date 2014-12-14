@@ -157,19 +157,15 @@
   LOG(@"tag %lu",textField.tag)
   switch (textField.tag) {
     case TF_SITUATION:
-      LOG()
       _tagNum = TF_SITUATION;
       break;
     case TF_LEVEL:
-      LOG()
       _tagNum = TF_LEVEL;
       break;
     case TF_PERSON:
-      LOG()
       _tagNum = TF_PERSON;
       break;
     case TF_FEE:
-      LOG()
       _tagNum = TF_FEE;
       break;
     default:
@@ -206,10 +202,12 @@
     [_dateFomatter setDateFormat:@"yyyy/MM/dd"];
     [_dateFomatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     NSDate *date = [_dateFomatter dateFromString:self.dou.text];
+    LOG(@"date:%@",date)
   
     NSString *dateStr = [_dateFomatter stringFromDate:[NSDate date]];
     [_dateFomatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     NSDate *now = [_dateFomatter dateFromString:dateStr];
+    LOG(@"now:%@",now)
     NSComparisonResult result  = [date compare:now];
     
     switch (result) {

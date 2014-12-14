@@ -28,7 +28,6 @@
     _dateFomatter = [[NSDateFormatter alloc] init];
      [_dateFomatter setDateFormat:@"yy/MM/dd"];
     _dataManager = [TYGourmetDiaryManager sharedmanager];
-    
   }
   return self;
 }
@@ -48,25 +47,8 @@
   self.searchBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
   self.searchBtn.layer.borderWidth = 1;
   self.searchBtn.layer.cornerRadius = 5;
-}
-
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//  LOG()
-//  [super viewWillAppear:animated];
-//}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-  LOG()
   
-//  if ([[segue identifier] isEqualToString:@"Diary"]) {
-//    LOG(@"diary %@", segue.identifier)
-//    TYEditorViewController *editCtr = segue.destinationViewController;
-//    TYDiaryViewController *diaCtr = segue.destinationViewController;
-//    editCtr.para = _sid;
-//    diaCtr.para = _sid;
-//  }
+  self.navigationController.delegate = self;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -76,28 +58,23 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+  if (self.visitedData.count == 0) {
+    return 0;
+  } else if (self.visitedData.count < 4) {
+    return self.visitedData.count;
+  }
   return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   TYVisitedTableViewCell *cell = (TYVisitedTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VisitedList" forIndexPath:indexPath];
-  NSInteger n = indexPath.row + 1;
-  if (self.visitedData.count < 4 && self.visitedData.count < n) {
-      LOG(@"null")
-      cell.date.text = @"";
-      cell.level.text = @"";
-      cell.name.text = @"";
-      cell.genre.text = @"";
-      cell.area.text = @"";
-  } else {
-    NSDictionary *fetchData = [self.visitedData objectAtIndex:indexPath.row];
-    cell.date.text = [_dateFomatter stringFromDate:[fetchData valueForKey:@"visited"]];
-    cell.name.text = [fetchData valueForKey:@"shop"];
-    cell.level.text = [TYUtil setLevelTableText:[fetchData valueForKey:@"level"]];
-    cell.area.text = [fetchData valueForKey:@"area"];
-    cell.genre.text = [fetchData valueForKey:@"genre"];
-  }
+  NSDictionary *fetchData = [self.visitedData objectAtIndex:indexPath.row];
+  cell.date.text = [_dateFomatter stringFromDate:[fetchData valueForKey:@"visited"]];
+  cell.name.text = [fetchData valueForKey:@"shop"];
+  cell.level.text = [TYUtil setLevelTableText:[fetchData valueForKey:@"level"]];
+  cell.area.text = [fetchData valueForKey:@"area"];
+  cell.genre.text = [fetchData valueForKey:@"genre"];
   return cell;
 }
 
@@ -111,24 +88,40 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  [tableView deselectRowAtIndexPath:indexPath animated:YES];
-  NSDictionary *fetchData = [self.visitedData objectAtIndex:indexPath.row];
-  LOG(@"sid: %@", [fetchData valueForKey:@"sid"])
-  _sid = [fetchData valueForKey:@"sid"];
-  
-  TYAppDelegate *appDelegate;
-  appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
-  appDelegate.sid = _sid;
-  appDelegate.n = 1;
-  LOG(@"_sid %@", _sid)
-  LOG(@"appdelegate sid %@", appDelegate.sid)
-  
-  UINavigationController *vc = self.tabBarController.viewControllers[1];
-  self.tabBarController.selectedViewController = vc;
-  [vc popToRootViewControllerAnimated:NO];
-  [vc.viewControllers[0] performSegueWithIdentifier:@"Editor" sender:self];
-//  [self performSegueWithIdentifier:@"Diary" sender:self];
+  if (self.visitedData) {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    return;
+  } else {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *fetchData = [self.visitedData objectAtIndex:indexPath.row];
+    LOG(@"sid: %@", [fetchData valueForKey:@"sid"])
+    _sid = [fetchData valueForKey:@"sid"];
+    
+    TYAppDelegate *appDelegate;
+    appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.sid = _sid;
+    appDelegate.n = 1;
+    LOG(@"_sid %@", _sid)
+    LOG(@"appdelegate sid %@", appDelegate.sid)
+    
+    UINavigationController *vc = self.tabBarController.viewControllers[1];
+    self.tabBarController.selectedViewController = vc;
+    [vc popToRootViewControllerAnimated:NO];
+    [vc.viewControllers[0] performSegueWithIdentifier:@"Editor" sender:self];
+  //  [self performSegueWithIdentifier:@"Diary" sender:self];
+  }
 }
+
+- (void) navigationController:(UINavigationController *) navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+  LOG()
+  _visitedData = nil;
+  _visitedData = [_dataManager fetchVisitData];
+  [self.tableView reloadData];
+}
+
+
+
 
 /* test */
 - (void)test

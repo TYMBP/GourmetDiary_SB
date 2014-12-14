@@ -18,7 +18,7 @@
   NSDateFormatter *_dateFomatter;
   NSString *_sid;
   UIActivityIndicatorView *_indicator;
-  NSInteger _offset;
+  NSInteger _set;
   NSInteger _count;
   BOOL _isLoading;
 }
@@ -31,7 +31,7 @@
     _dateFomatter = [[NSDateFormatter alloc] init];
      [_dateFomatter setDateFormat:@"yy/MM/dd"];
     _dataManager = [TYGourmetDiaryManager sharedmanager];
-//    _isLoading = YES;
+    _isLoading = YES;
   }
   return self;
 }
@@ -40,20 +40,22 @@
 {
   [super viewDidLoad];
   
+  self.navigationController.delegate = self;
+  
   _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
   [_indicator setColor:[UIColor darkGrayColor]];
   [_indicator setHidesWhenStopped:YES];
   [_indicator stopAnimating];
   
   self.visitedList = nil;
-  _offset = 0;
+  _set = 15;
   
   self.naviTitle.title = @"最新";
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   self.tableView.backgroundColor = [UIColor colorWithRed:0.00 green:0.60 blue:1.0 alpha:1.0];
   self.automaticallyAdjustsScrollViewInsets = NO;
-  self.visitedList = [_dataManager fetchVisitedList:1 offset:_offset];
+  self.visitedList = [_dataManager fetchVisitedList:1 num:_set];
   _count = [[[self.visitedList objectAtIndex:0] valueForKey:@"count"] integerValue];
   LOG(@"count %lu", _count)
 //  [self test];
@@ -65,13 +67,13 @@
   UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"並び替え" message:@"選択してください" preferredStyle:UIAlertControllerStyleActionSheet];
   UIAlertAction *dec = [UIAlertAction actionWithTitle:@"降順" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
     LOG(@"dec tap")
-    self.visitedList = [_dataManager fetchVisitedList:1 offset:_offset];
+    self.visitedList = [_dataManager fetchVisitedList:1 num:_set];
     [self.tableView reloadData];
     
   }];
   UIAlertAction *asc = [UIAlertAction actionWithTitle:@"昇順" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
     LOG(@"asc tap")
-    self.visitedList = [_dataManager fetchVisitedList:2 offset:_offset];
+    self.visitedList = [_dataManager fetchVisitedList:2 num:_set];
     [self.tableView reloadData];
   }];
   UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
@@ -104,6 +106,12 @@
 //    LOG(@"sid %@", _sid)
 //  }
 //}
+
+- (void) navigationController:(UINavigationController *) navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+  LOG()
+//  [self.tableView reloadData];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -149,26 +157,21 @@
   TYAppDelegate *appDelegate;
   appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
   appDelegate.sid = _sid;
+  appDelegate.n = 1;
   
   [self performSegueWithIdentifier:@"Editor" sender:self];
 }
 
-- (BOOL)getList
+- (BOOL)pageLoading:(Paging)paging
 {
-  self.visitedList = [_dataManager fetchVisitedList:1 offset:_offset];
+  self.visitedList = [_dataManager fetchVisitedList:1 num:_set];
   if (!self.visitedList) {
     return NO;
   }
-  return YES;
-}
-
-- (void)pageLoading:(Paging)paging
-{
-  if ([self getList]) {
-    if (paging){
-      paging();
-    }
+  if (paging){
+    paging();
   }
+  return YES;
 }
 
 //スクロールビューページング
@@ -177,15 +180,20 @@
   if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height))
   {
     if (_isLoading) {
-      if (_offset < _count) {
-        _isLoading = NO;
-        _offset += 15;
+      if (_set < _count) {
         LOG()
+        _isLoading = NO;
+        _set += 15;
         [self startIndicator];
-        [self pageLoading:^{
-          LOG(@"callback")
-          
-        }];
+        
+        if ([self pageLoading:^{
+          [self.tableView reloadData];
+          [self endIndicator];
+        }]) {
+        } else {
+          LOG()
+          [self endIndicator];
+        }
       }
     }
   }

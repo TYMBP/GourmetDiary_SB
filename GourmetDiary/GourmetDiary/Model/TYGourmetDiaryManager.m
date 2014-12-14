@@ -428,9 +428,9 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   return YES;
 }
 
+//Top
 - (NSMutableArray *)fetchVisitData
 {
-  LOG()
   NSMutableArray *array = [NSMutableArray array];
   NSError *error = nil;
   NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"VisitData"];
@@ -438,6 +438,8 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"visited_at" ascending:NO];
   request.sortDescriptors = @[sort];
   NSArray *fetchedArray = [_context executeFetchRequest:request error:&error];
+  LOG(@"fetchdArray: %@", fetchedArray)
+  
   
   if (fetchedArray == nil) {
     LOG(@"fetch failure\n%@", [error localizedDescription])
@@ -452,7 +454,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
       LOG(@"null");
     } else {
       for (NSManagedObject *shop in master) {
-//        LOG(@"shop: %@", [shop valueForKey:@"shop"])
+        LOG(@"shop: %@", [shop valueForKey:@"shop"])
         [ary setValue:[shop valueForKey:@"shop"] forKey:@"shop"];
         [ary setValue:[shop valueForKey:@"sid"] forKey:@"sid"];
         [ary setValue:[shop valueForKey:@"level"] forKey:@"level"];
@@ -467,16 +469,14 @@ static TYGourmetDiaryManager *sharedInstance = nil;
 }
 
 /* 日記リスト */
-//- (NSMutableArray *)fetchVisitedList
-- (NSMutableArray *)fetchVisitedList:(NSInteger)set offset:(NSInteger)offset
+- (NSMutableArray *)fetchVisitedList:(NSInteger)set num:(NSInteger)num
 {
-  LOG()
+  LOG(@"set:%lu set:%lu", set, num)
   NSMutableArray *array = [NSMutableArray array];
   NSError *error = nil;
   NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"VisitData"];
   NSInteger count = [self.context countForFetchRequest:request error:&error];
-  request.fetchOffset = offset;
-  request.fetchLimit = 15;
+  request.fetchLimit = num;
   NSSortDescriptor *sort;
   if (set == 1) {
     sort = [[NSSortDescriptor alloc] initWithKey:@"visited_at" ascending:NO];
@@ -485,7 +485,6 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   }
   request.sortDescriptors = @[sort];
   NSArray *fetchedArray = [_context executeFetchRequest:request error:&error];
-  
   if (fetchedArray == nil) {
     LOG(@"fetch failure\n%@", [error localizedDescription])
     return array;

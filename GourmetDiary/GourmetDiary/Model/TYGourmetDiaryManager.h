@@ -37,6 +37,6 @@ typedef void (^SetData)(ShopMst *);
 - (BOOL)addVisitData:(NSMutableDictionary *)data;
 - (BOOL)addEditorRegist:(NSMutableDictionary *)data shop:(NSMutableDictionary *)shop;
 - (BOOL)deleteDiary;
-- (NSMutableArray *)fetchVisitedList:(NSInteger)set offset:(NSInteger)offset;
+- (NSMutableArray *)fetchVisitedList:(NSInteger)set num:(NSInteger)num;
 
 @end
