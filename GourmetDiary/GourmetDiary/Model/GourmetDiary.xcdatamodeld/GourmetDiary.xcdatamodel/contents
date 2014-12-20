@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="13F34" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="KeywordSearch" representedClassName="KeywordSearch" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="genre" optional="YES" attributeType="String" syncable="YES"/>
@@ -30,7 +30,7 @@
         <attribute name="tel" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="master" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="VisitData" inverseName="diary" inverseEntity="VisitData" syncable="YES"/>
+        <relationship name="master" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VisitData" inverseName="diary" inverseEntity="VisitData" syncable="YES"/>
     </entity>
     <entity name="VisitData" representedClassName="VisitData" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
@@ -46,7 +46,7 @@
     <elements>
         <element name="KeywordSearch" positionX="-54" positionY="36" width="128" height="103"/>
         <element name="SearchData" positionX="-63" positionY="-18" width="128" height="135"/>
-        <element name="ShopMst" positionX="-36" positionY="54" width="128" height="283"/>
+        <element name="ShopMst" positionX="-36" positionY="54" width="128" height="285"/>
         <element name="VisitData" positionX="-18" positionY="162" width="128" height="178"/>
     </elements>
 </model>

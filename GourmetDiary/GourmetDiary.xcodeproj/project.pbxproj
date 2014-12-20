@@ -15,6 +15,8 @@
 		1001E52B1A1F0512003AB9A3 /* TYDetailSearchConn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E52A1A1F0512003AB9A3 /* TYDetailSearchConn.m */; };
 		1001E52F1A1F32E1003AB9A3 /* TYRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E52E1A1F32E1003AB9A3 /* TYRegisterViewController.m */; };
 		1001E5331A1F7D46003AB9A3 /* TYMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1001E5321A1F7D46003AB9A3 /* TYMapViewController.m */; };
+		104CDA761A3DBD0C0012C5EC /* ShopMst.m in Sources */ = {isa = PBXBuildFile; fileRef = 104CDA751A3DBD0C0012C5EC /* ShopMst.m */; };
+		104CDA791A3DBD0D0012C5EC /* VisitData.m in Sources */ = {isa = PBXBuildFile; fileRef = 104CDA781A3DBD0D0012C5EC /* VisitData.m */; };
 		108FDCC31A1DA00C00658904 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCC21A1DA00C00658904 /* main.m */; };
 		108FDCC61A1DA00C00658904 /* TYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCC51A1DA00C00658904 /* TYAppDelegate.m */; };
 		108FDCC91A1DA00C00658904 /* TYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDCC81A1DA00C00658904 /* TYViewController.m */; };
@@ -35,8 +37,6 @@
 		108FDD141A1E06C800658904 /* TYSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD131A1E06C800658904 /* TYSearchTableViewCell.m */; };
 		10C927C01A204BAE00CD6669 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C927BF1A204BAE00CD6669 /* MapKit.framework */; };
 		10C927C31A20BA5A00CD6669 /* TYVisitedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C927C21A20BA5A00CD6669 /* TYVisitedTableViewCell.m */; };
-		10C927C61A218C6400CD6669 /* ShopMst.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C927C51A218C6400CD6669 /* ShopMst.m */; };
-		10C927C91A218C6500CD6669 /* VisitData.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C927C81A218C6500CD6669 /* VisitData.m */; };
 		10D28D501A29D06500261360 /* TYShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D28D4F1A29D06500261360 /* TYShopViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +67,10 @@
 		1001E52E1A1F32E1003AB9A3 /* TYRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYRegisterViewController.m; sourceTree = "<group>"; };
 		1001E5311A1F7D46003AB9A3 /* TYMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYMapViewController.h; sourceTree = "<group>"; };
 		1001E5321A1F7D46003AB9A3 /* TYMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYMapViewController.m; sourceTree = "<group>"; };
+		104CDA741A3DBD0C0012C5EC /* ShopMst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopMst.h; sourceTree = "<group>"; };
+		104CDA751A3DBD0C0012C5EC /* ShopMst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopMst.m; sourceTree = "<group>"; };
+		104CDA771A3DBD0D0012C5EC /* VisitData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitData.h; sourceTree = "<group>"; };
+		104CDA781A3DBD0D0012C5EC /* VisitData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitData.m; sourceTree = "<group>"; };
 		108FDCBD1A1DA00C00658904 /* GourmetDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GourmetDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		108FDCC11A1DA00C00658904 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		108FDCC21A1DA00C00658904 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -105,10 +109,6 @@
 		10C927BF1A204BAE00CD6669 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		10C927C11A20BA5A00CD6669 /* TYVisitedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVisitedTableViewCell.h; sourceTree = "<group>"; };
 		10C927C21A20BA5A00CD6669 /* TYVisitedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYVisitedTableViewCell.m; sourceTree = "<group>"; };
-		10C927C41A218C6400CD6669 /* ShopMst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopMst.h; sourceTree = "<group>"; };
-		10C927C51A218C6400CD6669 /* ShopMst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopMst.m; sourceTree = "<group>"; };
-		10C927C71A218C6500CD6669 /* VisitData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitData.h; sourceTree = "<group>"; };
-		10C927C81A218C6500CD6669 /* VisitData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitData.m; sourceTree = "<group>"; };
 		10D28D4E1A29D06500261360 /* TYShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYShopViewController.h; sourceTree = "<group>"; };
 		10D28D4F1A29D06500261360 /* TYShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYShopViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -305,11 +305,11 @@
 		108FDCF61A1DC15000658904 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				104CDA771A3DBD0D0012C5EC /* VisitData.h */,
+				104CDA781A3DBD0D0012C5EC /* VisitData.m */,
+				104CDA741A3DBD0C0012C5EC /* ShopMst.h */,
+				104CDA751A3DBD0C0012C5EC /* ShopMst.m */,
 				108FDCF71A1DC19400658904 /* GourmetDiary.xcdatamodeld */,
-				10C927C71A218C6500CD6669 /* VisitData.h */,
-				10C927C81A218C6500CD6669 /* VisitData.m */,
-				10C927C41A218C6400CD6669 /* ShopMst.h */,
-				10C927C51A218C6400CD6669 /* ShopMst.m */,
 				108FDD031A1DC4C900658904 /* KeywordSearch.h */,
 				108FDD041A1DC4C900658904 /* KeywordSearch.m */,
 				108FDCFD1A1DC25600658904 /* SearchData.h */,
@@ -470,7 +470,6 @@
 				1001E5331A1F7D46003AB9A3 /* TYMapViewController.m in Sources */,
 				108FDCC91A1DA00C00658904 /* TYViewController.m in Sources */,
 				1001DDC01A255F3300B84E66 /* TYEditorViewController.m in Sources */,
-				10C927C91A218C6500CD6669 /* VisitData.m in Sources */,
 				1001E5211A1EC476003AB9A3 /* TYResultViewController.m in Sources */,
 				108FDCC61A1DA00C00658904 /* TYAppDelegate.m in Sources */,
 				108FDCF21A1DC11A00658904 /* TYUtil.m in Sources */,
@@ -478,10 +477,10 @@
 				108FDCC31A1DA00C00658904 /* main.m in Sources */,
 				108FDCEF1A1DC10600658904 /* TYURLOperation.m in Sources */,
 				108FDD101A1DD97300658904 /* TYLocationInfo.m in Sources */,
+				104CDA761A3DBD0C0012C5EC /* ShopMst.m in Sources */,
 				108FDD051A1DC4C900658904 /* KeywordSearch.m in Sources */,
 				108FDCF91A1DC19400658904 /* GourmetDiary.xcdatamodeld in Sources */,
 				108FDD141A1E06C800658904 /* TYSearchTableViewCell.m in Sources */,
-				10C927C61A218C6400CD6669 /* ShopMst.m in Sources */,
 				1001E52B1A1F0512003AB9A3 /* TYDetailSearchConn.m in Sources */,
 				108FDCF51A1DC14000658904 /* TYLocationSearch.m in Sources */,
 				10D28D501A29D06500261360 /* TYShopViewController.m in Sources */,
@@ -489,6 +488,7 @@
 				108FDCFC1A1DC1A700658904 /* TYGourmetDiaryManager.m in Sources */,
 				1001E5241A1EC60A003AB9A3 /* TYKeywordSearchConn.m in Sources */,
 				10C927C31A20BA5A00CD6669 /* TYVisitedTableViewCell.m in Sources */,
+				104CDA791A3DBD0D0012C5EC /* VisitData.m in Sources */,
 				1001E52F1A1F32E1003AB9A3 /* TYRegisterViewController.m in Sources */,
 				108FDD0D1A1DCA9A00658904 /* TYSearchViewController.m in Sources */,
 				108FDCEC1A1DC0E600658904 /* TYApplication.m in Sources */,

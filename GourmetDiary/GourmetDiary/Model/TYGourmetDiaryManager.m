@@ -438,8 +438,6 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"visited_at" ascending:NO];
   request.sortDescriptors = @[sort];
   NSArray *fetchedArray = [_context executeFetchRequest:request error:&error];
-  LOG(@"fetchdArray: %@", fetchedArray)
-  
   
   if (fetchedArray == nil) {
     LOG(@"fetch failure\n%@", [error localizedDescription])

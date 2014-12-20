@@ -64,8 +64,8 @@
     self.naviTitle.title = self.shopMst.shop;
     
     _dateFomatter = [[NSDateFormatter alloc] init];
-     [_dateFomatter setDateFormat:@"yyyy/MM/dd"];
-  //  [_dateFomatter setDateStyle:NSDateFormatterShortStyle];
+    [_dateFomatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"JST"]];
+    [_dateFomatter setDateFormat:@"yyyy/MM/dd"];
     
     self.registerBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.registerBtn.layer.borderWidth = 1;
@@ -199,13 +199,19 @@
   } else if ([_comment.text length] >= 256){
     [self warning:@"コメントは256文字までで入力してください"];
   } else {
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"PST"]];
+//    [formatter setDateFormat:@"dd a HH:mm"];
+//    NSString *currentTime = [formatter stringFromDate:date];
+//    NSLog(@"%@",currentTime)
+    
     [_dateFomatter setDateFormat:@"yyyy/MM/dd"];
-    [_dateFomatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    [_dateFomatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"JST"]];
     NSDate *date = [_dateFomatter dateFromString:self.dou.text];
     LOG(@"date:%@",date)
   
     NSString *dateStr = [_dateFomatter stringFromDate:[NSDate date]];
-    [_dateFomatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    [_dateFomatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"JST"]];
     NSDate *now = [_dateFomatter dateFromString:dateStr];
     LOG(@"now:%@",now)
     NSComparisonResult result  = [date compare:now];
@@ -235,14 +241,6 @@
   self.shopMst.level = [NSNumber numberWithInteger:_levelNum];
   
   [_dataManager addVisitRegist:dic shop:self.shopMst];
-/*1125リレーション変更
-  [_dataManager addShopMstData:self.shopMst];
-  [_dataManager addVisitData:dic];
-*/
-  
-//  if ([self.modalDelegate respondsToSelector:@selector(searchDidFinish)]) {
-//    [self.modalDelegate searchDidFinish];
-//  }
   [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
