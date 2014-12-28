@@ -16,6 +16,12 @@
 + (NSString *)setSituationPickerText:(NSNumber *)para;
 + (NSString *)setLevelPickerText:(NSNumber *)para;
 + (NSString *)setFeePickerText:(NSNumber *)para;
++ (NSString *)setPersonsText:(NSNumber *)para;
 + (NSString *)setLevelTableText:(NSNumber *)para;
++ (NSArray *)levelList;
++ (NSArray *)situationList;
++ (NSArray *)personList;
++ (NSArray *)feeList;
++ (NSArray *)genreList;
 
 @end

@@ -47,7 +47,7 @@
   [super viewDidLoad];
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
-  self.tableView.backgroundColor = [UIColor colorWithRed:0.2 green:0.8 blue:0.6 alpha:1.0];
+  self.tableView.backgroundColor = [UIColor colorWithRed:0.13 green:0.55 blue:0.13 alpha:1.0];
   _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
   [_indicator setColor:[UIColor darkGrayColor]];
   [_indicator setHidesWhenStopped:YES];
@@ -170,17 +170,26 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  LOG()
   TYSearchTableViewCell *cell = (TYSearchTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Shoplist" forIndexPath:indexPath];
   if (_searchData.count == 0) {
     LOG(@"null")
     cell.genru.text = @"";
     cell.name.text = @"";
-    cell.address.text = @"";
+    cell.area.text = @"";
   } else {
     SearchData *rowData = [_searchData objectAtIndex:indexPath.row];
     cell.genruRs.text = rowData.genre;
-    cell.nameRs.text = rowData.shop;
-    cell.addressRs.text = rowData.address;
+    cell.areaRs.text = rowData.area;
+    CGFloat lineHeight = 20.0f;
+    NSString *str = rowData.shop;
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.minimumLineHeight = lineHeight;
+    paraStyle.maximumLineHeight = lineHeight;
+
+    NSMutableAttributedString *attributeText = [[NSMutableAttributedString alloc] initWithString:str];
+    [attributeText addAttribute:NSParagraphStyleAttributeName value:paraStyle range:NSMakeRange(0, attributeText.length)];
+    cell.nameRs.attributedText = attributeText;
   }
   return cell;
 }
@@ -208,7 +217,7 @@
   if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height))
   {
     if (_isLoading) {
-      LOG(@"setNum: %ld results: %@", _setNum, _results)
+//      LOG(@"setNum: %ld results: %@", _setNum, _results)
       if (_setNum < [_results integerValue]) {
         [self startIndicator];
         _isLoading = NO;

@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TYBaseViewController.h"
 
-@interface TYEditorViewController : UIViewController<UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@class ShopMst;
 
+//@interface TYEditorViewController : UIViewController<UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface TYEditorViewController : TYBaseViewController
+
+@property (nonatomic) ShopMst *master;
 @property (nonatomic) NSString *para;
 @property (nonatomic) NSMutableDictionary *shopDic;
 @property (weak, nonatomic) IBOutlet UITextField *dou;
@@ -21,5 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @property (weak, nonatomic) IBOutlet UINavigationItem *naviTitle;
 @property (weak, nonatomic) IBOutlet UITextView *comment;
+@property (weak, nonatomic) IBOutlet UIView *onView;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end

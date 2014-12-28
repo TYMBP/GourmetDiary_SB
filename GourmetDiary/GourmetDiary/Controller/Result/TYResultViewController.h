@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TYBaseViewController.h"
 
-@interface TYResultViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+//@interface TYResultViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface TYResultViewController : TYBaseViewController
 
 @property (nonatomic) int n;
 @property (nonatomic) NSNumber *locRs;

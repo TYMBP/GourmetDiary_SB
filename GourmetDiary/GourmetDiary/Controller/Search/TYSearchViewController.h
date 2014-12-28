@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TYBaseViewController.h"
 
-@interface TYSearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface TYSearchViewController : TYBaseViewController
 @property (weak, nonatomic) IBOutlet UITextField *shopKeyword;
-@property (weak, nonatomic) IBOutlet UITextField *areaStation;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *searchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *moreBtn;
+@property (weak, nonatomic) IBOutlet UITextField *genreSearch;
 
 @end
 

@@ -1,6 +1,7 @@
 dependencies: \
   /Users/TY/YamatoDev/Tapps/github/GourmetDiary_SB/GourmetDiary/GourmetDiary/Controller/Result/TYResultViewController.m \
   /Users/TY/YamatoDev/Tapps/github/GourmetDiary_SB/GourmetDiary/GourmetDiary/Controller/Result/TYResultViewController.h \
+  /Users/TY/YamatoDev/Tapps/github/GourmetDiary_SB/GourmetDiary/GourmetDiary/Controller/TYBaseViewController.h \
   /Users/TY/YamatoDev/Tapps/github/GourmetDiary_SB/GourmetDiary/GourmetDiary/Controller/Detail/TYDetailViewController.h \
   /Users/TY/YamatoDev/Tapps/github/GourmetDiary_SB/GourmetDiary/GourmetDiary/Model/TYGourmetDiaryManager.h \
   /Users/TY/YamatoDev/Tapps/github/GourmetDiary_SB/GourmetDiary/GourmetDiary/View/TYSearchTableViewCell.h \

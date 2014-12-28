@@ -12,7 +12,7 @@
 
 @interface KeywordSearch : NSManagedObject
 
-@property (nonatomic, retain) NSString * address;
+@property (nonatomic, retain) NSString * area;
 @property (nonatomic, retain) NSString * genre;
 @property (nonatomic, retain) NSString * shop;
 @property (nonatomic, retain) NSString * sid;

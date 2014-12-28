@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TYBaseViewController.h"
 
 typedef void (^Paging)();
 
-@interface TYDiaryViewController : UIViewController<UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TYDiaryViewController : TYBaseViewController
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSArray *visitedList;

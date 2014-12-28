@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TYBaseViewController.h"
 
-@interface TYShopViewController : UIViewController
+@interface TYShopViewController : TYBaseViewController
+
 @property (weak, nonatomic) IBOutlet UITextField *name;
-@property (weak, nonatomic) IBOutlet UITextField *kana;
 @property (weak, nonatomic) IBOutlet UITextField *genre;
 @property (weak, nonatomic) IBOutlet UITextField *area;
-@property (weak, nonatomic) IBOutlet UITextField *tel;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 
 @end

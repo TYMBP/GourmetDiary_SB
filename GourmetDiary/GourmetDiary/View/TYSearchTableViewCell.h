@@ -10,10 +10,10 @@
 
 @interface TYSearchTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *genru;
-@property (weak, nonatomic) IBOutlet UILabel *address;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *genruRs;
 @property (weak, nonatomic) IBOutlet UILabel *nameRs;
-@property (weak, nonatomic) IBOutlet UILabel *addressRs;
+@property (weak, nonatomic) IBOutlet UILabel *area;
+@property (weak, nonatomic) IBOutlet UILabel *areaRs;
 
 @end

@@ -21,6 +21,7 @@
 #define MORE_LABEL 100
 #define SET_MORE 1
 #define SET_SEARCH 2
+#define TF_GENRE 3
 
 @implementation TYSearchViewController {
   NSMutableData *_responseData;
@@ -28,18 +29,24 @@
   TYGourmetDiaryManager *_dataManager;
   NSArray *_searchData;
   NSString *_shopMessage;
-  NSString *_areaMessage;
+  NSString *_genreMessage;
   NSMutableDictionary *_para;
   NSString *_sid;
   NSInteger _setNum;
   NSNumber *_results;
+  UIPickerView *_picker;
+  NSUInteger _genreNum;
+  NSArray *_genreList;
+  UIToolbar *_toolbar;
+  UIView *_backView;
 }
 
 - (id)initWithCoder:(NSCoder *)coder
 {
   self = [super initWithCoder:coder];
   if (self) {
-    LOG()
+    //picker用
+    _genreList = [TYUtil genreList];
     _dataManager = [TYGourmetDiaryManager sharedmanager];
 //    _locationManager = [TYLocationInfo sharedManager];
   }
@@ -56,9 +63,18 @@
   self.searchBtn.layer.borderWidth = 1;
   self.searchBtn.layer.cornerRadius = 5;
   _setNum = 1;
+  _genreNum = 0;
 
-//  _more.tag = MORE_LABEL;
-//  _more.userInteractionEnabled = YES;
+  _picker = [self makePicker];
+  _toolbar = [self makeToolbar:CGRectMake(0, 0, 320, 44)];
+  self.genreSearch.tag = TF_GENRE;
+  self.genreSearch.inputView = _picker;
+  self.genreSearch.inputAccessoryView = _toolbar;
+  _backView = [[UIView alloc] initWithFrame:self.view.frame];
+  _backView.backgroundColor = [UIColor clearColor];
+  _backView.hidden = YES;
+  _backView.userInteractionEnabled = NO;
+  [self.view addSubview:_backView];
   
 //   APIよりDATAの取得
   [self runAPI];
@@ -83,6 +99,11 @@
 }
 */
 
+- (void)done:(id)sender
+{
+  _backView.hidden = YES;
+  [self.genreSearch resignFirstResponder];
+}
 
 - (void)warning:(NSString *)mess
 {
@@ -123,29 +144,28 @@
   if ([sender isEqual:self.searchBtn]) { //キーワード検索
     //keyword検索バリデーション
     _shopMessage = nil;
-    _areaMessage = nil;
+    _genreMessage = nil;
     [self.shopKeyword resignFirstResponder];
-    [self.areaStation resignFirstResponder];
+    [self.genreSearch resignFirstResponder];
     _para = [NSMutableDictionary dictionary];
    
     //バリデーション
-    if ([self.shopKeyword.text length] == 0 && [self.areaStation.text length] == 0) {
+    if ([self.shopKeyword.text length] == 0 && [self.genreSearch.text length] == 0) {
       [self warning:@"検索ワードを入力してください"];
       return NO;
     } else {
       _shopMessage = [TYUtil checkKeyword:_shopKeyword.text];
-      LOG(@"shopMessage %@", _shopMessage)
-      _areaMessage = [TYUtil checkKeyword:_areaStation.text];
-      LOG(@"areaMessage %@", _areaMessage)
+      _genreMessage = [TYUtil checkKeyword:_genreSearch.text];
       if ([_shopMessage length] != 0) {
         LOG(@"message error")
         [self warning:_shopMessage];
-      } else if ([_areaMessage length] != 0) {
+      } else if ([_genreMessage length] != 0) {
         LOG(@"message error")
-        [self warning:_areaMessage];
+        [self warning:_genreMessage];
       }
+      
       [_para setValue:self.shopKeyword.text forKey:@"shop"];
-      [_para setValue:self.areaStation.text forKey:@"area"];
+      [_para setValue:[NSNumber numberWithInteger:_genreNum] forKey:@"genre"];
       return YES;
     }
   }
@@ -189,13 +209,22 @@
   if (_searchData.count < 4 && _searchData.count < n) {
     cell.genru.text = @"";
     cell.name.text = @"";
-    cell.address.text = @"";
+    cell.area.text = @"";
   } else {
     SearchData *rowData = [_searchData objectAtIndex:indexPath.row];
 //  LOG(@"searchdata: %@", rowData.shop)
     cell.genru.text = rowData.genre;
-    cell.name.text = rowData.shop;
-    cell.address.text = rowData.address;
+    cell.area.text = rowData.area;
+
+    CGFloat lineHeight = 20.0f;
+    NSString *str = rowData.shop;
+    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    paraStyle.minimumLineHeight = lineHeight;
+    paraStyle.maximumLineHeight = lineHeight;
+
+    NSMutableAttributedString *attributeText = [[NSMutableAttributedString alloc] initWithString:str];
+    [attributeText addAttribute:NSParagraphStyleAttributeName value:paraStyle range:NSMakeRange(0, attributeText.length)];
+    cell.name.attributedText = attributeText;
   }
   
   return cell;
@@ -218,5 +247,40 @@
   [self performSegueWithIdentifier:@"Detail" sender:self];
 }
 
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+  NSInteger n = [_genreList count];
+  return n;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+  return [_genreList objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+  self.genreSearch.text = [NSString stringWithFormat:@"%@", _genreList[row]];
+  _genreNum = row;
+  LOG(@"_genreNum:%lu %@", _genreNum, [_genreList objectAtIndex:row]);
+  
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+  //キーボード閉じる
+  [self.view.subviews enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop){
+    if ([obj isKindOfClass:[UITextView class]]) {
+      LOG()
+      _backView.hidden = YES;
+      [obj resignFirstResponder];
+    } else if ([obj isKindOfClass:[UITextField class]]) {
+      LOG()
+      _backView.hidden = YES;
+      [obj resignFirstResponder];
+    } else {
+    }
+  }];
+}
 
 @end

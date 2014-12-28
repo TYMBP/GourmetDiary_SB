@@ -1,0 +1,16 @@
+//
+//  TYBaseViewController.h
+//  GourmetDiary
+//
+//  Created by Tomohiko on 2014/12/20.
+//  Copyright (c) 2014年 yamatomo. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface TYBaseViewController : UIViewController <UIScrollViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate>
+
+- (UIPickerView *)makePicker;
+- (UIToolbar *)makeToolbar:(CGRect)rect;
+
+@end

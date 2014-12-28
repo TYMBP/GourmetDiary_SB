@@ -9,6 +9,7 @@
 #import "TYRegisterViewController.h"
 #import "TYGourmetDiaryManager.h"
 #import "ShopMst.h"
+#import "TYUtil.h"
 
 #define TF_CALENDAR 1
 #define TF_SITUATION 2
@@ -28,10 +29,10 @@
   NSUInteger _situNum; //??
   NSUInteger _personNum; //??
   NSUInteger _feeNum; //??
-  NSMutableArray *_levelList;
-  NSMutableArray *_situList;
-  NSMutableArray *_personList;
-  NSMutableArray *_feeList;
+  NSArray *_levelList;
+  NSArray *_situList;
+  NSArray *_personList;
+  NSArray *_feeList;
   NSUInteger _tagNum;
   UIToolbar *_toolbar;
   UIToolbar *_toolbar2;
@@ -39,6 +40,7 @@
   UIToolbar *_toolbar4;
   UIToolbar *_toolbar5;
   UIView *_backView;
+  BOOL _observing;
 }
 
 - (id)initWithCoder:(NSCoder *)coder
@@ -46,13 +48,15 @@
   self = [super initWithCoder:coder];
   if (self) {
     LOG()
+    _observing = NO;
     _dataManager = [TYGourmetDiaryManager sharedmanager];
     _dateFomatter = nil;
     //picker用
-    _levelList = [[NSMutableArray alloc] initWithObjects:@"", @"うーん1点", @"もうちょい2点", @"まあまあ3点", @"まずまず4点", @"うまい！5点", nil];
-    _situList = [[NSMutableArray alloc] initWithObjects:@"", @"朝ごはん", @"昼ごはん", @"夜ごはん", @"お茶のじかん", @"お酒のじかん", @"持ちかえり", @"OTHER", nil];
-    _personList = [[NSMutableArray alloc] initWithObjects:@"", @"1人", @"2人", @"3人", @"4人", @"5人〜9人", @"10人以上", nil];
-    _feeList = [[NSMutableArray alloc] initWithObjects:@"", @"500円しない", @"500〜1,000円くらい", @"1,000〜2,000円くらい", @"2,000〜3,000円くらい", @"3,000〜4,000円くらい", @"4,000〜5,000円くらい", @"5,000〜10,000円だったかな", @"10,000円以上だった…", nil];
+    _levelList = [TYUtil levelList];
+    _situList = [TYUtil situationList];
+    _personList = [TYUtil personList];
+    _feeList = [TYUtil feeList];
+    
   }
   return self;
 }
@@ -123,11 +127,48 @@
   //  _backView.alpha = 0;
     _backView.hidden = YES;
     _backView.userInteractionEnabled = NO;
-    [self.view addSubview:_backView];
+    [self.onView addSubview:_backView];
   } else {
     [self warning:@"不具合が発生しました"];
   }
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  if (!_observing) {
+  LOG()
+    NSNotificationCenter *center;
+    center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self
+               selector:@selector(keyboardWillShow:)
+                   name:UIKeyboardWillShowNotification
+                 object:nil];
+    [center addObserver:self
+               selector:@selector(keyboardWillHide:)
+                   name:UIKeyboardWillHideNotification
+                 object:nil];
+    _observing = YES;
+  }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  if (_observing) {
+  LOG()
+    NSNotificationCenter *center;
+    center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:self
+                      name:UIKeyboardWillShowNotification
+                    object:nil];
+    [center removeObserver:self
+                      name:UIKeyboardWillShowNotification
+                    object:nil];
+    _observing = NO;
+  }
+}
+
 
 - (UIPickerView *)makePicker
 {
@@ -191,19 +232,11 @@
 - (IBAction)validationData:(id)sender
 {
   LOG()
-//}
-//- (void)validationData
-//{
   if ([self.dou.text length] == 0 || [self.situation.text length] == 0 || [self.level.text length] == 0 || [self.persons.text length] == 0 || [self.fee.text length] == 0) {
     [self warning:@"未入力項目があります"];
   } else if ([_comment.text length] >= 256){
     [self warning:@"コメントは256文字までで入力してください"];
   } else {
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"PST"]];
-//    [formatter setDateFormat:@"dd a HH:mm"];
-//    NSString *currentTime = [formatter stringFromDate:date];
-//    NSLog(@"%@",currentTime)
     
     [_dateFomatter setDateFormat:@"yyyy/MM/dd"];
     [_dateFomatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"JST"]];
@@ -347,9 +380,90 @@
       LOG()
       _backView.hidden = YES;
       [obj resignFirstResponder];
+    } else if ([obj isKindOfClass:[UIView class]]) {
+      LOG()
+      _backView.hidden = YES;
+      [self.dou resignFirstResponder];
+      [self.situation resignFirstResponder];
+      [self.level resignFirstResponder];
+      [self.persons resignFirstResponder];
+      [self.fee resignFirstResponder];
+      [self.comment resignFirstResponder];
     } else {
     }
   }];
 }
+
+#pragma mark keyboard up
+
+//キーボード
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+  LOG()
+  NSDictionary *userInfo;
+  userInfo = [notification userInfo];
+  
+  CGFloat overlap;
+  CGRect keyboardFrame;
+  CGRect textViewFrame;
+  keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+  keyboardFrame = [self.scrollView.superview convertRect:keyboardFrame fromView:nil];
+  textViewFrame = self.scrollView.frame;
+  overlap = MAX(0.0f, CGRectGetMaxY(textViewFrame) - CGRectGetMinY(keyboardFrame));
+  
+  LOG(@"keboardFrame:%@", NSStringFromCGRect(keyboardFrame))
+  LOG(@"keboardFrame:%@", NSStringFromCGRect(textViewFrame))
+  LOG(@"keboardFrame:%f", overlap)
+  
+  UIEdgeInsets insets;
+  insets = UIEdgeInsetsMake(0.0f, 0.0f, overlap, 0.0f);
+  
+  NSTimeInterval duration;
+  UIViewAnimationCurve animationCurve;
+  void(^animations)(void);
+  //キーボード表示時のアニメーション時間取得
+  duration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+  //キーボード表示時のアニメーションCurve
+  animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+  LOG(@"animationCurve:%ld", animationCurve)
+  animations = ^(void) {
+    self.scrollView.contentInset = insets;
+    self.scrollView.scrollIndicatorInsets = insets;
+  };
+  [UIView animateWithDuration:duration
+                        delay:0.0
+                      options:(animationCurve << 16)
+                   animations:animations
+                   completion:nil];
+  CGRect rect;
+  rect.origin.x = 0.0f;
+  rect.origin.y = self.scrollView.contentSize.height - 1.0f;
+  rect.size.width = CGRectGetWidth(self.scrollView.frame);
+  rect.size.height = 1.0f;
+  [self.scrollView scrollRectToVisible:rect animated:YES];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+  LOG()
+  NSDictionary *userInfo;
+  userInfo = [notification userInfo];
+  
+  NSTimeInterval duration;
+  UIViewAnimationCurve animationCurve;
+  void(^animations)(void);
+  duration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+  animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+  animations = ^(void){
+    self.scrollView.contentInset = UIEdgeInsetsZero;
+    self.scrollView.scrollIndicatorInsets = UIEdgeInsetsZero;
+  };
+  [UIView animateWithDuration:duration
+                        delay:0.0
+                      options:(animationCurve << 16)
+                   animations:animations
+                   completion:nil];
+}
+
 
 @end

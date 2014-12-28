@@ -12,7 +12,7 @@
 
 @interface SearchData : NSManagedObject
 
-@property (nonatomic, retain) NSString * address;
+@property (nonatomic, retain) NSString * area;
 @property (nonatomic, retain) NSString * genre;
 @property (nonatomic, retain) NSNumber * lat;
 @property (nonatomic, retain) NSNumber * lng;

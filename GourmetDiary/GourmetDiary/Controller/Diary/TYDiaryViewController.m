@@ -38,26 +38,31 @@
 
 - (void)viewDidLoad
 {
+  LOG()
   [super viewDidLoad];
   
   self.navigationController.delegate = self;
-  
   _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
   [_indicator setColor:[UIColor darkGrayColor]];
   [_indicator setHidesWhenStopped:YES];
   [_indicator stopAnimating];
   
   self.visitedList = nil;
-  _set = 15;
+  _set = 10;
   
   self.naviTitle.title = @"最新";
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
-  self.tableView.backgroundColor = [UIColor colorWithRed:0.00 green:0.60 blue:1.0 alpha:1.0];
+  self.tableView.backgroundColor = [UIColor colorWithRed:0.13 green:0.55 blue:0.13 alpha:1.0];
   self.automaticallyAdjustsScrollViewInsets = NO;
   self.visitedList = [_dataManager fetchVisitedList:1 num:_set];
-  _count = [[[self.visitedList objectAtIndex:0] valueForKey:@"count"] integerValue];
-  LOG(@"count %lu", _count)
+  
+  if (self.visitedList) {
+    return;
+  } else {
+    _count = [[[self.visitedList objectAtIndex:0] valueForKey:@"count"] integerValue];
+    LOG(@"count %lu", _count)
+  }
 //  [self test];
   
 }
@@ -110,7 +115,14 @@
 - (void) navigationController:(UINavigationController *) navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
   LOG()
-//  [self.tableView reloadData];
+  self.visitedList = nil;
+  self.visitedList = [_dataManager fetchVisitedList:1 num:_set];
+  if ([self.visitedList count] == 0) {
+    return;
+  } else {
+    _count = [[[self.visitedList objectAtIndex:0] valueForKey:@"count"] integerValue];
+    [self.tableView reloadData];
+  }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -120,29 +132,40 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return [self.visitedList count];
+  NSInteger n = [self.visitedList count];
+  if (n == 0) {
+    return 1;
+  } else {
+    return [self.visitedList count];
+  }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   TYVisitedTableViewCell *cell = (TYVisitedTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VisitedList" forIndexPath:indexPath];
-  
-  NSDictionary *fetchData = [self.visitedList objectAtIndex:indexPath.row];
-//    LOG(@"id visited: %@", [fetchData valueForKey:@"visited_at"])
-  
-  cell.dateList.text = [_dateFomatter stringFromDate:[fetchData valueForKey:@"visited"]];
-  cell.nameList.text = [fetchData valueForKey:@"shop"];
-//  cell.levelList.text = [[fetchData valueForKey:@"level"] stringValue];
-  cell.levelList.text = [TYUtil setLevelTableText:[fetchData valueForKey:@"level"]];
-  cell.areaList.text = [fetchData valueForKey:@"area"];
-  cell.genreList.text = [fetchData valueForKey:@"genre"];
+  if ([self.visitedList count] == 0) {
+    cell.dateList.text = @"test";
+    cell.levelList.text = @"";
+    cell.areaList.text = @"";
+    cell.genreList.text = @"";
+    cell.comment.text = @"";
+  } else {
+    
+    NSDictionary *fetchData = [self.visitedList objectAtIndex:indexPath.row];
+    cell.dateList.text = [_dateFomatter stringFromDate:[fetchData valueForKey:@"visited"]];
+    cell.nameList.text = [fetchData valueForKey:@"shop"];
+    cell.levelList.text = [TYUtil setLevelTableText:[fetchData valueForKey:@"level"]];
+    cell.areaList.text = [fetchData valueForKey:@"area"];
+    cell.genreList.text = [fetchData valueForKey:@"genre"];
+    cell.comment.text = [fetchData valueForKey:@"comment"];
+  }
   
   return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  float ht = 60;
+  float ht = 120;
   return ht;
 }
 
@@ -215,6 +238,7 @@
   [_indicator removeFromSuperview];
   [self.tableView setTableFooterView:nil];
 }
+
 
 /* test */
 - (void)test

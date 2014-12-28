@@ -12,6 +12,7 @@
 #import "TYGourmetDiaryManager.h"
 #import "TYDetailSearchConn.h"
 #import "TYApplication.h"
+#import "TYUtil.h"
 #import "ShopMst.h"
 #import "TYAppDelegate.h"
 
@@ -44,12 +45,6 @@
   self.mapBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
   self.mapBtn.layer.borderWidth = 1;
   self.mapBtn.layer.cornerRadius = 5;
-  self.telBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
-  self.telBtn.layer.borderWidth = 1;
-  self.telBtn.layer.cornerRadius = 5;
-  self.hookBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
-  self.hookBtn.layer.borderWidth = 1;
-  self.hookBtn.layer.cornerRadius = 5;
   self.nextBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
   self.nextBtn.layer.borderWidth = 1;
   self.nextBtn.layer.cornerRadius = 5;
@@ -109,6 +104,7 @@
     LOG(@"master: %@", master)
     _shopData = master;
     self.name.text = _shopData.shop;
+    self.area.text = _shopData.area;
     //_levelData.text
     self.genre.text = _shopData.genre;
     self.address.text = _shopData.address;
@@ -120,6 +116,16 @@
     UIImage *img = [UIImage imageWithData:data];
     self.shopImage.image = img;
   }];
+  NSString *countNum = [[NSString alloc] initWithFormat:@"%ld", (long)[_dataManager fetchVisitCount:self.para]];
+  self.visitCount.text = [NSString stringWithFormat:@"%@回", countNum];
+  NSInteger n = [_dataManager fetchShopLevel:self.para];
+//  NSArray *ary = [TYUtil levelList];
+//  LOG(@"level: %@", [ary objectAtIndex:n])
+  if (n == 0) {
+    self.level.text = @"来店記録なし";
+  } else {
+    self.level.text = [[TYUtil levelList] objectAtIndex:n];
+  }
 }
 
 //遷移前パラメータセット

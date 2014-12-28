@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TYBaseViewController.h"
 
-@interface TYViewController : UIViewController<UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+//@interface TYViewController : UIViewController<UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TYViewController : TYBaseViewController
 
 @property (weak, nonatomic) IBOutlet UIButton *searchBtn;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

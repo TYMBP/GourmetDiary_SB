@@ -42,7 +42,7 @@
   
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
-  self.tableView.backgroundColor = [UIColor colorWithRed:1.0 green:0.39 blue:0.39 alpha:1.0];
+  self.tableView.backgroundColor = [UIColor colorWithRed:0.13 green:0.55 blue:0.13 alpha:1.0];
   
   self.searchBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
   self.searchBtn.layer.borderWidth = 1;
@@ -60,10 +60,10 @@
 {
   if (self.visitedData.count == 0) {
     return 0;
-  } else if (self.visitedData.count < 4) {
+  } else if (self.visitedData.count < 2) {
     return self.visitedData.count;
   }
-  return 4;
+  return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -71,16 +71,26 @@
   TYVisitedTableViewCell *cell = (TYVisitedTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VisitedList" forIndexPath:indexPath];
   NSDictionary *fetchData = [self.visitedData objectAtIndex:indexPath.row];
   cell.date.text = [_dateFomatter stringFromDate:[fetchData valueForKey:@"visited"]];
-  cell.name.text = [fetchData valueForKey:@"shop"];
   cell.level.text = [TYUtil setLevelTableText:[fetchData valueForKey:@"level"]];
   cell.area.text = [fetchData valueForKey:@"area"];
   cell.genre.text = [fetchData valueForKey:@"genre"];
+  CGFloat lineHeight = 20.0f;
+  NSString *str = [fetchData valueForKey:@"shop"];
+  
+  NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+  paraStyle.minimumLineHeight = lineHeight;
+  paraStyle.maximumLineHeight = lineHeight;
+  
+  NSMutableAttributedString *attributeText = [[NSMutableAttributedString alloc] initWithString:str];
+  [attributeText addAttribute:NSParagraphStyleAttributeName value:paraStyle range:NSMakeRange(0, attributeText.length)];
+  cell.name.attributedText = attributeText;
+  
   return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  float ht = 60;
+  float ht = 100;
   return ht;
 }
 
@@ -88,7 +98,8 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (self.visitedData) {
+  if (!self.visitedData) {
+    LOG()
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     return;
   } else {

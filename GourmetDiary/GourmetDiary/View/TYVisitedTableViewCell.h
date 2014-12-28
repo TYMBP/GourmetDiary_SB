@@ -19,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameList;
 @property (weak, nonatomic) IBOutlet UILabel *genreList;
 @property (weak, nonatomic) IBOutlet UILabel *areaList;
+@property (weak, nonatomic) IBOutlet UILabel *comment;
 
 @end

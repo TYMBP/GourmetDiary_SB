@@ -11,7 +11,7 @@
 
 @implementation SearchData
 
-@dynamic address;
+@dynamic area;
 @dynamic genre;
 @dynamic lat;
 @dynamic lng;

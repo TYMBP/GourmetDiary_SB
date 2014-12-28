@@ -15,10 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *address;
 @property (weak, nonatomic) IBOutlet UILabel *visitCount;
 @property (weak, nonatomic) IBOutlet UIButton *mapBtn;
-@property (weak, nonatomic) IBOutlet UIButton *telBtn;
-@property (weak, nonatomic) IBOutlet UIButton *hookBtn;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *shopImage;
 @property (nonatomic) NSString *para;
+@property (weak, nonatomic) IBOutlet UILabel *area;
 
 @end

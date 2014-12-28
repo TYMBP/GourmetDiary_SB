@@ -11,7 +11,7 @@
 
 @implementation KeywordSearch
 
-@dynamic address;
+@dynamic area;
 @dynamic genre;
 @dynamic shop;
 @dynamic sid;
