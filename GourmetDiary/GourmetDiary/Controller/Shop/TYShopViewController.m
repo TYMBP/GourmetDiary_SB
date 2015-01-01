@@ -10,10 +10,13 @@
 #import "TYUtil.h"
 #import "TYEditorViewController.h"
 #import "TYAppDelegate.h"
+#import "TYMasterViewController.h"
+#import "TYGourmetDiaryManager.h"
 
 #define TF_GENRE 1
 
 @implementation TYShopViewController {
+  TYGourmetDiaryManager *_dataManager;
   NSString *_shopMessage;
   NSString *_areaMessage;
   NSMutableDictionary *_para;
@@ -22,16 +25,29 @@
   NSUInteger _genreNum;
   UIToolbar *_toolbar;
   UIView *_backView;
+  BOOL _masterFlg;
 }
 
 - (void)viewDidLoad
 {
+  LOG()
   [super viewDidLoad];
+ 
+  _dataManager = [TYGourmetDiaryManager sharedmanager];
   
   _genreList = [TYUtil genreList];
   self.nextBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
   self.nextBtn.layer.borderWidth = 1;
   self.nextBtn.layer.cornerRadius = 5;
+  self.masterBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+  self.masterBtn.layer.borderWidth = 1;
+  self.masterBtn.layer.cornerRadius = 5;
+  
+  if (![_dataManager fetchMasterCount]) {
+    LOG()
+    self.masterBtn.alpha = 0.3;
+    self.masterBtn.enabled = NO;
+  }
   
   _genreNum = 0;
   _picker = [self makePicker];
@@ -56,6 +72,17 @@
   [self presentViewController:alert animated:YES completion:nil];
 }
 
+- (void)done:(id)sender
+{
+  _backView.hidden = YES;
+  [self.genre resignFirstResponder];
+}
+- (IBAction)returnList:(id)sender {
+  LOG()
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - segue
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
   LOG()
@@ -69,8 +96,8 @@
     _para = [NSMutableDictionary dictionary];
    
     //バリデーション
-    if ([self.name.text length] == 0 && [self.area.text length] == 0 && [self.genre.text length] == 0) {
-      [self warning:@"検索ワードを入力してください"];
+    if ([self.name.text length] == 0 || [self.area.text length] == 0 || [self.genre.text length] == 0) {
+      [self warning:@"未入力の箇所があります"];
       return NO;
     } else {
       _shopMessage = [TYUtil checkLength:self.name.text];
@@ -85,7 +112,6 @@
       [_para setValue:self.genre.text forKey:@"genre"];
       [_para setValue:self.area.text forKey:@"area"];
       [_para setValue:[self setSid] forKey:@"sid"];
-      LOG(@"name %@", self.name.text)
       
       return YES;
     }
@@ -93,29 +119,37 @@
   return YES;
 }
 
-- (void)done:(id)sender
-{
-  _backView.hidden = YES;
-  [self.genre resignFirstResponder];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-  LOG()
-  
-  if ([[segue identifier] isEqualToString:@"Master"]) {
+  if ([[segue identifier] isEqualToString:@"Masterdata"]) {
     LOG()
-    
   } else if ([[segue identifier] isEqualToString:@"Visitdata"]) {
     LOG()
     TYEditorViewController *editorCtr = segue.destinationViewController;
     editorCtr.shopDic = _para;
-    LOG(@"para:%@", _para)
+    editorCtr.masterFlg = YES;
     TYAppDelegate *appDelegate;
     appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
-    appDelegate.n = 2;
+    appDelegate.editStatus = 2;
   }
 }
+
+//1230
+//- (IBAction)popViewController:(UIStoryboardSegue *)segue
+//{
+//  LOG()
+//  _masterFlg = YES;
+//  TYAppDelegate *appDelegate;
+//  appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
+//  _dataManager = [TYGourmetDiaryManager sharedmanager];
+//  [_dataManager fetchShopMasterData:appDelegate.sid callback:^(NSArray *ary) {
+//    LOG(@"ary:%@",ary)
+//    self.name.text = [[ary objectAtIndex:0] valueForKey:@"shop"];
+//    self.genre.text = [[ary objectAtIndex:0] valueForKey:@"genre"];
+//    self.area.text = [[ary objectAtIndex:0] valueForKey:@"area"];
+//  }];
+//}
+
 
 - (NSString *)setSid
 {
@@ -129,6 +163,7 @@
   return sid;
 }
 
+#pragma mark - pickerView
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
   NSInteger n = [_genreList count];
@@ -148,6 +183,7 @@
   
 }
 
+#pragma mark - touchesbegan
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
   //キーボード閉じる

@@ -36,6 +36,7 @@
 		108FDD0D1A1DCA9A00658904 /* TYSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD0C1A1DCA9A00658904 /* TYSearchViewController.m */; };
 		108FDD101A1DD97300658904 /* TYLocationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD0F1A1DD97300658904 /* TYLocationInfo.m */; };
 		108FDD141A1E06C800658904 /* TYSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD131A1E06C800658904 /* TYSearchTableViewCell.m */; };
+		10A881F51A5155E000766474 /* TYMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A881F41A5155E000766474 /* TYMasterViewController.m */; };
 		10C927C01A204BAE00CD6669 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C927BF1A204BAE00CD6669 /* MapKit.framework */; };
 		10C927C31A20BA5A00CD6669 /* TYVisitedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C927C21A20BA5A00CD6669 /* TYVisitedTableViewCell.m */; };
 		10CC268A1A45B6330090919C /* TYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CC26891A45B6330090919C /* TYBaseViewController.m */; };
@@ -110,6 +111,8 @@
 		108FDD0F1A1DD97300658904 /* TYLocationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYLocationInfo.m; sourceTree = "<group>"; };
 		108FDD121A1E06C800658904 /* TYSearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYSearchTableViewCell.h; sourceTree = "<group>"; };
 		108FDD131A1E06C800658904 /* TYSearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYSearchTableViewCell.m; sourceTree = "<group>"; };
+		10A881F31A5155E000766474 /* TYMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYMasterViewController.h; sourceTree = "<group>"; };
+		10A881F41A5155E000766474 /* TYMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYMasterViewController.m; sourceTree = "<group>"; };
 		10C927BF1A204BAE00CD6669 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		10C927C11A20BA5A00CD6669 /* TYVisitedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVisitedTableViewCell.h; sourceTree = "<group>"; };
 		10C927C21A20BA5A00CD6669 /* TYVisitedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYVisitedTableViewCell.m; sourceTree = "<group>"; };
@@ -329,6 +332,7 @@
 		108FDD091A1DC87500658904 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				10A881F21A51554F00766474 /* Master */,
 				10D28D4D1A29D00500261360 /* Shop */,
 				1001DDBD1A255F0700B84E66 /* Editor */,
 				1001DDB91A24B73500B84E66 /* Diary */,
@@ -365,6 +369,16 @@
 				10C927C21A20BA5A00CD6669 /* TYVisitedTableViewCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		10A881F21A51554F00766474 /* Master */ = {
+			isa = PBXGroup;
+			children = (
+				10A881F31A5155E000766474 /* TYMasterViewController.h */,
+				10A881F41A5155E000766474 /* TYMasterViewController.m */,
+			);
+			name = Master;
+			path = Controller/Master;
 			sourceTree = "<group>";
 		};
 		10D28D4D1A29D00500261360 /* Shop */ = {
@@ -500,6 +514,7 @@
 				108FDCFC1A1DC1A700658904 /* TYGourmetDiaryManager.m in Sources */,
 				1001E5241A1EC60A003AB9A3 /* TYKeywordSearchConn.m in Sources */,
 				10C927C31A20BA5A00CD6669 /* TYVisitedTableViewCell.m in Sources */,
+				10A881F51A5155E000766474 /* TYMasterViewController.m in Sources */,
 				104CDA791A3DBD0D0012C5EC /* VisitData.m in Sources */,
 				1001E52F1A1F32E1003AB9A3 /* TYRegisterViewController.m in Sources */,
 				108FDD0D1A1DCA9A00658904 /* TYSearchViewController.m in Sources */,

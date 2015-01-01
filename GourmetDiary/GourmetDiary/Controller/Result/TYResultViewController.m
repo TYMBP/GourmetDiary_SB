@@ -32,9 +32,9 @@
 
 - (id)initWithCoder:(NSCoder *)coder
 {
+  LOG()
   self = [super initWithCoder:coder];
   if (self) {
-    LOG(@"yamada")
     _dataManager = [TYGourmetDiaryManager sharedmanager];
    [_dataManager resetKeywordSearchData];
     _setNum = 1;
@@ -44,7 +44,9 @@
 
 - (void)viewDidLoad
 {
+  LOG()
   [super viewDidLoad];
+  
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   self.tableView.backgroundColor = [UIColor colorWithRed:0.13 green:0.55 blue:0.13 alpha:1.0];
@@ -64,7 +66,6 @@
     [_tableView reloadData];
   } else if (self.n == 2) {
     if (self.para) {
-      LOG(@"para: %@", self.para)
       //APIよりDATAの取得
       [self runAPI];
     } else {
@@ -76,8 +77,8 @@
 
 - (void)runAPI
 {
-  @synchronized (self) {
   LOG()
+  @synchronized (self) {
 //    _connection = [[TYKeywordSearchConn alloc] initWithTarget:self selector:@selector(getApiData) para:self.para];
     if (self.n == 1) {
       _location = [[TYLocationSearch alloc] initWithTarget:self selector:@selector(getApiData) set:_setNum];

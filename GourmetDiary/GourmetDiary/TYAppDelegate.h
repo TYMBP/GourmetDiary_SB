@@ -14,7 +14,9 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, readonly, nonatomic) TYApplication *application;
 @property (nonatomic) NSString *sid;
+@property (nonatomic) id oid;
 @property (nonatomic) int n;
+@property (nonatomic) int editStatus; //編集or追加
 
 @end
 

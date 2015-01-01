@@ -67,6 +67,13 @@
   
 }
 
+- (IBAction)pushNew:(id)sender {
+  UINavigationController *vc = self.tabBarController.viewControllers[1];
+  self.tabBarController.selectedViewController = vc;
+  [vc popToRootViewControllerAnimated:NO];
+  [vc.viewControllers[0] performSegueWithIdentifier:@"Editor" sender:self];
+}
+
 - (IBAction)pushSort:(id)sender {
   LOG()
   UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"並び替え" message:@"選択してください" preferredStyle:UIAlertControllerStyleActionSheet];
@@ -101,17 +108,7 @@
   [self presentViewController:alert animated:YES completion:nil];
 }
 
-//1202変更
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//  LOG(@"segue %@", segue.identifier)
-//  if ([[segue identifier] isEqualToString:@"Editor"]) {
-//    TYEditorViewController *editCtr = segue.destinationViewController;
-//    editCtr.para = _sid;
-//    LOG(@"sid %@", _sid)
-//  }
-//}
-
+#pragma mark - navigationController
 - (void) navigationController:(UINavigationController *) navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
   LOG()
@@ -125,6 +122,7 @@
   }
 }
 
+#pragma mark - tableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
   return 1;
@@ -144,13 +142,13 @@
 {
   TYVisitedTableViewCell *cell = (TYVisitedTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"VisitedList" forIndexPath:indexPath];
   if ([self.visitedList count] == 0) {
-    cell.dateList.text = @"test";
+    cell.dateList.text = @"";
+    cell.nameList.text = @"NO DATA";
     cell.levelList.text = @"";
     cell.areaList.text = @"";
     cell.genreList.text = @"";
     cell.comment.text = @"";
   } else {
-    
     NSDictionary *fetchData = [self.visitedList objectAtIndex:indexPath.row];
     cell.dateList.text = [_dateFomatter stringFromDate:[fetchData valueForKey:@"visited"]];
     cell.nameList.text = [fetchData valueForKey:@"shop"];
@@ -158,6 +156,8 @@
     cell.areaList.text = [fetchData valueForKey:@"area"];
     cell.genreList.text = [fetchData valueForKey:@"genre"];
     cell.comment.text = [fetchData valueForKey:@"comment"];
+    cell.comment.lineBreakMode = NSLineBreakByTruncatingTail;
+//    [cell setClipsToBounds:YES];
   }
   
   return cell;
@@ -176,15 +176,27 @@
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
   NSDictionary *fetchData = [self.visitedList objectAtIndex:indexPath.row];
   _sid = [fetchData valueForKey:@"sid"];
-  LOG(@"_sid %@", _sid)
   TYAppDelegate *appDelegate;
   appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
   appDelegate.sid = _sid;
-  appDelegate.n = 1;
-  
+  appDelegate.editStatus = 1;
+  appDelegate.oid = [fetchData valueForKey:@"oid"];
   [self performSegueWithIdentifier:@"Editor" sender:self];
+  
 }
 
+#pragma mark - segue
+//1230遷移前パラメータセット
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//  if ([[segue identifier] isEqualToString:@"Shopdata"]) {
+//    LOG()
+//  } else if ([[segue identifier] isEqualToString:@"Editor"]) {
+//    LOG()
+//  }
+//}
+
+#pragma mark - paging
 - (BOOL)pageLoading:(Paging)paging
 {
   self.visitedList = [_dataManager fetchVisitedList:1 num:_set];

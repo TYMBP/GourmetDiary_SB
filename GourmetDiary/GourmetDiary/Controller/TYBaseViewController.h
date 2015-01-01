@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TYBaseViewController : UIViewController <UIScrollViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TYBaseViewController : UIViewController <UITextViewDelegate, UIScrollViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 - (UIPickerView *)makePicker;
 - (UIToolbar *)makeToolbar:(CGRect)rect;

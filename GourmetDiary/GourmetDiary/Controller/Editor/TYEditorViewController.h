@@ -15,6 +15,7 @@
 @interface TYEditorViewController : TYBaseViewController
 
 @property (nonatomic) ShopMst *master;
+@property BOOL masterFlg;
 @property (nonatomic) NSString *para;
 @property (nonatomic) NSMutableDictionary *shopDic;
 @property (weak, nonatomic) IBOutlet UITextField *dou;

@@ -21,6 +21,7 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+  LOG()
   if (!self.dragging) {
     [self.nextResponder touchesEnded:touches withEvent:event];
   }
@@ -29,6 +30,7 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+  LOG()
   if (!self.dragging) {
     [self.nextResponder touchesBegan:touches withEvent:event];
   }

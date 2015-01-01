@@ -15,5 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameRs;
 @property (weak, nonatomic) IBOutlet UILabel *area;
 @property (weak, nonatomic) IBOutlet UILabel *areaRs;
+@property (weak, nonatomic) IBOutlet UILabel *genreMst;
+@property (weak, nonatomic) IBOutlet UILabel *areaMst;
+@property (weak, nonatomic) IBOutlet UILabel *nameMst;
 
 @end

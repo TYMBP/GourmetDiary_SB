@@ -48,13 +48,16 @@
   UIToolbar *_toolbar5;
   UIView *_backView;
   BOOL _observing;
-  BOOL _newFlg;
+  BOOL _newFlag;
+  BOOL _pickerFlag;
+  id _oid;
 }
 
 - (id)initWithCoder:(NSCoder *)coder
 {
-  LOG(@"init")
+  LOG()
   self = [super initWithCoder:coder];
+  
   if (self) {
     _observing = NO;
     _dateFomatter = [[NSDateFormatter alloc] init];
@@ -71,11 +74,13 @@
 
 - (void)viewDidLoad
 {
+  LOG()
   [super viewDidLoad];
  
   _dic = nil;
   _sid = nil;
-  _newFlg = NO;
+//1230  _newFlg = NO;
+  _pickerFlag = NO;
   
   self.editBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
   self.editBtn.layer.borderWidth = 1;
@@ -86,13 +91,17 @@
   
   _appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
   _sid = _appDelegate.sid;
-  _n = _appDelegate.n;
+  _n = _appDelegate.editStatus;
+  _oid = _appDelegate.oid;
+  LOG(@"oid:%@", _oid)
+  
   _dateFomatter = [[NSDateFormatter alloc] init];
-   [_dateFomatter setDateFormat:@"yyyy/MM/dd"];
+  [_dateFomatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"JST"]];
+  [_dateFomatter setDateFormat:@"yyyy/MM/dd"];
   
   if (_n == 1) {
     LOG()
-    _dic = [[_dataManager fetchDiaryData:_sid] objectAtIndex:0];
+    _dic = [[_dataManager fetchDiaryData:_oid] objectAtIndex:0];
     self.naviTitle.title = [_dic valueForKey:@"shop"];
     self.dou.text = [_dateFomatter stringFromDate:[_dic valueForKey:@"visited_at"]];
     self.dou.enabled = NO;
@@ -110,12 +119,12 @@
     _feeNum = [[_dic valueForKey:@"fee"] integerValue];
     self.comment.text = [_dic valueForKey:@"memo"];
     self.comment.editable = NO;
+    self.comment.delegate = self;
     
   } else if (_n == 2) {
-    LOG()
     if (self.shopDic) {
-      LOG()
-      _newFlg = YES;
+      LOG(@"shopDic:%d", self.masterFlg)
+      _newFlag = YES;
       self.naviTitle.title = [self.shopDic valueForKey:@"shop"];
       [self.editBtn setTitle:@"登録する" forState:UIControlStateNormal];
       self.deleteBtn.enabled = NO;
@@ -171,7 +180,6 @@
   self.fee.inputAccessoryView = _toolbar5;
   _backView = [[UIView alloc] initWithFrame:self.view.frame];
   _backView.backgroundColor = [UIColor clearColor];
-//  _backView.alpha = 0;
   _backView.hidden = YES;
   _backView.userInteractionEnabled = NO;
   [self.onView addSubview:_backView];
@@ -182,7 +190,6 @@
 {
   [super viewWillAppear:animated];
   if (!_observing) {
-    LOG()
     NSNotificationCenter *center;
     center = [NSNotificationCenter defaultCenter];
     [center addObserver:self
@@ -202,7 +209,6 @@
 {
   [super viewWillDisappear:animated];
   if (_observing) {
-    LOG()
     NSNotificationCenter *center;
     center = [NSNotificationCenter defaultCenter];
     [center removeObserver:self
@@ -238,9 +244,12 @@
   return toolbar;
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-  _tagNum = 0;
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
   LOG(@"tag %lu",textField.tag)
+  
+  _tagNum = 0;
+  _pickerFlag = NO;
   switch (textField.tag) {
     case TF_SITUATION:
       LOG()
@@ -263,6 +272,12 @@
   }
   // ピッカー表示開始
   _backView.hidden = NO;
+  return YES;
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+  _pickerFlag = YES;
   return YES;
 }
 
@@ -346,15 +361,19 @@
 {
   NSMutableDictionary *dic = [NSMutableDictionary dictionary];
   
-  if (_newFlg) {
+  if (self.masterFlg) {
     LOG(@"new sid:%@", [self.shopDic valueForKey:@"sid"])
     [dic setValue:[self.shopDic valueForKey:@"sid"] forKey:@"sid"];
     [dic setValue:[self.shopDic valueForKey:@"shop"] forKey:@"shop"];
     [dic setValue:[self.shopDic valueForKey:@"genre"] forKey:@"genre"];
     [dic setValue:[self.shopDic valueForKey:@"area"] forKey:@"area"];
-    [dic setValue:[NSNumber numberWithBool:_newFlg] forKey:@"new"];
+    [dic setValue:[NSNumber numberWithBool:self.masterFlg] forKey:@"masterAdd"];
   } else {
-    LOG(@"update sid:%@", _sid)
+    if (_newFlag) {
+      [dic setValue:[NSNumber numberWithBool:_newFlag] forKey:@"new"];
+    } else {
+      [dic setValue:_oid forKey:@"oid"];
+    }
     [dic setValue:_sid forKey:@"sid"];
   }
   [dic setValue:date forKey:@"visited_at"];
@@ -385,8 +404,8 @@
 
 //店舗詳細
 - (IBAction)pushShopData:(id)sender {
-
-  _appDelegate.n = 2;
+  
+  _appDelegate.n = 3;
   
   UINavigationController *vc = self.tabBarController.viewControllers[0];
   self.tabBarController.selectedViewController = vc;
@@ -489,6 +508,7 @@
     } else if ([obj isKindOfClass:[UIView class]]) {
       LOG()
       _backView.hidden = YES;
+      _pickerFlag = YES;
       [self.dou resignFirstResponder];
       [self.situation resignFirstResponder];
       [self.level resignFirstResponder];
@@ -505,70 +525,76 @@
 //キーボード
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-  LOG()
-  NSDictionary *userInfo;
-  userInfo = [notification userInfo];
-  
-  CGFloat overlap;
-  CGRect keyboardFrame;
-  CGRect textViewFrame;
-  keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-  keyboardFrame = [self.scrollView.superview convertRect:keyboardFrame fromView:nil];
-  textViewFrame = self.scrollView.frame;
-  overlap = MAX(0.0f, CGRectGetMaxY(textViewFrame) - CGRectGetMinY(keyboardFrame));
-  
-  LOG(@"keboardFrame:%@", NSStringFromCGRect(keyboardFrame))
-  LOG(@"keboardFrame:%@", NSStringFromCGRect(textViewFrame))
-  LOG(@"keboardFrame:%f", overlap)
-  
-  UIEdgeInsets insets;
-  insets = UIEdgeInsetsMake(0.0f, 0.0f, overlap, 0.0f);
-  
-  NSTimeInterval duration;
-  UIViewAnimationCurve animationCurve;
-  void(^animations)(void);
-  //キーボード表示時のアニメーション時間取得
-  duration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-  //キーボード表示時のアニメーションCurve
-  animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-  LOG(@"animationCurve:%ld", animationCurve)
-  animations = ^(void) {
-    self.scrollView.contentInset = insets;
-    self.scrollView.scrollIndicatorInsets = insets;
-  };
-  [UIView animateWithDuration:duration
-                        delay:0.0
-                      options:(animationCurve << 16)
-                   animations:animations
-                   completion:nil];
-  CGRect rect;
-  rect.origin.x = 0.0f;
-  rect.origin.y = self.scrollView.contentSize.height - 1.0f;
-  rect.size.width = CGRectGetWidth(self.scrollView.frame);
-  rect.size.height = 1.0f;
-  [self.scrollView scrollRectToVisible:rect animated:YES];
+  if (_pickerFlag) {
+    LOG()
+    NSDictionary *userInfo;
+    userInfo = [notification userInfo];
+    
+    CGFloat overlap;
+    CGRect keyboardFrame;
+    CGRect textViewFrame;
+    keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    keyboardFrame = [self.scrollView.superview convertRect:keyboardFrame fromView:nil];
+    textViewFrame = self.scrollView.frame;
+    overlap = MAX(0.0f, CGRectGetMaxY(textViewFrame) - CGRectGetMinY(keyboardFrame));
+    
+//    LOG(@"keboardFrame:%@", NSStringFromCGRect(keyboardFrame))
+//    LOG(@"keboardFrame:%@", NSStringFromCGRect(textViewFrame))
+//    LOG(@"keboardFrame:%f", overlap)
+    
+    UIEdgeInsets insets;
+    insets = UIEdgeInsetsMake(0.0f, 0.0f, overlap, 0.0f);
+    
+    NSTimeInterval duration;
+    UIViewAnimationCurve animationCurve;
+    void(^animations)(void);
+    //キーボード表示時のアニメーション時間取得
+    duration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    //キーボード表示時のアニメーションCurve
+    animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    LOG(@"animationCurve:%ld", animationCurve)
+    animations = ^(void) {
+      self.scrollView.contentInset = insets;
+      self.scrollView.scrollIndicatorInsets = insets;
+    };
+    [UIView animateWithDuration:duration
+                          delay:0.0
+                        options:(animationCurve << 16)
+                     animations:animations
+                     completion:nil];
+    CGRect rect;
+    rect.origin.x = 0.0f;
+    rect.origin.y = self.scrollView.contentSize.height - 1.0f;
+    rect.size.width = CGRectGetWidth(self.scrollView.frame);
+    rect.size.height = 1.0f;
+    [self.scrollView scrollRectToVisible:rect animated:YES];
+    
+  }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-  LOG()
-  NSDictionary *userInfo;
-  userInfo = [notification userInfo];
-  
-  NSTimeInterval duration;
-  UIViewAnimationCurve animationCurve;
-  void(^animations)(void);
-  duration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-  animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-  animations = ^(void){
-    self.scrollView.contentInset = UIEdgeInsetsZero;
-    self.scrollView.scrollIndicatorInsets = UIEdgeInsetsZero;
-  };
-  [UIView animateWithDuration:duration
-                        delay:0.0
-                      options:(animationCurve << 16)
-                   animations:animations
-                   completion:nil];
+  if (_pickerFlag) {
+    LOG()
+    NSDictionary *userInfo;
+    userInfo = [notification userInfo];
+    
+    NSTimeInterval duration;
+    UIViewAnimationCurve animationCurve;
+    void(^animations)(void);
+    duration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    animations = ^(void){
+      self.scrollView.contentInset = UIEdgeInsetsZero;
+      self.scrollView.scrollIndicatorInsets = UIEdgeInsetsZero;
+    };
+    [UIView animateWithDuration:duration
+                          delay:0.0
+                        options:(animationCurve << 16)
+                     animations:animations
+                     completion:nil];
+      
+  }
 }
 
 @end

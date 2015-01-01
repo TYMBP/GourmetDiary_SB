@@ -13,6 +13,7 @@
 
 typedef void (^Callback)(NSArray *);
 typedef void (^SetData)(ShopMst *);
+typedef void (^DetailData)(NSArray *);
 
 @interface TYGourmetDiaryManager : NSObject
 
@@ -30,17 +31,20 @@ typedef void (^SetData)(ShopMst *);
 - (void)tempShopData:(NSDictionary *)data setData:(SetData)setData;
 - (BOOL)addVisitRegist:(NSMutableDictionary *)data shop:(ShopMst *)shop;
 - (NSMutableArray *)fetchVisitData;
-- (NSMutableArray *)fetchDiaryData:(NSString *)para;
+//1231- (NSMutableArray *)fetchDiaryData:(NSString *)para;
 - (BOOL)addShopMstData:(ShopMst *)data;
 - (BOOL)addVisitData:(NSMutableDictionary *)data;
 - (BOOL)editorRegist:(NSMutableDictionary *)data;
-//- (BOOL)addEditorRegist:(NSMutableDictionary *)data shop:(NSMutableDictionary *)shop;
-//- (BOOL)addEditorRegist:(NSMutableDictionary *)data;
 - (BOOL)deleteDiary;
 - (NSMutableArray *)fetchVisitedList:(NSInteger)set num:(NSInteger)num;
-
-//1221
 - (NSInteger)fetchVisitCount:(NSString *)sid;
 - (NSInteger)fetchShopLevel:(NSString *)sid;
+
+//1229
+- (NSMutableArray *)fetchMasterData:(NSInteger)num;
+- (void)fetchShopMasterData:(NSString *)sid callback:(Callback)callback;
+- (NSMutableArray *)fetchDiaryData:(id)oid;
+- (BOOL)fetchDetailData:(NSString *)sid detailData:(DetailData)detailData;
+- (BOOL)fetchMasterCount;
 
 @end

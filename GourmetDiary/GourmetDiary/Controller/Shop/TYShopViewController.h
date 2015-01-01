@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *genre;
 @property (weak, nonatomic) IBOutlet UITextField *area;
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
+@property (weak, nonatomic) IBOutlet UIButton *masterBtn;
 
 @end

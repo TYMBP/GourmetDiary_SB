@@ -69,8 +69,11 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
   _storeURL = [NSURL fileURLWithPath:[directory stringByAppendingPathComponent:@"GourmetDiary.sqlite"]];
 //  LOG(@"storeURL %@", _storeURL)
+
+//テスト不揮発用 1215
 //  NSURL *modelURL = [NSURL fileURLWithPath:[NSFileManager defaultManager].currentDirectoryPath];
 //  modelURL = [modelURL URLByAppendingPathComponent:@"GourmetDiary.momd"];
+  
   NSError *error = nil;
   _coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjetModel]];
   if (![_coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:_storeURL options:nil error:&error]) {
@@ -92,8 +95,10 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   return _managedObjetModel;
 }
 
-#pragma mark - TYSearchViewController
+
 /* 検索TOP・現在地検索 */
+#pragma mark - TYSearchViewController
+
 //データリセット
 - (void)resetData
 {
@@ -137,7 +142,9 @@ static TYGourmetDiaryManager *sharedInstance = nil;
     _searchData.lat = [NSNumber numberWithDouble:[lat doubleValue]];
     NSString *lng = [[data valueForKeyPath:@"results.shop.lng"] objectAtIndex:_n];
     _searchData.lng = [NSNumber numberWithDouble:[lng doubleValue]];
-    LOG(@"n %d shop: %@ sid: %@ genru:%@ area:%@ lat:%@ lng:%@", _n, _searchData.shop, _searchData.sid, _searchData.genre, _searchData.area, _searchData.lat, _searchData.lng)
+    
+//    LOG(@"n %d shop: %@ sid: %@ genru:%@ area:%@ lat:%@ lng:%@", _n, _searchData.shop, _searchData.sid, _searchData.genre, _searchData.area, _searchData.lat, _searchData.lng)
+    
     NSError *error = nil;
     if (![self.context save:&error]) {
       LOG("error %@", error)
@@ -151,7 +158,6 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   NSError *error = nil;
   NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"SearchData"];
   NSArray *fetchedArray = [_context executeFetchRequest:request error:&error];
-  LOG(@"fetch count %lu", fetchedArray.count)
   if (fetchedArray == nil) {
     LOG(@"fetch failure\n%@", [error localizedDescription])
     return fetchedArray;
@@ -159,8 +165,10 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   return fetchedArray;
 }
 
-#pragma mark - TYResultViewController
+
 /* キーワード検索 */
+#pragma mark - TYResultViewController
+
 //キーワード検索データリセット
 - (void)resetKeywordSearchData
 {
@@ -189,7 +197,6 @@ static TYGourmetDiaryManager *sharedInstance = nil;
 - (void)addKeywordSearchData:(NSDictionary *)data
 {
   NSArray *ary = [[data objectForKey:@"results"] objectForKey:@"shop"];
-  LOG(@"data: %lu", ary.count)
   
   for (_n = 0; _n < ary.count; _n++) {
     _keywordData = (KeywordSearch *)[NSEntityDescription insertNewObjectForEntityForName:@"KeywordSearch" inManagedObjectContext:self.context];
@@ -200,7 +207,8 @@ static TYGourmetDiaryManager *sharedInstance = nil;
     _keywordData.sid = [[data valueForKeyPath:@"results.shop.id"] objectAtIndex:_n];
     _keywordData.genre = [[data valueForKeyPath:@"results.shop.genre.name"] objectAtIndex:_n];
     _keywordData.area = [[data valueForKeyPath:@"results.shop.small_area.name"] objectAtIndex:_n];
-    LOG(@"n %d shop: %@ sid: %@ genre:%@ area:%@", _n, _keywordData.shop, _keywordData.sid, _keywordData.genre, _keywordData.area)
+//    LOG(@"n %d shop: %@ sid: %@ genre:%@ area:%@", _n, _keywordData.shop, _keywordData.sid, _keywordData.genre, _keywordData.area)
+    
     NSError *error = nil;
     if (![self.context save:&error]) {
       LOG("error %@", error)
@@ -208,10 +216,9 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   }
 }
 
-//検索TOPデータ取得
+//検索データ取得
 - (void)fetchKeywordSearchData:(Callback)callback
 {
-  LOG()
   NSError *error = nil;
   NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"KeywordSearch"];
   NSArray *fetchedArray = [self.context executeFetchRequest:request error:&error];
@@ -221,18 +228,16 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   }
   
   if (callback) {
-    LOG()
     callback(fetchedArray);
   }
 }
 
-#pragma mark - TYDetailViewController
 /* shop詳細 */
+#pragma mark - TYDetailViewController
+//検索結果
 - (void)tempShopData:(NSDictionary *)data setData:(SetData)setData
 {
   _shopData = nil;
-//  NSArray *ary = [[data objectForKey:@"results"] objectForKey:@"shop"];
-//  LOG(@"data: %lu", ary.count)
   
   _shopData = (ShopMst *)[NSEntityDescription insertNewObjectForEntityForName:@"ShopMst" inManagedObjectContext:self.context];
   if (_shopData == nil) {
@@ -256,13 +261,39 @@ static TYGourmetDiaryManager *sharedInstance = nil;
 //    LOG(@"shop:%@ shop_kana:%@ area:%@ address:%@ genre:%@ url:%@ sp_url:%@ lat:%@ lng:%@ img_path:%@ sid:%@", _shopData.shop, _shopData.shop_kana, _shopData.area, _shopData.address, _shopData.genre, _shopData.url, _shopData.sp_url, _shopData.lat, _shopData.lng, _shopData.img_path, _shopData.sid)
     
   }
-  
-//  NSArray *visitAry = [self fetchVisitData];
-  
   if (setData) {
     LOG()
     setData(_shopData);
   }
+}
+
+//登録詳細
+- (BOOL)fetchDetailData:(NSString *)sid detailData:(DetailData)detailData
+{
+  LOG()
+  NSFetchRequest *request = [[NSFetchRequest alloc] init];
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"ShopMst" inManagedObjectContext:self.context];
+  [request setEntity:entity];
+  NSPredicate *pred = [NSPredicate predicateWithFormat:@"sid = %@", sid];
+  [request setPredicate:pred];
+  NSError *error = nil;
+  
+  if (error) {
+    LOG(@"error %@ %@", error, [error userInfo])
+    return NO;
+  }
+  
+  NSArray *moArray = [self.context executeFetchRequest:request error:&error];
+  
+  if (moArray.count == 0) {
+    LOG(@"no data error")
+    return NO;
+  }
+  if (detailData) {
+    LOG()
+    detailData(moArray);
+  }
+  return YES;
 }
 
 - (NSInteger)fetchVisitCount:(NSString *)sid
@@ -270,7 +301,6 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   NSFetchRequest *request = [[NSFetchRequest alloc] init];
   NSEntityDescription *entity = [NSEntityDescription entityForName:@"VisitData" inManagedObjectContext:self.context];
   [request setEntity:entity];
-  LOG(@"data sid %@", sid)
   NSPredicate *pred = [NSPredicate predicateWithFormat:@"sid = %@",sid];
   [request setPredicate:pred];
   [request setIncludesSubentities:NO];
@@ -306,7 +336,9 @@ static TYGourmetDiaryManager *sharedInstance = nil;
 }
 
 
+/* 利用記録データ */
 #pragma mark - TYRegisterViewController
+
 //店舗マスター登録
 - (BOOL)addShopMstData:(ShopMst *)data
 {
@@ -316,9 +348,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   NSFetchRequest *request = [[NSFetchRequest alloc] init];
   NSEntityDescription *entity = [NSEntityDescription entityForName:@"ShopMst" inManagedObjectContext:self.context];
   [request setEntity:entity];
-  LOG(@"data sid %@", data.sid)
   NSPredicate *pred = [NSPredicate predicateWithFormat:@"sid = %@",data.sid];
-//  LOG(@"sid: %@", data.sid)
   [request setPredicate:pred];
   NSError *error = nil;
   
@@ -329,8 +359,6 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   
   NSArray *moArray = [self.context executeFetchRequest:request error:&error];
   master = [NSEntityDescription insertNewObjectForEntityForName:@"ShopMst" inManagedObjectContext:self.context];
-  LOG(@"moArray count:%lu", moArray.count)
-  LOG(@"moArray count:%@", moArray)
   
   if (moArray.count == 0) {
     LOG(@"新規登録")
@@ -361,7 +389,6 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   } else {
     LOG(@"上書き")
     master = [moArray objectAtIndex:0];
-    LOG(@"master: %@", [master valueForKey:@"shop"])
     NSString *dateStr = [_dateFomatter stringFromDate:[NSDate date]];
     [_dateFomatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"JST"]];
     NSDate *date = [_dateFomatter dateFromString:dateStr];
@@ -377,7 +404,6 @@ static TYGourmetDiaryManager *sharedInstance = nil;
     [master setValue:data.lng forKey:@"lng"];
     [master setValue:data.img_path forKey:@"img_path"];
     [master setValue:data.level forKey:@"level"];
-//    LOG(@"updateObj: %@", updateObj)
   }
   NSError *saveError = nil;
   if (![self.context save:&saveError]) {
@@ -387,9 +413,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   return YES;
 }
 
-#pragma mark - TYRegisterViewController
-/* 利用記録データ */
-//Register
+//利用登録
 - (BOOL)addVisitRegist:(NSMutableDictionary *)data shop:(ShopMst *)shop
 {
   LOG(@"data: %@ shop: %@", data, shop)
@@ -402,80 +426,9 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   return YES;
 }
 
-#pragma mark - TYEditorViewController
-//Editor
-- (BOOL)editorRegist:(NSMutableDictionary *)data
-{
-  if ([data valueForKey:@"new"]) {
-//    LOG(@"data genre: %@", [data valueForKey:@"genre"])
-    master = nil;
-    master = [NSEntityDescription insertNewObjectForEntityForName:@"ShopMst" inManagedObjectContext:self.context];
-//    master = (ShopMst *)[NSEntityDescription insertNewObjectForEntityForName:@"ShopMst" inManagedObjectContext:self.context];
-    [master setValue:[data valueForKey:@"sid"] forKey:@"sid"];
-    [master setValue:[data valueForKey:@"shop"] forKey:@"shop"];
-    [master setValue:[data valueForKey:@"genre"] forKey:@"genre"];
-    [master setValue:[data valueForKey:@"level"] forKey:@"level"];
-    [master setValue:[data valueForKey:@"area"] forKey:@"area"];
-    NSError *saveError = nil;
-    
-    if (![self.context save:&saveError]) {
-      LOG("error %@", saveError)
-      return NO;
-    }
-    
-//    if (![self addShopMstData:shop]) {
-//      LOG(@"shop master commit NG")
-//      return NO;
-//    }
-    if (![self addVisitData:data]) {
-      LOG(@"visit data commit NG")
-      return NO;
-    }
-  } else {
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ShopMst" inManagedObjectContext:self.context];
-    [request setEntity:entity];
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"sid = %@",[data valueForKey:@"sid"]];
-    [request setPredicate:pred];
-    
-    NSError *error = nil;
-    if (error) {
-      LOG(@"error %@ %@", error, [error userInfo])
-      return NO;
-    }
-    
-    NSArray *moArray = [self.context executeFetchRequest:request error:&error];
-    master = [NSEntityDescription insertNewObjectForEntityForName:@"ShopMst" inManagedObjectContext:self.context];
-    if (!moArray.count == 0) {
-      if (master == nil) {
-        LOG(@"master null")
-        return NO;
-      }
-      master = [moArray objectAtIndex:0];
-      [master setValue:[data valueForKey:@"level"] forKey:@"level"];
-      NSError *saveError = nil;
-      if (![self.context save:&saveError]) {
-        LOG("error %@ %@", error, saveError)
-        return NO;
-      }
-      
-      if (![self updateVisitData:data]) {
-        LOG(@"visit data commit NG")
-        return NO;
-      }
-    } else {
-      LOG(@"no data error")
-      return NO;
-    }
-  }
-  return YES;
-}
-
-#pragma mark - TYRegisterViewController
-#pragma mark - TYEditorViewController
+//利用登録　訪問情報
 - (BOOL)addVisitData:(NSMutableDictionary *)data
 {
-  LOG(@"data %@", data)
   visit = [NSEntityDescription insertNewObjectForEntityForName:@"VisitData" inManagedObjectContext:self.context];
   if (visit == nil) {
     [self undo];
@@ -493,8 +446,6 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   [visit setValue:[data valueForKey:@"fee"] forKey:@"fee"];
   [visit setValue:[data valueForKey:@"persons"] forKey:@"persons"];
   
-//  LOG(@"sid:%@ visited_at:%@ memo:%@ situation:%@ fee:%@ persons:%@ created_at:%@ updated_at:%@", _visitData.sid, _visitData.visited_at, _visitData.memo, _visitData.situation, _visitData.fee, _visitData.persons, _visitData.created_at, _visitData.updated_at)
-  
   [visit setValue:[NSSet setWithArray:@[master]] forKey:@"diary"];
   
   NSError *error = nil;
@@ -506,20 +457,93 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   return YES;
 }
 
+
+/* 編集更新or新規登録 */
 #pragma mark - TYEditorViewController
+
+- (BOOL)editorRegist:(NSMutableDictionary *)data
+{
+  LOG()
+  if ([data valueForKey:@"masterAdd"]) {
+    LOG()
+    master = nil;
+    master = [NSEntityDescription insertNewObjectForEntityForName:@"ShopMst" inManagedObjectContext:self.context];
+    [master setValue:[data valueForKey:@"sid"] forKey:@"sid"];
+    [master setValue:[data valueForKey:@"shop"] forKey:@"shop"];
+    [master setValue:[data valueForKey:@"genre"] forKey:@"genre"];
+    [master setValue:[data valueForKey:@"level"] forKey:@"level"];
+    [master setValue:[data valueForKey:@"area"] forKey:@"area"];
+    NSError *saveError = nil;
+    
+    if (![self.context save:&saveError]) {
+      LOG("error %@", saveError)
+      return NO;
+    }
+    if (![self addVisitData:data]) {
+      LOG(@"visit data commit NG")
+      return NO;
+    }
+  } else {
+    LOG()
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ShopMst" inManagedObjectContext:self.context];
+    [request setEntity:entity];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"sid = %@",[data valueForKey:@"sid"]];
+    [request setPredicate:pred];
+    
+    NSError *error = nil;
+    if (error) {
+      LOG(@"error %@ %@", error, [error userInfo])
+      return NO;
+    }
+    
+    NSArray *moArray = [self.context executeFetchRequest:request error:&error];
+    if (!moArray.count == 0) {
+      LOG()
+      master = [moArray objectAtIndex:0];
+      if (master == nil) {
+        LOG(@"master null")
+        return NO;
+      }
+      [master setValue:[data valueForKey:@"level"] forKey:@"level"];
+      NSError *saveError = nil;
+      if (![self.context save:&saveError]) {
+        LOG("error %@ %@", error, saveError)
+        return NO;
+      }
+      
+      if ([data valueForKey:@"new"]) {
+      LOG()
+        if (![self addVisitData:data]) {
+          LOG(@"visit data commit NG")
+          return NO;
+        }
+      } else {
+      LOG()
+        if (![self updateVisitData:data]) {
+          LOG(@"visit data commit NG")
+          return NO;
+        }
+      }
+    } else {
+      LOG(@"no data error")
+      return NO;
+    }
+  }
+  return YES;
+}
+
 //訪問記録の上書き
 - (BOOL)updateVisitData:(NSMutableDictionary *)data
 {
-  LOG(@"data %@", data)
-  
-  VisitData *editor = (VisitData *)[self.context objectWithID:_oId];
-  
+  LOG(@"data:%@", data)
+  VisitData *editor = (VisitData *)[self.context objectWithID:[data valueForKey:@"oid"]];
   LOG(@"editor:%@", editor)
+  
   if (editor == nil) {
     LOG(@"editor null")
     return NO;
   }
-//  visit = [NSEntityDescription insertNewObjectForEntityForName:@"VisitData" inManagedObjectContext:self.context];
   if (editor == nil) {
     [self undo];
     return NO;
@@ -534,9 +558,6 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   [editor setValue:[data valueForKey:@"situation"] forKey:@"situation"];
   [editor setValue:[data valueForKey:@"fee"] forKey:@"fee"];
   [editor setValue:[data valueForKey:@"persons"] forKey:@"persons"];
-  
-//  LOG(@"sid:%@ visited_at:%@ memo:%@ situation:%@ fee:%@ persons:%@ created_at:%@ updated_at:%@", _visitData.sid, _visitData.visited_at, _visitData.memo, _visitData.situation, _visitData.fee, _visitData.persons, _visitData.created_at, _visitData.updated_at)
-  
   [editor setValue:[NSSet setWithArray:@[master]] forKey:@"diary"];
   
   NSError *error = nil;
@@ -548,8 +569,132 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   return YES;
 }
 
+//訪問履歴編集時 データ取得
+- (NSMutableArray *)fetchDiaryData:(id)oid
+{
+  LOG(@"oid:%@", oid)
+  NSMutableArray *array = [NSMutableArray array];
+  VisitData *edtData = (VisitData *)[self.context objectWithID:oid];
+  
+  NSMutableDictionary *ary = [NSMutableDictionary dictionary];
+  [ary setValue:[edtData valueForKey:@"visited_at"] forKey:@"visited_at"];
+  [ary setValue:[edtData valueForKey:@"situation"] forKey:@"situation"];
+  [ary setValue:[edtData valueForKey:@"persons"] forKey:@"persons"];
+  [ary setValue:[edtData valueForKey:@"fee"] forKey:@"fee"];
+  [ary setValue:[edtData valueForKey:@"memo"] forKey:@"memo"];
+  NSSet *master = [edtData valueForKey:@"diary"];
+  if (master.count == 0) {
+    LOG(@"null");
+  } else {
+    for (NSManagedObject *shop in master) {
+      [ary setValue:[shop valueForKey:@"shop"] forKey:@"shop"];
+      [ary setValue:[shop valueForKey:@"level"] forKey:@"level"];
+    }
+  }
+  LOG(@"ary:%@", ary)
+  [array addObject:ary];
+  return array;
+}
+//変更前1231
+//- (NSMutableArray *)fetchDiaryData:(NSString *)para oid:(id)oid
+//{
+//  NSMutableArray *array = [NSMutableArray array];
+//  NSFetchRequest *request = [[NSFetchRequest alloc] init];
+//  NSEntityDescription *entity = [NSEntityDescription entityForName:@"VisitData" inManagedObjectContext:self.context];
+//  [request setEntity:entity];
+//  NSPredicate *pred = [NSPredicate predicateWithFormat:@"sid = %@",para];
+//  [request setPredicate:pred];
+//  NSError *error = nil;
+//  NSArray *moArray = [self.context executeFetchRequest:request error:&error];
+//  if (error) {
+//    LOG(@"error %@ %@", error, [error userInfo])
+//  }
+//  _oId = nil;
+//  for (NSManagedObject *obj in moArray) {
+//    _oId = [obj objectID];
+//    NSMutableDictionary *ary = [NSMutableDictionary dictionary];
+//    [ary setValue:[obj valueForKey:@"visited_at"] forKey:@"visited_at"];
+//    [ary setValue:[obj valueForKey:@"situation"] forKey:@"situation"];
+//    [ary setValue:[obj valueForKey:@"persons"] forKey:@"persons"];
+//    [ary setValue:[obj valueForKey:@"fee"] forKey:@"fee"];
+//    [ary setValue:[obj valueForKey:@"memo"] forKey:@"memo"];
+////    [ary setValue:_oId forKey:@"oid"];
+//    NSSet *master = [obj valueForKey:@"diary"];
+//    if (master.count == 0) {
+//      LOG(@"null");
+//    } else {
+//      for (NSManagedObject *shop in master) {
+//        [ary setValue:[shop valueForKey:@"shop"] forKey:@"shop"];
+//        [ary setValue:[shop valueForKey:@"level"] forKey:@"level"];
+//      }
+//    }
+//    [array addObject:ary];
+//  }
+//  return array;
+//}
+
+//訪問履歴削除
+- (BOOL)deleteDiary
+{
+  NSManagedObject *deleteObj = [self.context objectWithID:_oId];
+  [self.context deleteObject:deleteObj];
+  if (![self save]) {
+    return NO;
+  }
+  return YES;
+}
+
+
+/* 店舗情報入力 */
+#pragma mark - TYShopViewController
+
+//マスター登録数
+- (BOOL)fetchMasterCount
+{
+  NSFetchRequest *request = [[NSFetchRequest alloc] init];
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"ShopMst" inManagedObjectContext:self.context];
+  [request setEntity:entity];
+  [request setIncludesSubentities:NO];
+  
+  NSError *error = nil;
+  NSUInteger cnt = [self.context countForFetchRequest:request error:&error];
+  LOG(@"cnt:%lu", cnt)
+  if (error) {
+    LOG(@"error %@ %@", error, [error userInfo])
+    return NO;
+  }
+  if (cnt > 0) {
+    LOG()
+    return YES;
+  } else {
+    LOG()
+    return NO;
+  }
+}
+
+//選択した登録済み店舗マスター
+- (void)fetchShopMasterData:(NSString *)sid callback:(Callback)callback
+{
+  NSFetchRequest *request = [[NSFetchRequest alloc] init];
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"ShopMst" inManagedObjectContext:self.context];
+  [request setEntity:entity];
+  NSPredicate *pred = [NSPredicate predicateWithFormat:@"sid = %@",sid];
+  [request setPredicate:pred];
+  
+  NSError *error = nil;
+  NSArray *fetchedArray = [self.context executeFetchRequest:request error:&error];
+  if (fetchedArray == nil) {
+    LOG(@"fetch failure\n%@", [error localizedDescription])
+  }
+  if (callback) {
+    callback(fetchedArray);
+  }
+}
+
+
+/* Top 最新訪問履歴取得 */
 #pragma mark - TYViewController
-//Top
+
 - (NSMutableArray *)fetchVisitData
 {
   NSMutableArray *array = [NSMutableArray array];
@@ -566,8 +711,8 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   }
   for (NSManagedObject *obj in fetchedArray) {
     NSMutableDictionary *ary = [NSMutableDictionary dictionary];
+    [ary setValue:[obj objectID] forKey:@"oid"];
     [ary setValue:[obj valueForKey:@"visited_at"] forKey:@"visited"];
-//    LOG(@"visit: %@", [obj valueForKey:@"visited_at"])
     NSSet *master = [obj valueForKey:@"diary"];
     if (master.count == 0) {
       LOG(@"null");
@@ -587,8 +732,10 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   return array;
 }
 
+
+/* 訪問記録一覧リスト */
 #pragma mark - TYDiaryViewController
-/* 日記リスト */
+
 - (NSMutableArray *)fetchVisitedList:(NSInteger)set num:(NSInteger)num
 {
   LOG(@"set:%lu set:%lu", set, num)
@@ -611,6 +758,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   }
   for (NSManagedObject *obj in fetchedArray) {
     NSMutableDictionary *ary = [NSMutableDictionary dictionary];
+    [ary setValue:[obj objectID] forKey:@"oid"];
     [ary setValue:[obj valueForKey:@"visited_at"] forKey:@"visited"];
     [ary setValue:[obj valueForKey:@"memo"] forKey:@"comment"];
     NSSet *master = [obj valueForKey:@"diary"];
@@ -632,54 +780,42 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   return array;
 }
 
-- (NSMutableArray *)fetchDiaryData:(NSString *)para
+
+/* 登録マスター参照 */
+#pragma mark - TYMasterViewController
+
+//登録マスターの取得
+- (NSMutableArray *)fetchMasterData:(NSInteger)num
 {
+  LOG(@"num:%lu", num)
   NSMutableArray *array = [NSMutableArray array];
-  NSFetchRequest *request = [[NSFetchRequest alloc] init];
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"VisitData" inManagedObjectContext:self.context];
-  [request setEntity:entity];
-  NSPredicate *pred = [NSPredicate predicateWithFormat:@"sid = %@",para];
-  [request setPredicate:pred];
   NSError *error = nil;
-  if (error) {
-    LOG(@"error %@ %@", error, [error userInfo])
+  NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ShopMst"];
+  NSInteger count = [self.context countForFetchRequest:request error:&error];
+  request.fetchLimit = num;
+  
+  NSArray *fetchedArray = [_context executeFetchRequest:request error:&error];
+  if (fetchedArray == nil) {
+    LOG(@"fetch failure\n%@", [error localizedDescription])
+    return array;
   }
-  NSArray *moArray = [self.context executeFetchRequest:request error:&error];
-  _oId = nil;
-  for (NSManagedObject *obj in moArray) {
-    _oId = [obj objectID];
+  for (NSManagedObject *obj in fetchedArray) {
     NSMutableDictionary *ary = [NSMutableDictionary dictionary];
-    [ary setValue:[obj valueForKey:@"visited_at"] forKey:@"visited_at"];
-    [ary setValue:[obj valueForKey:@"situation"] forKey:@"situation"];
-    [ary setValue:[obj valueForKey:@"persons"] forKey:@"persons"];
-    [ary setValue:[obj valueForKey:@"fee"] forKey:@"fee"];
-    [ary setValue:[obj valueForKey:@"memo"] forKey:@"memo"];
-//    [ary setValue:_oId forKey:@"oid"];
-    NSSet *master = [obj valueForKey:@"diary"];
-    if (master.count == 0) {
-      LOG(@"null");
-    } else {
-      for (NSManagedObject *shop in master) {
-        [ary setValue:[shop valueForKey:@"shop"] forKey:@"shop"];
-        [ary setValue:[shop valueForKey:@"level"] forKey:@"level"];
-      }
-    }
+    [ary setValue:[obj valueForKey:@"shop"] forKey:@"shop"];
+    [ary setValue:[obj valueForKey:@"genre"] forKey:@"genre"];
+    [ary setValue:[obj valueForKey:@"area"] forKey:@"area"];
+    [ary setValue:[obj valueForKey:@"sid"] forKey:@"sid"];
+    [ary setValue:[NSNumber numberWithInteger:count] forKey:@"count"];
     [array addObject:ary];
   }
   return array;
 }
 
-- (BOOL)deleteDiary
-{
-  LOG(@"_oid %@", _oId)
-  NSManagedObject *deleteObj = [self.context objectWithID:_oId];
-  [self.context deleteObject:deleteObj];
-  if (![self save]) {
-    return NO;
-  }
-  return YES;
-}
 
+/* 共通 */
+#pragma mark - Utilty
+
+//取消し
 - (void)undo
 {
   LOG()
@@ -690,6 +826,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   }
 }
 
+//保存
 - (BOOL)save
 {
   NSError *error = nil;
@@ -699,6 +836,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   }
   return YES;
 }
+
 
 /*test*/
 //- (void)testFetch
@@ -723,10 +861,6 @@ static TYGourmetDiaryManager *sharedInstance = nil;
 //  }
 //}
 
-- (void)test2
-{
-//  NSManagedObject *managedObject = [self.context objectWithID:objID];
-}
 
 
 @end

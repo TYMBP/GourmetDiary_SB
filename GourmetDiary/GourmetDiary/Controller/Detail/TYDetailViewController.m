@@ -24,9 +24,9 @@
 
 - (id)initWithCoder:(NSCoder *)coder
 {
+  LOG()
   self = [super initWithCoder:coder];
   if (self) {
-    LOG()
     _dataManager = [TYGourmetDiaryManager sharedmanager];
   }
   return self;
@@ -34,9 +34,9 @@
 
 - (void)viewDidLoad
 {
+  LOG()
   [super viewDidLoad];
 
-  LOG()
   TYAppDelegate *appDelegate;
   appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
   NSString *sid = appDelegate.sid;
@@ -50,6 +50,7 @@
   self.nextBtn.layer.cornerRadius = 5;
  
   if (n == 1) {
+    LOG()
     if (self.para) {
       LOG(@"para: %@", self.para)
       //APIよりDATAの取得
@@ -59,10 +60,70 @@
       [self warning:@"問題発生しました"];
     }
   } else if (n == 2) {
+    LOG()
     self.para = sid;
     [self runAPI];
+  } else if (n == 3) {
+    LOG()
+    if (![_dataManager fetchDetailData:sid detailData:^(NSArray *ary) {
+      
+      LOG(@"ary:%@",ary)
+      NSDictionary *dic = [ary objectAtIndex:0];
+      self.name.text = [dic valueForKey:@"shop"];
+      self.area.text = [dic valueForKey:@"area"];
+      self.genre.text = [dic valueForKey:@"genre"];
+      if ([dic valueForKey:@"address"]) {
+        self.address.text = [dic valueForKey:@"address"];
+      } else {
+        self.address.text = @"住所 未登録";
+      }
+      if ([dic valueForKey:@"img_path"]) {
+        self.shopImage.image = nil;
+        NSURL *url = [NSURL URLWithString:[dic valueForKey:@"img_path"]];
+        LOG(@"url:%@",[dic valueForKey:@"img_path"])
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        UIImage *img = [UIImage imageWithData:data];
+        self.shopImage.image = img;
+      } else {
+        self.mapBtn.alpha = 0.5;
+        self.mapBtn.enabled = NO;
+      }
+      
+      NSString *countNum = [[NSString alloc] initWithFormat:@"%ld", (long)[_dataManager fetchVisitCount:sid]];
+      self.visitCount.text = [NSString stringWithFormat:@"%@回", countNum];
+      NSInteger n = [_dataManager fetchShopLevel:sid];
+      if (n == 0) {
+        self.level.text = @"来店記録なし";
+      } else {
+        self.level.text = [[TYUtil levelList] objectAtIndex:n];
+      }
+    }]) {
+      [self warning:@"データが取得出来ません"];
+      [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    CGRect posi = self.nextBtn.frame;
+    LOG(@"posi:%f", posi.origin.x)
+//    CGRect posi = CGRectGetMaxX(self.nextBtn);
+    [self.nextBtn removeFromSuperview];
+    UIButton *returnBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    returnBtn.frame = CGRectMake(posi.origin.x-100, posi.origin.y+20, 200, 40);
+    [returnBtn setTitle:@"戻る" forState:UIControlStateNormal];
+    [returnBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    returnBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+    returnBtn.layer.borderWidth = 1;
+    returnBtn.layer.cornerRadius = 5;
+    returnBtn.titleLabel.font = [UIFont fontWithName:@"HirakakuProN-W6" size:17];
+    [returnBtn addTarget:self action:@selector(returnEditor) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:returnBtn];
+    
   }
-  
+}
+
+//戻る
+- (void)returnEditor
+{
+  UINavigationController *vc = self.tabBarController.viewControllers[1];
+  self.tabBarController.selectedViewController = vc;
 }
 
 - (void)warning:(NSString *)mess
@@ -90,7 +151,6 @@
 - (void)getApiData {
   NSError *error = nil;
   NSString *json_str = [[NSString alloc] initWithData:_connection.data encoding:NSUTF8StringEncoding];
-//  LOG(@"data_str:%@",json_str)
   NSData *jsonData = [json_str dataUsingEncoding:NSUTF8StringEncoding];
   NSDictionary *data = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&error];
   if (error) {
@@ -128,6 +188,8 @@
   }
 }
 
+
+#pragma mark - segue
 //遷移前パラメータセット
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

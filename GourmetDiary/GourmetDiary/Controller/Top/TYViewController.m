@@ -8,7 +8,6 @@
 
 #import "TYViewController.h"
 #import "TYAppDelegate.h"
-//#import "TYApplication.h"
 #import "TYGourmetDiaryManager.h"
 #import "TYVisitedTableViewCell.h"
 #import "VisitData.h"
@@ -23,6 +22,7 @@
 
 - (id)initWithCoder:(NSCoder *)coder
 {
+  LOG()
   self = [super initWithCoder:coder];
   if (self) {
     _dateFomatter = [[NSDateFormatter alloc] init];
@@ -36,6 +36,7 @@
 {
   [super viewDidLoad];
   LOG()
+  
 //  [self test];
   _visitedData = nil;
   _visitedData = [_dataManager fetchVisitData];
@@ -50,6 +51,7 @@
   
   self.navigationController.delegate = self;
 }
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -111,7 +113,8 @@
     TYAppDelegate *appDelegate;
     appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.sid = _sid;
-    appDelegate.n = 1;
+    appDelegate.editStatus = 1;
+    appDelegate.oid = [fetchData valueForKey:@"oid"];
     LOG(@"_sid %@", _sid)
     LOG(@"appdelegate sid %@", appDelegate.sid)
     
@@ -119,10 +122,11 @@
     self.tabBarController.selectedViewController = vc;
     [vc popToRootViewControllerAnimated:NO];
     [vc.viewControllers[0] performSegueWithIdentifier:@"Editor" sender:self];
-  //  [self performSegueWithIdentifier:@"Diary" sender:self];
+  //1215  [self performSegueWithIdentifier:@"Diary" sender:self];
   }
 }
 
+#pragma mark - navigationController
 - (void) navigationController:(UINavigationController *) navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
   LOG()
