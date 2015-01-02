@@ -82,10 +82,10 @@
 //1230  _newFlg = NO;
   _pickerFlag = NO;
   
-  self.editBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+  self.editBtn.layer.borderColor = [[UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0] CGColor];
   self.editBtn.layer.borderWidth = 1;
   self.editBtn.layer.cornerRadius = 5;
-  self.deleteBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+  self.deleteBtn.layer.borderColor = [[UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0] CGColor];
   self.deleteBtn.layer.borderWidth = 1;
   self.deleteBtn.layer.cornerRadius = 5;
   

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <iAd/iAd.h>
 
 @interface TYBaseViewController : UIViewController <UITextViewDelegate, UIScrollViewDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate>
+
 
 - (UIPickerView *)makePicker;
 - (UIToolbar *)makeToolbar:(CGRect)rect;

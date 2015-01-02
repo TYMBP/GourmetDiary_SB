@@ -55,11 +55,14 @@
 
 - (void)viewDidLoad
 {
+  LOG()
   [super viewDidLoad];
+  
+  self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0];
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
-  self.tableView.backgroundColor = [UIColor colorWithRed:1.0 green:0.4 blue:0.4 alpha:1.0];
-  self.searchBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+  self.tableView.backgroundColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.98 alpha:1.0];
+  self.searchBtn.layer.borderColor = [[UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0] CGColor];
   self.searchBtn.layer.borderWidth = 1;
   self.searchBtn.layer.cornerRadius = 5;
   _setNum = 1;

@@ -18,6 +18,7 @@
   TYGourmetDiaryManager *_dataManager;
   NSDateFormatter *_dateFomatter;
   NSString *_sid;
+  BOOL _bannerIsVisble;
 }
 
 - (id)initWithCoder:(NSCoder *)coder
@@ -34,8 +35,8 @@
 
 - (void)viewDidLoad
 {
-  [super viewDidLoad];
   LOG()
+  [super viewDidLoad];
   
 //  [self test];
   _visitedData = nil;
@@ -45,7 +46,7 @@
   self.tableView.dataSource = self;
   self.tableView.backgroundColor = [UIColor colorWithRed:0.13 green:0.55 blue:0.13 alpha:1.0];
   
-  self.searchBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+  self.searchBtn.layer.borderColor = [[UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0] CGColor];
   self.searchBtn.layer.borderWidth = 1;
   self.searchBtn.layer.cornerRadius = 5;
   
@@ -136,7 +137,38 @@
 }
 
 
+//iAd
+#pragma mark - Ad
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+  LOG()
+  if (!_bannerIsVisble) {
+    [UIView animateWithDuration:0.5f
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                       [banner setAlpha:1.0f];
+                     }
+                     completion:nil];
+    _bannerIsVisble = YES;
+    
+  }
+}
 
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+  LOG()
+  if (_bannerIsVisble) {
+    [UIView animateWithDuration:0.5f
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                     }completion:nil];
+    
+  _bannerIsVisble = NO;
+                     
+  }
+}
 
 /* test */
 - (void)test

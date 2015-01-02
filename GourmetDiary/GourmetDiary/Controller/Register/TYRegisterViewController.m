@@ -25,10 +25,10 @@
   UIPickerView *_picker3;
   UIPickerView *_picker4;
   UIPickerView *_picker5;
-  NSUInteger _levelNum; //??
-  NSUInteger _situNum; //??
-  NSUInteger _personNum; //??
-  NSUInteger _feeNum; //??
+  NSUInteger _levelNum;
+  NSUInteger _situNum;
+  NSUInteger _personNum;
+  NSUInteger _feeNum;
   NSArray *_levelList;
   NSArray *_situList;
   NSArray *_personList;
@@ -75,7 +75,7 @@
     [_dateFomatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"JST"]];
     [_dateFomatter setDateFormat:@"yyyy/MM/dd"];
     
-    self.registerBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.registerBtn.layer.borderColor = [[UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0] CGColor];
     self.registerBtn.layer.borderWidth = 1;
     self.registerBtn.layer.cornerRadius = 5;
     

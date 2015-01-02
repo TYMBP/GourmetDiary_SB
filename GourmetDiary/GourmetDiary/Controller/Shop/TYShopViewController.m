@@ -37,9 +37,10 @@
   
   _genreList = [TYUtil genreList];
   self.nextBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+  self.nextBtn.layer.borderColor = [[UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0] CGColor];
   self.nextBtn.layer.borderWidth = 1;
   self.nextBtn.layer.cornerRadius = 5;
-  self.masterBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+  self.masterBtn.layer.borderColor = [[UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0] CGColor];
   self.masterBtn.layer.borderWidth = 1;
   self.masterBtn.layer.cornerRadius = 5;
   

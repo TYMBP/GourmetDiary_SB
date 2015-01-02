@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) NSMutableArray *visitedData;
 
+//@property (weak, nonatomic) id delegate;
 @end
 

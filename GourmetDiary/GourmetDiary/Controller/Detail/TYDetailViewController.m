@@ -42,10 +42,11 @@
   NSString *sid = appDelegate.sid;
   int n = appDelegate.n;
   
-  self.mapBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+  self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0];
+  self.mapBtn.layer.borderColor = [[UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0] CGColor];
   self.mapBtn.layer.borderWidth = 1;
   self.mapBtn.layer.cornerRadius = 5;
-  self.nextBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+  self.nextBtn.layer.borderColor = [[UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0] CGColor];
   self.nextBtn.layer.borderWidth = 1;
   self.nextBtn.layer.cornerRadius = 5;
  
@@ -103,13 +104,13 @@
     }
     CGRect posi = self.nextBtn.frame;
     LOG(@"posi:%f", posi.origin.x)
-//    CGRect posi = CGRectGetMaxX(self.nextBtn);
     [self.nextBtn removeFromSuperview];
     UIButton *returnBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     returnBtn.frame = CGRectMake(posi.origin.x-100, posi.origin.y+20, 200, 40);
     [returnBtn setTitle:@"戻る" forState:UIControlStateNormal];
     [returnBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    returnBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+    [returnBtn setBackgroundColor:[UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0]];
+    returnBtn.layer.borderColor = [[UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0] CGColor];
     returnBtn.layer.borderWidth = 1;
     returnBtn.layer.cornerRadius = 5;
     returnBtn.titleLabel.font = [UIFont fontWithName:@"HirakakuProN-W6" size:17];
