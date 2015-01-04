@@ -21,11 +21,11 @@
 //    NSString *str = API_TEST2;
 //    LOG(@"url: %@", API_TEST2)
     
-    NSMutableArray *ary = [[NSMutableArray alloc] initWithObjects:@"", @"G001", @"G002", @"G003", @"G004", @"G005", @"G006", @"G007", @"G008", @"G009", @"G010", @"G011", @"G012", @"G013", @"G014", @"G015", nil];
+    NSMutableArray *ary = [[NSMutableArray alloc] initWithObjects:@"", @"G001", @"G002", @"G003", @"G004", @"G005", @"G006", @"G007", @"G008", @"G009", @"G010", @"G011", @"G012", @"G013", @"G014", @"G015", @"G016", nil];
     NSString *shopWord = [para objectForKey:@"shop"];
     NSInteger num = [[para objectForKey:@"genre"] integerValue];
     NSString *genreCode = [ary objectAtIndex:num];
-    NSString *start = [[NSString alloc] initWithFormat:@"%ld", set];
+    NSString *start = [[NSString alloc] initWithFormat:@"%ld", (long)set];
     
     LOG(@"shop: %@ area:%@", shopWord, genreCode)
 //    NSString *urlStr = [NSString stringWithFormat:@"%@%@&Keyword=%@ %@&order=4&start=1&count=15&format=json", API_SHOPSEARCH, API_KEY, shopWord, areaWord];

@@ -135,23 +135,6 @@
   }
 }
 
-//1230
-//- (IBAction)popViewController:(UIStoryboardSegue *)segue
-//{
-//  LOG()
-//  _masterFlg = YES;
-//  TYAppDelegate *appDelegate;
-//  appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
-//  _dataManager = [TYGourmetDiaryManager sharedmanager];
-//  [_dataManager fetchShopMasterData:appDelegate.sid callback:^(NSArray *ary) {
-//    LOG(@"ary:%@",ary)
-//    self.name.text = [[ary objectAtIndex:0] valueForKey:@"shop"];
-//    self.genre.text = [[ary objectAtIndex:0] valueForKey:@"genre"];
-//    self.area.text = [[ary objectAtIndex:0] valueForKey:@"area"];
-//  }];
-//}
-
-
 - (NSString *)setSid
 {
   NSDate *now = [NSDate date];

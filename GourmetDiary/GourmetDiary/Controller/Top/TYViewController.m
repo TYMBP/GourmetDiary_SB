@@ -44,15 +44,16 @@
   
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
-  self.tableView.backgroundColor = [UIColor colorWithRed:0.13 green:0.55 blue:0.13 alpha:1.0];
+  self.tableView.backgroundColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.98 alpha:1.0];
   
   self.searchBtn.layer.borderColor = [[UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0] CGColor];
   self.searchBtn.layer.borderWidth = 1;
   self.searchBtn.layer.cornerRadius = 5;
   
   self.navigationController.delegate = self;
+  
+  
 }
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

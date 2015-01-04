@@ -20,6 +20,7 @@
   UIActivityIndicatorView *_indicator;
   NSInteger _set;
   NSInteger _count;
+  NSInteger _sort;
   BOOL _isLoading;
 }
 
@@ -50,15 +51,16 @@
   
   self.visitedList = nil;
   _set = 10;
+  _sort = 1;
   
-  self.naviTitle.title = @"最新";
+  self.naviTitle.title = @"訪問店";
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   self.tableView.backgroundColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.98 alpha:1.0];
   self.automaticallyAdjustsScrollViewInsets = NO;
-  self.visitedList = [_dataManager fetchVisitedList:1 num:_set];
+  self.visitedList = [_dataManager fetchVisitedList:_sort num:_set];
   
-  if (self.visitedList) {
+  if (!self.visitedList) {
     return;
   } else {
     _count = [[[self.visitedList objectAtIndex:0] valueForKey:@"count"] integerValue];
@@ -80,13 +82,17 @@
   UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"並び替え" message:@"選択してください" preferredStyle:UIAlertControllerStyleActionSheet];
   UIAlertAction *dec = [UIAlertAction actionWithTitle:@"降順" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
     LOG(@"dec tap")
-    self.visitedList = [_dataManager fetchVisitedList:1 num:_set];
+    _set = 10;
+    _sort = 1;
+    self.visitedList = [_dataManager fetchVisitedList:_sort num:_set];
     [self.tableView reloadData];
     
   }];
   UIAlertAction *asc = [UIAlertAction actionWithTitle:@"昇順" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
     LOG(@"asc tap")
-    self.visitedList = [_dataManager fetchVisitedList:2 num:_set];
+    _set = 10;
+    _sort = 2;
+    self.visitedList = [_dataManager fetchVisitedList:_sort num:_set];
     [self.tableView reloadData];
   }];
   UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
@@ -116,6 +122,7 @@
   self.visitedList = nil;
   self.visitedList = [_dataManager fetchVisitedList:1 num:_set];
   if ([self.visitedList count] == 0) {
+    [self.tableView reloadData];
     return;
   } else {
     _count = [[[self.visitedList objectAtIndex:0] valueForKey:@"count"] integerValue];
@@ -186,21 +193,11 @@
   
 }
 
-#pragma mark - segue
-//1230遷移前パラメータセット
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//  if ([[segue identifier] isEqualToString:@"Shopdata"]) {
-//    LOG()
-//  } else if ([[segue identifier] isEqualToString:@"Editor"]) {
-//    LOG()
-//  }
-//}
-
 #pragma mark - paging
 - (BOOL)pageLoading:(Paging)paging
 {
-  self.visitedList = [_dataManager fetchVisitedList:1 num:_set];
+  LOG()
+  self.visitedList = [_dataManager fetchVisitedList:_sort num:_set];
   if (!self.visitedList) {
     return NO;
   }
@@ -219,12 +216,13 @@
       if (_set < _count) {
         LOG()
         _isLoading = NO;
-        _set += 15;
+        _set += 10;
         [self startIndicator];
         
         if ([self pageLoading:^{
           [self.tableView reloadData];
           [self endIndicator];
+          _isLoading = YES;
         }]) {
         } else {
           LOG()
@@ -237,6 +235,7 @@
 
 - (void)startIndicator
 {
+  LOG()
   [_indicator startAnimating];
   CGRect footerFrame = self.tableView.tableFooterView.frame;
   footerFrame.size.height += 70.0f;
@@ -247,6 +246,7 @@
 
 - (void)endIndicator
 {
+  LOG()
   [_indicator stopAnimating];
   [_indicator removeFromSuperview];
   [self.tableView setTableFooterView:nil];

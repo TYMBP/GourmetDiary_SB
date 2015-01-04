@@ -38,7 +38,6 @@
 		108FDD141A1E06C800658904 /* TYSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD131A1E06C800658904 /* TYSearchTableViewCell.m */; };
 		10A881F51A5155E000766474 /* TYMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A881F41A5155E000766474 /* TYMasterViewController.m */; };
 		10A881FA1A56450300766474 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A881F91A56450300766474 /* iAd.framework */; };
-		10A881FF1A56839D00766474 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A881FE1A56839D00766474 /* CloudKit.framework */; };
 		10C927C01A204BAE00CD6669 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C927BF1A204BAE00CD6669 /* MapKit.framework */; };
 		10C927C31A20BA5A00CD6669 /* TYVisitedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C927C21A20BA5A00CD6669 /* TYVisitedTableViewCell.m */; };
 		10CC268A1A45B6330090919C /* TYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CC26891A45B6330090919C /* TYBaseViewController.m */; };
@@ -116,8 +115,6 @@
 		10A881F31A5155E000766474 /* TYMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYMasterViewController.h; sourceTree = "<group>"; };
 		10A881F41A5155E000766474 /* TYMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYMasterViewController.m; sourceTree = "<group>"; };
 		10A881F91A56450300766474 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
-		10A881FB1A56761500766474 /* GourmetDiary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GourmetDiary.entitlements; sourceTree = "<group>"; };
-		10A881FE1A56839D00766474 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		10C927BF1A204BAE00CD6669 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		10C927C11A20BA5A00CD6669 /* TYVisitedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVisitedTableViewCell.h; sourceTree = "<group>"; };
 		10C927C21A20BA5A00CD6669 /* TYVisitedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYVisitedTableViewCell.m; sourceTree = "<group>"; };
@@ -132,7 +129,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10A881FF1A56839D00766474 /* CloudKit.framework in Frameworks */,
 				10A881FA1A56450300766474 /* iAd.framework in Frameworks */,
 				10C927C01A204BAE00CD6669 /* MapKit.framework in Frameworks */,
 			);
@@ -221,7 +217,6 @@
 		108FDCB41A1DA00C00658904 = {
 			isa = PBXGroup;
 			children = (
-				10A881FE1A56839D00766474 /* CloudKit.framework */,
 				10A881F91A56450300766474 /* iAd.framework */,
 				10C927BF1A204BAE00CD6669 /* MapKit.framework */,
 				108FDCBF1A1DA00C00658904 /* GourmetDiary */,
@@ -242,7 +237,6 @@
 		108FDCBF1A1DA00C00658904 /* GourmetDiary */ = {
 			isa = PBXGroup;
 			children = (
-				10A881FB1A56761500766474 /* GourmetDiary.entitlements */,
 				108FDD111A1E065A00658904 /* View */,
 				108FDD091A1DC87500658904 /* Controller */,
 				108FDCF61A1DC15000658904 /* Model */,
@@ -453,7 +447,7 @@
 						DevelopmentTeam = XC9Y3QHCBZ;
 						SystemCapabilities = {
 							com.apple.iCloud = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -657,7 +651,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = GourmetDiary/GourmetDiary.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: tomohiko yamada (4VC78GY2ZF)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: tomohiko yamada (4VC78GY2ZF)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -673,7 +666,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = GourmetDiary/GourmetDiary.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: tomohiko yamada (4VC78GY2ZF)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: tomohiko yamada (4VC78GY2ZF)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

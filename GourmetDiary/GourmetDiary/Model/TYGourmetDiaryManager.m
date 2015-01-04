@@ -65,14 +65,9 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   if (_coordinator != nil) {
     return _coordinator;
   }
-// SQLパターン
   NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
   _storeURL = [NSURL fileURLWithPath:[directory stringByAppendingPathComponent:@"GourmetDiary.sqlite"]];
 //  LOG(@"storeURL %@", _storeURL)
-
-//テスト不揮発用 1215
-//  NSURL *modelURL = [NSURL fileURLWithPath:[NSFileManager defaultManager].currentDirectoryPath];
-//  modelURL = [modelURL URLByAppendingPathComponent:@"GourmetDiary.momd"];
   
   NSError *error = nil;
   _coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjetModel]];
@@ -501,6 +496,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
     if (!moArray.count == 0) {
       LOG()
       master = [moArray objectAtIndex:0];
+      LOG(@"master:%@", master)
       if (master == nil) {
         LOG(@"master null")
         return NO;
@@ -558,7 +554,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   [editor setValue:[data valueForKey:@"situation"] forKey:@"situation"];
   [editor setValue:[data valueForKey:@"fee"] forKey:@"fee"];
   [editor setValue:[data valueForKey:@"persons"] forKey:@"persons"];
-  [editor setValue:[NSSet setWithArray:@[master]] forKey:@"diary"];
+//0104  [editor setValue:[NSSet setWithArray:@[master]] forKey:@"diary"];
   
   NSError *error = nil;
   if (![_context save:&error]) {
@@ -634,9 +630,9 @@ static TYGourmetDiaryManager *sharedInstance = nil;
 //}
 
 //訪問履歴削除
-- (BOOL)deleteDiary
+- (BOOL)deleteDiary:(id)oid
 {
-  NSManagedObject *deleteObj = [self.context objectWithID:_oId];
+  NSManagedObject *deleteObj = [self.context objectWithID:oid];
   [self.context deleteObject:deleteObj];
   if (![self save]) {
     return NO;
@@ -745,11 +741,13 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   NSInteger count = [self.context countForFetchRequest:request error:&error];
   request.fetchLimit = num;
   NSSortDescriptor *sort;
+  
   if (set == 1) {
     sort = [[NSSortDescriptor alloc] initWithKey:@"visited_at" ascending:NO];
   } else if (set == 2) {
     sort = [[NSSortDescriptor alloc] initWithKey:@"visited_at" ascending:YES];
   }
+  
   request.sortDescriptors = @[sort];
   NSArray *fetchedArray = [_context executeFetchRequest:request error:&error];
   if (fetchedArray == nil) {

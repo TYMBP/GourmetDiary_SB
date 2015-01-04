@@ -42,6 +42,7 @@
   UIView *_backView;
   BOOL _observing;
   BOOL _pickerFlag;
+  BOOL _tapFlg;
 }
 
 - (id)initWithCoder:(NSCoder *)coder
@@ -50,6 +51,7 @@
   if (self) {
     LOG()
     _observing = NO;
+    _tapFlg = NO;
     _dataManager = [TYGourmetDiaryManager sharedmanager];
     _dateFomatter = nil;
     //picker用
@@ -201,7 +203,7 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
   _tagNum = 0;
   _pickerFlag = NO;
-  LOG(@"tag %lu",textField.tag)
+  LOG(@"tag %lu",(long)textField.tag)
   switch (textField.tag) {
     case TF_SITUATION:
       _tagNum = TF_SITUATION;
@@ -246,12 +248,17 @@
 - (IBAction)validationData:(id)sender
 {
   LOG()
+  if (_tapFlg) {
+    return;
+  }
+  _tapFlg = YES;
   if ([self.dou.text length] == 0 || [self.situation.text length] == 0 || [self.level.text length] == 0 || [self.persons.text length] == 0 || [self.fee.text length] == 0) {
     [self warning:@"未入力項目があります"];
+    _tapFlg = NO;
   } else if ([_comment.text length] >= 256){
     [self warning:@"コメントは256文字までで入力してください"];
+    _tapFlg = NO;
   } else {
-    
     [_dateFomatter setDateFormat:@"yyyy/MM/dd"];
     [_dateFomatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"JST"]];
     NSDate *date = [_dateFomatter dateFromString:self.dou.text];
@@ -266,6 +273,7 @@
     switch (result) {
       case NSOrderedDescending:
         [self warning:@"日時の入力に誤りがあります"];
+        _tapFlg = NO;
         break;
       default:
         [self registerVisitData:date];
@@ -288,6 +296,7 @@
   self.shopMst.level = [NSNumber numberWithInteger:_levelNum];
   
   [_dataManager addVisitRegist:dic shop:self.shopMst];
+  _tapFlg = NO;
   [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -429,12 +438,15 @@
     textViewFrame = self.scrollView.frame;
     overlap = MAX(0.0f, CGRectGetMaxY(textViewFrame) - CGRectGetMinY(keyboardFrame));
     
-  //  LOG(@"keboardFrame:%@", NSStringFromCGRect(keyboardFrame))
-  //  LOG(@"keboardFrame:%@", NSStringFromCGRect(textViewFrame))
-  //  LOG(@"keboardFrame:%f", overlap)
+    LOG(@"textViewFrame maxY:%f", CGRectGetMaxY(textViewFrame))
+    LOG(@"textViewFrame minY:%f", CGRectGetMinY(keyboardFrame))
+    
+    LOG(@"keboardFrame:%@", NSStringFromCGRect(keyboardFrame))
+    LOG(@"keboardFrame:%@", NSStringFromCGRect(textViewFrame))
+    LOG(@"keboardFrame:%f", overlap)
     
     UIEdgeInsets insets;
-    insets = UIEdgeInsetsMake(0.0f, 0.0f, overlap, 0.0f);
+    insets = UIEdgeInsetsMake(0.0f, 0.0f, overlap - 40.0f, 0.0f);
     
     NSTimeInterval duration;
     UIViewAnimationCurve animationCurve;
@@ -443,7 +455,6 @@
     duration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     //キーボード表示時のアニメーションCurve
     animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    LOG(@"animationCurve:%ld", animationCurve)
     animations = ^(void) {
       self.scrollView.contentInset = insets;
       self.scrollView.scrollIndicatorInsets = insets;

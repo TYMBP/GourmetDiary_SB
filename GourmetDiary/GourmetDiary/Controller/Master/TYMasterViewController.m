@@ -22,29 +22,11 @@
   UIActivityIndicatorView *_indicator;
 }
 
-//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-//{
-//  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-//  if (self) {
-//    LOG()
-//  }
-//  return self;
-//}
-//
-//- (id)initWithCoder:(NSCoder *)coder
-//{
-//  LOG()
-//  self = [super initWithCoder:coder];
-//  if (self) {
-//    _dataManager = [TYGourmetDiaryManager sharedmanager];
-//  }
-//  return self;
-//}
-
 - (void)viewDidLoad
 {
   LOG()
   [super viewDidLoad];
+  
   _dataManager = [TYGourmetDiaryManager sharedmanager];
    _limit = 15;
   _masterData = nil;
@@ -143,16 +125,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   LOG()
-//  [tableView deselectRowAtIndexPath:indexPath animated:YES];
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
   
-//  NSDictionary *fetchData = [self.visitedList objectAtIndex:indexPath.row];
-//  _sid = [fetchData valueForKey:@"sid"];
-//  LOG(@"_sid %@", _sid)
-//  TYAppDelegate *appDelegate;
-//  appDelegate = (TYAppDelegate *)[[UIApplication sharedApplication] delegate];
-//  appDelegate.sid = _sid;
-//  appDelegate.editStatus = 1;
-//  [self performSegueWithIdentifier:@"Editor" sender:self];
 }
 
 

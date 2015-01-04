@@ -32,10 +32,10 @@
   UIPickerView *_picker3;
   UIPickerView *_picker4;
   UIPickerView *_picker5;
-  NSUInteger _levelNum; //??
-  NSUInteger _situNum; //??
-  NSUInteger _personNum; //??
-  NSUInteger _feeNum; //??
+  NSUInteger _levelNum;
+  NSUInteger _situNum;
+  NSUInteger _personNum;
+  NSUInteger _feeNum;
   NSArray *_levelList;
   NSArray *_situList;
   NSArray *_personList;
@@ -50,6 +50,7 @@
   BOOL _observing;
   BOOL _newFlag;
   BOOL _pickerFlag;
+  BOOL _tapFlg;
   id _oid;
 }
 
@@ -79,8 +80,8 @@
  
   _dic = nil;
   _sid = nil;
-//1230  _newFlg = NO;
   _pickerFlag = NO;
+  _tapFlg = NO;
   
   self.editBtn.layer.borderColor = [[UIColor colorWithRed:0.60 green:0.80 blue:0.20 alpha:1.0] CGColor];
   self.editBtn.layer.borderWidth = 1;
@@ -314,14 +315,19 @@
 
 //日記削除
 - (IBAction)pushDelete:(id)sender {
+  if (_tapFlg) {
+    return;
+  }
+  _tapFlg = YES;
+  
   UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"確認" message:@"日記を削除しますか？" preferredStyle:UIAlertControllerStyleAlert];
   UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
     LOG(@"OK tap")
-    [_dataManager deleteDiary];
+    [_dataManager deleteDiary:_oid];
     [self.navigationController popToRootViewControllerAnimated:YES];
   }];
   UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style: UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-    LOG()
+    _tapFlg = NO;
   }];
   [alert addAction:ok];
   [alert addAction:cancel];
@@ -331,10 +337,17 @@
 //バリデーション
 - (void)validationData
 {
+  if (_tapFlg) {
+    return;
+  }
+  _tapFlg = YES;
+  
   if ([self.dou.text length] == 0 || [self.situation.text length] == 0 || [self.level.text length] == 0 || [self.persons.text length] == 0 || [self.fee.text length] == 0) {
     [self warning:@"未入力項目があります"];
+    _tapFlg = NO;
   } else if ([_comment.text length] >= 256){
     [self warning:@"コメントは256文字までで入力してください"];
+    _tapFlg = NO;
   } else {
     [_dateFomatter setDateFormat:@"yyyy/MM/dd"];
     [_dateFomatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"JST"]];
@@ -348,6 +361,7 @@
     switch (result) {
       case NSOrderedDescending:
         [self warning:@"日時の入力に誤りがあります"];
+        _tapFlg = NO;
         break;
       default:
         [self registerVisitData:date];

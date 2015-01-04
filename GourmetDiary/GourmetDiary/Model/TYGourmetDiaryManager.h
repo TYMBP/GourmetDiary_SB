@@ -35,7 +35,7 @@ typedef void (^DetailData)(NSArray *);
 - (BOOL)addShopMstData:(ShopMst *)data;
 - (BOOL)addVisitData:(NSMutableDictionary *)data;
 - (BOOL)editorRegist:(NSMutableDictionary *)data;
-- (BOOL)deleteDiary;
+//0104- (BOOL)deleteDiary;
 - (NSMutableArray *)fetchVisitedList:(NSInteger)set num:(NSInteger)num;
 - (NSInteger)fetchVisitCount:(NSString *)sid;
 - (NSInteger)fetchShopLevel:(NSString *)sid;
@@ -46,5 +46,7 @@ typedef void (^DetailData)(NSArray *);
 - (NSMutableArray *)fetchDiaryData:(id)oid;
 - (BOOL)fetchDetailData:(NSString *)sid detailData:(DetailData)detailData;
 - (BOOL)fetchMasterCount;
+//0104
+- (BOOL)deleteDiary:(id)oid;
 
 @end

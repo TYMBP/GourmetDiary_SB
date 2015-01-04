@@ -12,7 +12,7 @@
 
 + (NSArray *)levelList
 {
-  NSArray *ary = @[@"", @"★", @"★★", @"★★★", @"★★★★", @"★★★★★", @"★殿堂★"];
+  NSArray *ary = @[@"", @"★", @"★★", @"★★★", @"★★★★", @"★★★★★", @"★★殿堂★★"];
   return ary;
 }
 
@@ -120,7 +120,7 @@
       text = @"★★★★★";
       break;
     case 6:
-      text = @"★殿堂★";
+      text = @"★★殿堂★★";
       break;
       
     default:
@@ -151,7 +151,7 @@
       text = @"★★★★★";
       break;
     case 6:
-      text = @"★殿堂★";
+      text = @"★★殿堂★★";
       break;
       
     default:
