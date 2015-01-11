@@ -60,13 +60,12 @@
   self.automaticallyAdjustsScrollViewInsets = NO;
   self.visitedList = [_dataManager fetchVisitedList:_sort num:_set];
   
-  if (!self.visitedList) {
+  if (self.visitedList) {
+    _count = 0;
     return;
   } else {
     _count = [[[self.visitedList objectAtIndex:0] valueForKey:@"count"] integerValue];
-    LOG(@"count %lu", _count)
   }
-//  [self test];
   
 }
 

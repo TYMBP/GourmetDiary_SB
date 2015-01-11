@@ -247,7 +247,7 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-  LOG(@"tag %lu",textField.tag)
+//  LOG(@"tag %lu",textField.tag)
   
   _tagNum = 0;
   _pickerFlag = NO;
@@ -478,7 +478,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-  LOG(@"row: %lu", row)
+//  LOG(@"row: %lu", row)
   switch (_tagNum) {
     case TF_SITUATION:
       self.situation.text = [NSString stringWithFormat:@"%@", _situList[row]];
@@ -557,7 +557,13 @@
 //    LOG(@"keboardFrame:%f", overlap)
     
     UIEdgeInsets insets;
-    insets = UIEdgeInsetsMake(0.0f, 0.0f, overlap, 0.0f);
+    CGRect display = [UIScreen mainScreen].bounds;
+    if (display.size.height == 480) {
+      self.scrollView.contentSize = CGSizeMake(320, 364);
+      insets = UIEdgeInsetsMake(0.0f, 0.0f, overlap, 0.0f);
+    } else {
+      insets = UIEdgeInsetsMake(0.0f, 0.0f, overlap - 40.0f, 0.0f);
+    }
     
     NSTimeInterval duration;
     UIViewAnimationCurve animationCurve;
@@ -566,7 +572,7 @@
     duration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     //キーボード表示時のアニメーションCurve
     animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    LOG(@"animationCurve:%ld", animationCurve)
+//    LOG(@"animationCurve:%ld", animationCurve)
     animations = ^(void) {
       self.scrollView.contentInset = insets;
       self.scrollView.scrollIndicatorInsets = insets;

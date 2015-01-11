@@ -163,7 +163,7 @@
 {
   self.genre.text = [NSString stringWithFormat:@"%@", _genreList[row]];
   _genreNum = row;
-  LOG(@"_genreNum:%lu %@", _genreNum, [_genreList objectAtIndex:row]);
+//  LOG(@"_genreNum:%lu %@", _genreNum, [_genreList objectAtIndex:row]);
   
 }
 

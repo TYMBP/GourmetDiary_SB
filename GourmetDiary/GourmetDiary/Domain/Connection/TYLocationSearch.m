@@ -23,7 +23,7 @@
     NSNumber *lngObj = [_location objectAtIndex:0];
     double lat = fabs(latObj.doubleValue);
     double lng = fabs(lngObj.doubleValue);
-    NSString *start = [[NSString alloc] initWithFormat:@"%ld", set];
+    NSString *start = [[NSString alloc] initWithFormat:@"%ld", (long)set];
 //  NSURL *url = [NSURL URLWithString:API_TEST];
 //  NSString *urlStr = [NSString stringWithFormat:@"%@%@&count=15&format=json", API_TEST1, start];
     NSString *urlStr = [NSString stringWithFormat:@"%@%@&Latitude=%f&Longitude=%f&order=4&start=%@&count=15&format=json", API_BASEURL, API_KEY, lat, lng, start];

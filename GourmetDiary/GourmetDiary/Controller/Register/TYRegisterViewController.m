@@ -446,7 +446,13 @@
     LOG(@"keboardFrame:%f", overlap)
     
     UIEdgeInsets insets;
-    insets = UIEdgeInsetsMake(0.0f, 0.0f, overlap - 40.0f, 0.0f);
+    CGRect display = [UIScreen mainScreen].bounds;
+    if (display.size.height == 480) {
+      self.scrollView.contentSize = CGSizeMake(320, 364);
+      insets = UIEdgeInsetsMake(0.0f, 0.0f, overlap, 0.0f);
+    } else {
+      insets = UIEdgeInsetsMake(0.0f, 0.0f, overlap - 40.0f, 0.0f);
+    }
     
     NSTimeInterval duration;
     UIViewAnimationCurve animationCurve;
@@ -456,6 +462,7 @@
     //キーボード表示時のアニメーションCurve
     animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
     animations = ^(void) {
+      LOG()
       self.scrollView.contentInset = insets;
       self.scrollView.scrollIndicatorInsets = insets;
     };

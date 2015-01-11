@@ -126,7 +126,7 @@
         _searchData = ary;
         self.resultCount.text = [_results stringValue];
         _setNum += 15;
-        LOG(@"setNum %lu", _setNum)
+//        LOG(@"setNum %lu", _setNum)
         [_tableView reloadData];
         [self endIndicator];
         _isLoading = YES;
@@ -165,7 +165,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  LOG(@"row count %lu", _searchData.count)
+//  LOG(@"row count %lu", _searchData.count)
   return _searchData.count;
 }
 

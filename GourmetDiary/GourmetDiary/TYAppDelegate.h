@@ -12,6 +12,7 @@
 @interface TYAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+//@property (strong, nonatomic) UIWindow *windowOld;
 @property (strong, readonly, nonatomic) TYApplication *application;
 @property (nonatomic) NSString *sid;
 @property (nonatomic) id oid;

@@ -94,7 +94,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  float ht = 100;
+  CGRect display = [UIScreen mainScreen].bounds;
+    float ht;
+  if (display.size.height == 480) {
+    ht = 70;
+  } else {
+    ht = 100;
+  }
   return ht;
 }
 
@@ -168,21 +174,6 @@
     
   _bannerIsVisble = NO;
                      
-  }
-}
-
-/* test */
-- (void)test
-{
-  LOG()
-    _visitedData = [_dataManager fetchVisitData];
-    LOG(@"count : %lu", [_visitedData count])
-  for (NSArray *obj in _visitedData) {
-    LOG(@"visit: %@", [obj valueForKey:@"visited"])
-//    NSSet *master = [obj valueForKey:@"diary"];
-    LOG(@"name: %@", [obj valueForKey:@"shop"])
-    LOG(@"area: %@", [obj valueForKey:@"area"])
-    LOG(@"genre: %@", [obj valueForKey:@"genre"])
   }
 }
 

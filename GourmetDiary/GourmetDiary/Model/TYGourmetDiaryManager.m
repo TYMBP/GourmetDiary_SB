@@ -122,7 +122,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
 - (void)addData:(NSDictionary *)data
 {
   NSArray *ary = [[data objectForKey:@"results"] objectForKey:@"shop"];
-  LOG(@"data: %lu", ary.count)
+//  LOG(@"data: %lu", ary.count)
   
   for (_n = 0; _n < ary.count; _n++) {
     _searchData = (SearchData *)[NSEntityDescription insertNewObjectForEntityForName:@"SearchData" inManagedObjectContext:self.context];
@@ -654,7 +654,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   
   NSError *error = nil;
   NSUInteger cnt = [self.context countForFetchRequest:request error:&error];
-  LOG(@"cnt:%lu", cnt)
+//  LOG(@"cnt:%lu", cnt)
   if (error) {
     LOG(@"error %@ %@", error, [error userInfo])
     return NO;
@@ -734,7 +734,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
 
 - (NSMutableArray *)fetchVisitedList:(NSInteger)set num:(NSInteger)num
 {
-  LOG(@"set:%lu set:%lu", set, num)
+//  LOG(@"set:%lu set:%lu", set, num)
   NSMutableArray *array = [NSMutableArray array];
   NSError *error = nil;
   NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"VisitData"];
@@ -785,7 +785,7 @@ static TYGourmetDiaryManager *sharedInstance = nil;
 //登録マスターの取得
 - (NSMutableArray *)fetchMasterData:(NSInteger)num
 {
-  LOG(@"num:%lu", num)
+//  LOG(@"num:%lu", num)
   NSMutableArray *array = [NSMutableArray array];
   NSError *error = nil;
   NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ShopMst"];

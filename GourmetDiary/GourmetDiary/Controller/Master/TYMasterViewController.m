@@ -52,7 +52,7 @@
     return;
   } else {
     _count = [[[_masterData objectAtIndex:0] valueForKey:@"count"] integerValue];
-    LOG(@"count %lu", _count)
+//    LOG(@"count %lu", _count)
     [self.tableView reloadData];
   }
 }

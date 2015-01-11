@@ -202,7 +202,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return 5;
+  if (_searchData.count == 0) {
+    return 0;
+  } else if (_searchData.count < 5) {
+    return _searchData.count;
+  } else {
+    return 5;
+  }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -243,11 +249,17 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  [tableView deselectRowAtIndexPath:indexPath animated:YES];
-  SearchData *rowData = [_searchData objectAtIndex:indexPath.row];
-  LOG(@"sid: %@", rowData.sid)
-  _sid = rowData.sid;
-  [self performSegueWithIdentifier:@"Detail" sender:self];
+  if (!_searchData) {
+    LOG()
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    return;
+  } else {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    SearchData *rowData = [_searchData objectAtIndex:indexPath.row];
+    LOG(@"sid: %@", rowData.sid)
+    _sid = rowData.sid;
+    [self performSegueWithIdentifier:@"Detail" sender:self];
+  }
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
@@ -265,7 +277,7 @@
 {
   self.genreSearch.text = [NSString stringWithFormat:@"%@", _genreList[row]];
   _genreNum = row;
-  LOG(@"_genreNum:%lu %@", _genreNum, [_genreList objectAtIndex:row]);
+//  LOG(@"_genreNum:%lu %@", _genreNum, [_genreList objectAtIndex:row]);
   
 }
 

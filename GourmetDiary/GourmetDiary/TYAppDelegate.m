@@ -17,9 +17,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Override point for customization after application launch.
- 
   _application = [[TYApplication alloc] init];
   
+  CGRect rect = [UIScreen mainScreen].bounds;
+  
+  if (rect.size.height == 480) {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_35" bundle:nil];
+    LOG()
+    UIViewController *rootViewController = [storyboard instantiateInitialViewController];
+    
+    self.window.rootViewController = rootViewController;
+  }
   return YES;
 }
 

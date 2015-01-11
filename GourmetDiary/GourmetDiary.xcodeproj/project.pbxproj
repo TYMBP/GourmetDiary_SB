@@ -38,6 +38,7 @@
 		108FDD141A1E06C800658904 /* TYSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD131A1E06C800658904 /* TYSearchTableViewCell.m */; };
 		10A881F51A5155E000766474 /* TYMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A881F41A5155E000766474 /* TYMasterViewController.m */; };
 		10A881FA1A56450300766474 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A881F91A56450300766474 /* iAd.framework */; };
+		10A882021A597DE200766474 /* Main_35.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10A882001A597DE200766474 /* Main_35.storyboard */; };
 		10C927C01A204BAE00CD6669 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10C927BF1A204BAE00CD6669 /* MapKit.framework */; };
 		10C927C31A20BA5A00CD6669 /* TYVisitedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 10C927C21A20BA5A00CD6669 /* TYVisitedTableViewCell.m */; };
 		10CC268A1A45B6330090919C /* TYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10CC26891A45B6330090919C /* TYBaseViewController.m */; };
@@ -115,6 +116,7 @@
 		10A881F31A5155E000766474 /* TYMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYMasterViewController.h; sourceTree = "<group>"; };
 		10A881F41A5155E000766474 /* TYMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYMasterViewController.m; sourceTree = "<group>"; };
 		10A881F91A56450300766474 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		10A882011A597DE200766474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_35.storyboard; sourceTree = "<group>"; };
 		10C927BF1A204BAE00CD6669 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		10C927C11A20BA5A00CD6669 /* TYVisitedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVisitedTableViewCell.h; sourceTree = "<group>"; };
 		10C927C21A20BA5A00CD6669 /* TYVisitedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYVisitedTableViewCell.m; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				108FDCCF1A1DA00C00658904 /* LaunchScreen.xib */,
 				108FDCE61A1DB99A00658904 /* GourmetDiary-Prefix.pch */,
 				108FDCC01A1DA00C00658904 /* Supporting Files */,
+				10A882001A597DE200766474 /* Main_35.storyboard */,
 			);
 			path = GourmetDiary;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				108FDCCC1A1DA00C00658904 /* Main.storyboard in Resources */,
+				10A882021A597DE200766474 /* Main_35.storyboard in Resources */,
 				108FDCD11A1DA00C00658904 /* LaunchScreen.xib in Resources */,
 				108FDCCE1A1DA00C00658904 /* Images.xcassets in Resources */,
 			);
@@ -566,6 +570,14 @@
 				108FDCD01A1DA00C00658904 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		10A882001A597DE200766474 /* Main_35.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				10A882011A597DE200766474 /* Base */,
+			);
+			name = Main_35.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
