@@ -5,6 +5,25 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--使い方-->
+        <scene sceneID="YE9-iM-soV">
+            <objects>
+                <viewController id="hPl-oN-jGC" customClass="TYHelpViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s28-LO-8FK"/>
+                        <viewControllerLayoutGuide type="bottom" id="aow-Hb-TAv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Yqy-fA-T6r">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="使い方" id="dIT-Iw-J91"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2fJ-vW-rGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2236" y="-1175"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -137,7 +156,13 @@
                             <constraint firstItem="TtX-OT-ak5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="vmp-8Z-vQc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="H3u-x5-ygZ"/>
+                    <navigationItem key="navigationItem" id="H3u-x5-ygZ">
+                        <barButtonItem key="rightBarButtonItem" title="使い方" id="TWo-Yh-1EY">
+                            <connections>
+                                <segue destination="hPl-oN-jGC" kind="show" id="tFj-C3-aNF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBtn" destination="BdR-0V-vsb" id="XFl-Ti-ZG3"/>
                         <outlet property="tableView" destination="TtX-OT-ak5" id="9eJ-Lm-LiC"/>
@@ -1446,8 +1471,8 @@
         <image name="Search" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="QQz-ip-lFx"/>
         <segue reference="SYk-EV-8rd"/>
         <segue reference="dEz-Fh-OwF"/>
-        <segue reference="QQz-ip-lFx"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -18,6 +18,7 @@
   NSMutableArray *_masterData;
   NSInteger _limit;
   NSInteger _count;
+  NSInteger _masterCount;
   BOOL _isLoading;
   UIActivityIndicatorView *_indicator;
 }
@@ -28,8 +29,9 @@
   [super viewDidLoad];
   
   _dataManager = [TYGourmetDiaryManager sharedmanager];
-   _limit = 15;
+   _limit = 10;
   _masterData = nil;
+  _isLoading = NO;
   
   _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
   [_indicator setColor:[UIColor darkGrayColor]];
@@ -40,19 +42,31 @@
   self.tableView.dataSource = self;
   self.tableView.backgroundColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.98 alpha:1.0];
   self.automaticallyAdjustsScrollViewInsets = NO;
+ 
   
+  
+  _masterCount = [_dataManager fetchMasterCount];
   [self setMasterList];
 }
 
 - (void)setMasterList
 {
+  LOG()
   _masterData = [_dataManager fetchMasterData:_limit];
   LOG(@"masterData:%@", _masterData)
+  LOG(@"masterCount:%lu", _masterCount)
   if (!_masterData) {
+    LOG(@"master null")
     return;
+  } else if (_masterCount < _limit) {
+    LOG()
+    _count = _masterCount;
+    [self.tableView reloadData];
   } else {
-    _count = [[[_masterData objectAtIndex:0] valueForKey:@"count"] integerValue];
-//    LOG(@"count %lu", _count)
+    LOG()
+//0112    _count = [[[_masterData objectAtIndex:0] valueForKey:@"count"] integerValue];
+    _count = _limit;
+    _isLoading = YES;
     [self.tableView reloadData];
   }
 }
@@ -129,6 +143,69 @@
   
 }
 
+#pragma mark - paging
+- (BOOL)pageLoading:(Paging)paging
+{
+  LOG()
+  _masterData = [_dataManager fetchMasterData:_limit];
+  if (!_masterData) {
+    LOG(@"data get error")
+    return NO;
+  }
+  if (paging){
+    paging();
+  }
+  return YES;
+}
 
+//スクロールビューページング
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+  if(self.tableView.contentOffset.y >= (self.tableView.contentSize.height - self.tableView.bounds.size.height))
+  {
+    if (_isLoading) {
+      if (_masterCount > _count) {
+        _isLoading = NO;
+        _limit += 10;
+        [self startIndicator];
+        
+        if ([self pageLoading:^{
+          [self.tableView reloadData];
+          [self endIndicator];
+        }]) {
+          if (_masterCount < _limit) {
+            _isLoading = NO;
+          } else {
+            _isLoading = YES;
+          }
+        } else {
+          _isLoading = NO;
+          [self endIndicator];
+        }
+      } else {
+        _isLoading = NO;
+      }
+    }
+  }
+}
+
+- (void)startIndicator
+{
+  LOG()
+  [_indicator startAnimating];
+  CGRect footerFrame = self.tableView.tableFooterView.frame;
+  footerFrame.size.height += 70.0f;
+  
+  [_indicator setFrame:footerFrame];
+  [self.tableView setTableFooterView:_indicator];
+}
+
+- (void)endIndicator
+{
+  LOG()
+  [_indicator stopAnimating];
+  [_indicator removeFromSuperview];
+  [self.tableView setTableFooterView:nil];
+}
 
 @end

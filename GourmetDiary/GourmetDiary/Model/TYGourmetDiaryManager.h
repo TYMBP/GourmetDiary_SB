@@ -31,22 +31,19 @@ typedef void (^DetailData)(NSArray *);
 - (void)tempShopData:(NSDictionary *)data setData:(SetData)setData;
 - (BOOL)addVisitRegist:(NSMutableDictionary *)data shop:(ShopMst *)shop;
 - (NSMutableArray *)fetchVisitData;
-//1231- (NSMutableArray *)fetchDiaryData:(NSString *)para;
 - (BOOL)addShopMstData:(ShopMst *)data;
 - (BOOL)addVisitData:(NSMutableDictionary *)data;
 - (BOOL)editorRegist:(NSMutableDictionary *)data;
-//0104- (BOOL)deleteDiary;
 - (NSMutableArray *)fetchVisitedList:(NSInteger)set num:(NSInteger)num;
 - (NSInteger)fetchVisitCount:(NSString *)sid;
 - (NSInteger)fetchShopLevel:(NSString *)sid;
-
-//1229
 - (NSMutableArray *)fetchMasterData:(NSInteger)num;
 - (void)fetchShopMasterData:(NSString *)sid callback:(Callback)callback;
 - (NSMutableArray *)fetchDiaryData:(id)oid;
 - (BOOL)fetchDetailData:(NSString *)sid detailData:(DetailData)detailData;
-- (BOOL)fetchMasterCount;
-//0104
 - (BOOL)deleteDiary:(id)oid;
+
+//0112
+- (NSInteger)fetchMasterCount;
 
 @end

@@ -44,7 +44,7 @@
   self.masterBtn.layer.borderWidth = 1;
   self.masterBtn.layer.cornerRadius = 5;
   
-  if (![_dataManager fetchMasterCount]) {
+  if (![_dataManager fetchMasterCount] > 0) {
     LOG()
     self.masterBtn.alpha = 0.3;
     self.masterBtn.enabled = NO;

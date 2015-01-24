@@ -36,6 +36,14 @@
 		108FDD0D1A1DCA9A00658904 /* TYSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD0C1A1DCA9A00658904 /* TYSearchViewController.m */; };
 		108FDD101A1DD97300658904 /* TYLocationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD0F1A1DD97300658904 /* TYLocationInfo.m */; };
 		108FDD141A1E06C800658904 /* TYSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 108FDD131A1E06C800658904 /* TYSearchTableViewCell.m */; };
+		1094D59A1A62BC600023D24C /* tutorial1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1094D5931A62BC600023D24C /* tutorial1.jpg */; };
+		1094D59B1A62BC600023D24C /* tutorial2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1094D5941A62BC600023D24C /* tutorial2.jpg */; };
+		1094D59C1A62BC600023D24C /* tutorial3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1094D5951A62BC600023D24C /* tutorial3.jpg */; };
+		1094D59D1A62BC600023D24C /* tutorial4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1094D5961A62BC600023D24C /* tutorial4.jpg */; };
+		1094D59E1A62BC600023D24C /* tutorial5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1094D5971A62BC600023D24C /* tutorial5.jpg */; };
+		1094D59F1A62BC600023D24C /* tutorial6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1094D5981A62BC600023D24C /* tutorial6.jpg */; };
+		1094D5A01A62BC600023D24C /* tutorial7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1094D5991A62BC600023D24C /* tutorial7.jpg */; };
+		1094D5A41A62BD260023D24C /* TYHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1094D5A31A62BD260023D24C /* TYHelpViewController.m */; };
 		10A881F51A5155E000766474 /* TYMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A881F41A5155E000766474 /* TYMasterViewController.m */; };
 		10A881FA1A56450300766474 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A881F91A56450300766474 /* iAd.framework */; };
 		10A882021A597DE200766474 /* Main_35.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10A882001A597DE200766474 /* Main_35.storyboard */; };
@@ -113,6 +121,15 @@
 		108FDD0F1A1DD97300658904 /* TYLocationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYLocationInfo.m; sourceTree = "<group>"; };
 		108FDD121A1E06C800658904 /* TYSearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYSearchTableViewCell.h; sourceTree = "<group>"; };
 		108FDD131A1E06C800658904 /* TYSearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYSearchTableViewCell.m; sourceTree = "<group>"; };
+		1094D5931A62BC600023D24C /* tutorial1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tutorial1.jpg; path = Resource/tutorial1.jpg; sourceTree = "<group>"; };
+		1094D5941A62BC600023D24C /* tutorial2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tutorial2.jpg; path = Resource/tutorial2.jpg; sourceTree = "<group>"; };
+		1094D5951A62BC600023D24C /* tutorial3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tutorial3.jpg; path = Resource/tutorial3.jpg; sourceTree = "<group>"; };
+		1094D5961A62BC600023D24C /* tutorial4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tutorial4.jpg; path = Resource/tutorial4.jpg; sourceTree = "<group>"; };
+		1094D5971A62BC600023D24C /* tutorial5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tutorial5.jpg; path = Resource/tutorial5.jpg; sourceTree = "<group>"; };
+		1094D5981A62BC600023D24C /* tutorial6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tutorial6.jpg; path = Resource/tutorial6.jpg; sourceTree = "<group>"; };
+		1094D5991A62BC600023D24C /* tutorial7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tutorial7.jpg; path = Resource/tutorial7.jpg; sourceTree = "<group>"; };
+		1094D5A21A62BD260023D24C /* TYHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYHelpViewController.h; path = Controller/Help/TYHelpViewController.h; sourceTree = "<group>"; };
+		1094D5A31A62BD260023D24C /* TYHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYHelpViewController.m; path = Controller/Help/TYHelpViewController.m; sourceTree = "<group>"; };
 		10A881F31A5155E000766474 /* TYMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYMasterViewController.h; sourceTree = "<group>"; };
 		10A881F41A5155E000766474 /* TYMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYMasterViewController.m; sourceTree = "<group>"; };
 		10A881F91A56450300766474 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
@@ -239,6 +256,7 @@
 		108FDCBF1A1DA00C00658904 /* GourmetDiary */ = {
 			isa = PBXGroup;
 			children = (
+				1094D5921A62BC430023D24C /* Resource */,
 				108FDD111A1E065A00658904 /* View */,
 				108FDD091A1DC87500658904 /* Controller */,
 				108FDCF61A1DC15000658904 /* Model */,
@@ -339,6 +357,7 @@
 		108FDD091A1DC87500658904 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1094D5A11A62BCE30023D24C /* Help */,
 				10A881F21A51554F00766474 /* Master */,
 				10D28D4D1A29D00500261360 /* Shop */,
 				1001DDBD1A255F0700B84E66 /* Editor */,
@@ -376,6 +395,29 @@
 				10C927C21A20BA5A00CD6669 /* TYVisitedTableViewCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1094D5921A62BC430023D24C /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				1094D5931A62BC600023D24C /* tutorial1.jpg */,
+				1094D5941A62BC600023D24C /* tutorial2.jpg */,
+				1094D5951A62BC600023D24C /* tutorial3.jpg */,
+				1094D5961A62BC600023D24C /* tutorial4.jpg */,
+				1094D5971A62BC600023D24C /* tutorial5.jpg */,
+				1094D5981A62BC600023D24C /* tutorial6.jpg */,
+				1094D5991A62BC600023D24C /* tutorial7.jpg */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		1094D5A11A62BCE30023D24C /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				1094D5A21A62BD260023D24C /* TYHelpViewController.h */,
+				1094D5A31A62BD260023D24C /* TYHelpViewController.m */,
+			);
+			name = Help;
 			sourceTree = "<group>";
 		};
 		10A881F21A51554F00766474 /* Master */ = {
@@ -484,8 +526,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1094D59B1A62BC600023D24C /* tutorial2.jpg in Resources */,
 				108FDCCC1A1DA00C00658904 /* Main.storyboard in Resources */,
+				1094D59A1A62BC600023D24C /* tutorial1.jpg in Resources */,
+				1094D5A01A62BC600023D24C /* tutorial7.jpg in Resources */,
+				1094D59C1A62BC600023D24C /* tutorial3.jpg in Resources */,
+				1094D59D1A62BC600023D24C /* tutorial4.jpg in Resources */,
 				10A882021A597DE200766474 /* Main_35.storyboard in Resources */,
+				1094D59F1A62BC600023D24C /* tutorial6.jpg in Resources */,
+				1094D59E1A62BC600023D24C /* tutorial5.jpg in Resources */,
 				108FDCD11A1DA00C00658904 /* LaunchScreen.xib in Resources */,
 				108FDCCE1A1DA00C00658904 /* Images.xcassets in Resources */,
 			);
@@ -527,6 +576,7 @@
 				108FDCFF1A1DC25600658904 /* SearchData.m in Sources */,
 				108FDCFC1A1DC1A700658904 /* TYGourmetDiaryManager.m in Sources */,
 				1001E5241A1EC60A003AB9A3 /* TYKeywordSearchConn.m in Sources */,
+				1094D5A41A62BD260023D24C /* TYHelpViewController.m in Sources */,
 				10C927C31A20BA5A00CD6669 /* TYVisitedTableViewCell.m in Sources */,
 				10A881F51A5155E000766474 /* TYMasterViewController.m in Sources */,
 				104CDA791A3DBD0D0012C5EC /* VisitData.m in Sources */,

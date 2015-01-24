@@ -8,6 +8,8 @@
 
 #import "TYBaseViewController.h"
 
+typedef void (^Paging)();
+
 @interface TYMasterViewController : TYBaseViewController
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

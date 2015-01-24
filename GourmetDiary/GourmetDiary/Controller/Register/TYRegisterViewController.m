@@ -438,12 +438,12 @@
     textViewFrame = self.scrollView.frame;
     overlap = MAX(0.0f, CGRectGetMaxY(textViewFrame) - CGRectGetMinY(keyboardFrame));
     
-    LOG(@"textViewFrame maxY:%f", CGRectGetMaxY(textViewFrame))
-    LOG(@"textViewFrame minY:%f", CGRectGetMinY(keyboardFrame))
-    
-    LOG(@"keboardFrame:%@", NSStringFromCGRect(keyboardFrame))
-    LOG(@"keboardFrame:%@", NSStringFromCGRect(textViewFrame))
-    LOG(@"keboardFrame:%f", overlap)
+//    LOG(@"textViewFrame maxY:%f", CGRectGetMaxY(textViewFrame))
+//    LOG(@"textViewFrame minY:%f", CGRectGetMinY(keyboardFrame))
+//    
+//    LOG(@"keboardFrame:%@", NSStringFromCGRect(keyboardFrame))
+//    LOG(@"keboardFrame:%@", NSStringFromCGRect(textViewFrame))
+//    LOG(@"keboardFrame:%f", overlap)
     
     UIEdgeInsets insets;
     CGRect display = [UIScreen mainScreen].bounds;

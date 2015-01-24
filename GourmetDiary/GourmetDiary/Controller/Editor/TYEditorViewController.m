@@ -320,7 +320,7 @@
   }
   _tapFlg = YES;
   
-  UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"確認" message:@"日記を削除しますか？" preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"確認" message:@"メモを削除しますか？" preferredStyle:UIAlertControllerStyleAlert];
   UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
     LOG(@"OK tap")
     [_dataManager deleteDiary:_oid];

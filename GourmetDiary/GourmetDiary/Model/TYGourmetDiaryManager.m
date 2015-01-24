@@ -353,10 +353,11 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   }
   
   NSArray *moArray = [self.context executeFetchRequest:request error:&error];
-  master = [NSEntityDescription insertNewObjectForEntityForName:@"ShopMst" inManagedObjectContext:self.context];
+//0114  master = [NSEntityDescription insertNewObjectForEntityForName:@"ShopMst" inManagedObjectContext:self.context];
   
   if (moArray.count == 0) {
     LOG(@"新規登録")
+    master = [NSEntityDescription insertNewObjectForEntityForName:@"ShopMst" inManagedObjectContext:self.context];
     if (master == nil) {
       LOG(@"master null")
       return NO;
@@ -591,43 +592,6 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   [array addObject:ary];
   return array;
 }
-//変更前1231
-//- (NSMutableArray *)fetchDiaryData:(NSString *)para oid:(id)oid
-//{
-//  NSMutableArray *array = [NSMutableArray array];
-//  NSFetchRequest *request = [[NSFetchRequest alloc] init];
-//  NSEntityDescription *entity = [NSEntityDescription entityForName:@"VisitData" inManagedObjectContext:self.context];
-//  [request setEntity:entity];
-//  NSPredicate *pred = [NSPredicate predicateWithFormat:@"sid = %@",para];
-//  [request setPredicate:pred];
-//  NSError *error = nil;
-//  NSArray *moArray = [self.context executeFetchRequest:request error:&error];
-//  if (error) {
-//    LOG(@"error %@ %@", error, [error userInfo])
-//  }
-//  _oId = nil;
-//  for (NSManagedObject *obj in moArray) {
-//    _oId = [obj objectID];
-//    NSMutableDictionary *ary = [NSMutableDictionary dictionary];
-//    [ary setValue:[obj valueForKey:@"visited_at"] forKey:@"visited_at"];
-//    [ary setValue:[obj valueForKey:@"situation"] forKey:@"situation"];
-//    [ary setValue:[obj valueForKey:@"persons"] forKey:@"persons"];
-//    [ary setValue:[obj valueForKey:@"fee"] forKey:@"fee"];
-//    [ary setValue:[obj valueForKey:@"memo"] forKey:@"memo"];
-////    [ary setValue:_oId forKey:@"oid"];
-//    NSSet *master = [obj valueForKey:@"diary"];
-//    if (master.count == 0) {
-//      LOG(@"null");
-//    } else {
-//      for (NSManagedObject *shop in master) {
-//        [ary setValue:[shop valueForKey:@"shop"] forKey:@"shop"];
-//        [ary setValue:[shop valueForKey:@"level"] forKey:@"level"];
-//      }
-//    }
-//    [array addObject:ary];
-//  }
-//  return array;
-//}
 
 //訪問履歴削除
 - (BOOL)deleteDiary:(id)oid
@@ -645,7 +609,8 @@ static TYGourmetDiaryManager *sharedInstance = nil;
 #pragma mark - TYShopViewController
 
 //マスター登録数
-- (BOOL)fetchMasterCount
+//- (BOOL)fetchMasterCount
+- (NSInteger)fetchMasterCount
 {
   NSFetchRequest *request = [[NSFetchRequest alloc] init];
   NSEntityDescription *entity = [NSEntityDescription entityForName:@"ShopMst" inManagedObjectContext:self.context];
@@ -661,10 +626,10 @@ static TYGourmetDiaryManager *sharedInstance = nil;
   }
   if (cnt > 0) {
     LOG()
-    return YES;
+    return cnt;
   } else {
     LOG()
-    return NO;
+    return 0;
   }
 }
 
@@ -723,11 +688,9 @@ static TYGourmetDiaryManager *sharedInstance = nil;
       }
     }
     [array addObject:ary];
-    
   }
   return array;
 }
-
 
 /* 訪問記録一覧リスト */
 #pragma mark - TYDiaryViewController
@@ -773,7 +736,6 @@ static TYGourmetDiaryManager *sharedInstance = nil;
       }
     }
     [array addObject:ary];
-    
   }
   return array;
 }
@@ -785,11 +747,11 @@ static TYGourmetDiaryManager *sharedInstance = nil;
 //登録マスターの取得
 - (NSMutableArray *)fetchMasterData:(NSInteger)num
 {
-//  LOG(@"num:%lu", num)
+  LOG(@"num:%lu", num)
   NSMutableArray *array = [NSMutableArray array];
   NSError *error = nil;
   NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ShopMst"];
-  NSInteger count = [self.context countForFetchRequest:request error:&error];
+//0112  NSInteger count = [self.context countForFetchRequest:request error:&error];
   request.fetchLimit = num;
   
   NSArray *fetchedArray = [_context executeFetchRequest:request error:&error];
@@ -803,12 +765,11 @@ static TYGourmetDiaryManager *sharedInstance = nil;
     [ary setValue:[obj valueForKey:@"genre"] forKey:@"genre"];
     [ary setValue:[obj valueForKey:@"area"] forKey:@"area"];
     [ary setValue:[obj valueForKey:@"sid"] forKey:@"sid"];
-    [ary setValue:[NSNumber numberWithInteger:count] forKey:@"count"];
+//0112    [ary setValue:[NSNumber numberWithInteger:count] forKey:@"count"];
     [array addObject:ary];
   }
   return array;
 }
-
 
 /* 共通 */
 #pragma mark - Utilty
